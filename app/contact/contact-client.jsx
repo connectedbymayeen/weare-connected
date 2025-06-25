@@ -61,9 +61,8 @@ export default function ContactPageClient() {
   const contactData = content?.contact || {
 
     office: {
-      address: "1234 Innovation Drive, Suite 500",
-      city: "San Francisco, CA 94107",
-      country: "United States",
+      address: "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
+
     },
     emails: {
       general: "hello@weareconnected.io",
@@ -334,11 +333,9 @@ export default function ContactPageClient() {
                         <div>
                           <h3 className="font-semibold mb-1">Address</h3>
                           <p className="text-muted-foreground">
-                            {contactData.office?.address || "1234 Innovation Drive"}
-                            <br />
-                            Suite 500
-                            <br />
-                            {contactData.office?.city || "San Francisco, CA 94107"}
+                            {(contactData.office?.address && contactData.office?.city)
+                              ? `${contactData.office.address}, ${contactData.office.city}`
+                              : "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212,Dhaka, Bangladesh"}
                           </p>
                         </div>
                       </div>

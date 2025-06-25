@@ -1,24 +1,25 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import RelatedJobs from "@/app/components/careers/related-jobs"
+import Header from "@/app/components/header"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import {
-  MapPin,
+  ArrowLeft,
+  Briefcase,
+  Calendar,
+  CheckCircle,
   Clock,
   DollarSign,
-  Users,
-  Calendar,
   ExternalLink,
-  Briefcase,
-  CheckCircle,
   Gift,
-  ArrowLeft,
+  MapPin,
+  Users,
 } from "lucide-react"
-import RelatedJobs from "@/app/components/careers/related-jobs"
+import Link from "next/link"
+import { useState } from "react"
 
 export default function JobPageClient({ job }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -52,7 +53,9 @@ export default function JobPageClient({ job }) {
   }
 
   return (
+
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+      <Header />
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
         <div className="mb-6">

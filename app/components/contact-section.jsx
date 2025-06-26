@@ -41,13 +41,11 @@ export default function ContactSection({ content }) {
 
   useEffect(() => {
     if (content?.contact) {
-      // Check if office address exists & not empty, else fallback to default
       const officeAddress =
         content.contact.office?.address && content.contact.office.address.trim() !== ""
           ? content.contact.office.address
           : defaultContactData.office.address
 
-      // Compose updated contact data merging content.contact and fallback office address
       const updatedContact = {
         ...defaultContactData,
         ...content.contact,

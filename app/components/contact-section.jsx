@@ -19,22 +19,47 @@ import {
 } from "lucide-react"
 import { useEffect, useState } from "react"
 
+const defaultContactData = {
+  title: "Get in Touch",
+  description:
+    "Whether you have a specific project in mind or just want to explore possibilities, we're here to help. Our team of experts is ready to discuss your vision and provide tailored solutions.",
+  office: {
+    address:
+      "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
+  },
+  emails: {
+    general: "hello@connected.com",
+    business: "business@connected.com",
+    careers: "careers@connected.com",
+  },
+  phone: "+1 (415) 555-0164",
+  hours: "Mon-Fri: 9:00 AM - 6:00 PM (PST)",
+}
+
 export default function ContactSection({ content }) {
-  const [contactData, setContactData] = useState({
-    title: "Get in Touch",
-    description:
-      "Whether you have a specific project in mind or just want to explore possibilities, we're here to help. Our team of experts is ready to discuss your vision and provide tailored solutions.",
-    office: {
-      address: "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
-    },
-    emails: {
-      general: "hello@connected.com",
-      business: "business@connected.com",
-      careers: "careers@connected.com",
-    },
-    phone: "+1 (415) 555-0164",
-    hours: "Mon-Fri: 9:00 AM - 6:00 PM (PST)",
-  })
+  const [contactData, setContactData] = useState(defaultContactData)
+
+  useEffect(() => {
+    if (content?.contact) {
+      // Check if office address exists & not empty, else fallback to default
+      const officeAddress =
+        content.contact.office?.address && content.contact.office.address.trim() !== ""
+          ? content.contact.office.address
+          : defaultContactData.office.address
+
+      // Compose updated contact data merging content.contact and fallback office address
+      const updatedContact = {
+        ...defaultContactData,
+        ...content.contact,
+        office: {
+          ...defaultContactData.office,
+          ...content.contact.office,
+          address: officeAddress,
+        },
+      }
+      setContactData(updatedContact)
+    }
+  }, [content])
 
   const [formData, setFormData] = useState({
     name: "",
@@ -48,12 +73,6 @@ export default function ContactSection({ content }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
   const [errorMessage, setErrorMessage] = useState("")
-
-  useEffect(() => {
-    if (content?.contact) {
-      setContactData(content.contact)
-    }
-  }, [content])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -210,7 +229,8 @@ export default function ContactSection({ content }) {
               <Alert className="border-green-200 bg-green-50">
                 <CheckCircle className="h-4 w-4 text-green-600" />
                 <AlertDescription className="text-green-800">
-                  Thank you for your message! We've received your inquiry and will get back to you within 24 hours.
+                  Thank you for your message! We've received your inquiry and will get back to you within 24
+                  hours.
                 </AlertDescription>
               </Alert>
             )}

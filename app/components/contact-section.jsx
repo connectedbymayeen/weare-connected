@@ -17,7 +17,7 @@ import {
   Phone,
   Twitter,
 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 const defaultContactData = {
   title: "Get in Touch",
@@ -36,28 +36,9 @@ const defaultContactData = {
   hours: "Mon-Fri: 9:00 AM - 6:00 PM (PST)",
 }
 
-export default function ContactSection({ content }) {
-  const [contactData, setContactData] = useState(defaultContactData)
-
-  useEffect(() => {
-    if (content?.contact) {
-      const officeAddress =
-        content.contact.office?.address && content.contact.office.address.trim() !== ""
-          ? content.contact.office.address
-          : defaultContactData.office.address
-
-      const updatedContact = {
-        ...defaultContactData,
-        ...content.contact,
-        office: {
-          ...defaultContactData.office,
-          ...content.contact.office,
-          address: officeAddress,
-        },
-      }
-      setContactData(updatedContact)
-    }
-  }, [content])
+export default function ContactSection() {
+  // Only use defaultContactData; no external content or useEffect
+  const [contactData] = useState(defaultContactData)
 
   const [formData, setFormData] = useState({
     name: "",

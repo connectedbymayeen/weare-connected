@@ -1,23 +1,23 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import {
-  CheckCircle,
   AlertCircle,
-  Loader2,
-  MapPin,
-  Mail,
-  Phone,
-  Instagram,
-  Twitter,
-  Linkedin,
+  CheckCircle,
   Facebook,
+  Instagram,
+  Linkedin,
+  Loader2,
+  Mail,
+  MapPin,
+  Phone,
+  Twitter,
 } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useEffect, useState } from "react"
 
 export default function ContactSection({ content }) {
   const [contactData, setContactData] = useState({
@@ -25,9 +25,7 @@ export default function ContactSection({ content }) {
     description:
       "Whether you have a specific project in mind or just want to explore possibilities, we're here to help. Our team of experts is ready to discuss your vision and provide tailored solutions.",
     office: {
-      address: "1234 Innovation Drive, Suite 500",
-      city: "San Francisco, CA 94107",
-      country: "United States",
+      address: "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh"
     },
     emails: {
       general: "hello@connected.com",
@@ -149,8 +147,6 @@ export default function ContactSection({ content }) {
               </div>
               <div className="ml-8 text-gray-600">
                 <p>{contactData.office.address}</p>
-                <p>{contactData.office.city}</p>
-                <p>{contactData.office.country}</p>
               </div>
             </div>
 

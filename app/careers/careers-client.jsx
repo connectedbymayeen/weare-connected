@@ -91,11 +91,11 @@ export default function CareersClientPage({ jobs = [] }) {
                       placeholder="Search jobs..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-white w-full"
+                      className="pl-10 py-[23px] border-2 border-[#cdcdcd] bg-[#e6e4f6] w-full"
                     />
                   </div>
                   <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
-                    <SelectTrigger className="w-full lg:w-60 bg-white border border-gray-200">
+                    <SelectTrigger className="w-full lg:w-60 py-[23px] border-2 border-[#cdcdcd] bg-[#e6e4f6]">
                       <SelectValue placeholder="Department" />
                     </SelectTrigger>
                     <SelectContent>
@@ -109,7 +109,7 @@ export default function CareersClientPage({ jobs = [] }) {
                   </Select>
 
                   <Select value={locationFilter} onValueChange={setLocationFilter}>
-                    <SelectTrigger className="w-full lg:w-60 bg-white border border-gray-200">
+                    <SelectTrigger className="w-full lg:w-60 py-[23px] border-2 border-[#cdcdcd] bg-[#e6e4f6]  ">
                       <SelectValue placeholder="Location" />
                     </SelectTrigger>
                     <SelectContent>

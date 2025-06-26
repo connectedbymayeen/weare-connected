@@ -25,7 +25,7 @@ export default function ContactSection({ content }) {
     description:
       "Whether you have a specific project in mind or just want to explore possibilities, we're here to help. Our team of experts is ready to discuss your vision and provide tailored solutions.",
     office: {
-      address: "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh"
+      address: "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
     },
     emails: {
       general: "hello@connected.com",
@@ -146,7 +146,15 @@ export default function ContactSection({ content }) {
                 <h4 className="font-semibold text-black">Our Office</h4>
               </div>
               <div className="ml-8 text-gray-600">
-                <p>{contactData.office.address}</p>
+                <p
+                  style={{
+                    whiteSpace: "normal",
+                    overflowWrap: "break-word",
+                    wordBreak: "break-word",
+                  }}
+                >
+                  {contactData.office.address}
+                </p>
               </div>
             </div>
 

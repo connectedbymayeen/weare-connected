@@ -84,7 +84,8 @@ export default function BlogClientPage({ posts }) {
 
                     <div className="flex gap-2">
                       {categories.map((category) => {
-                        const isHighlighted = category === "Technology" || category === "Business"
+                        const highlightedCategories = ["Technology", "Business"] // manage here only
+                        const isHighlighted = highlightedCategories.includes(category)
                         const isSelected = selectedCategory === category
 
                         return (
@@ -102,6 +103,7 @@ export default function BlogClientPage({ posts }) {
                         )
                       })}
                     </div>
+
 
 
                   </div>

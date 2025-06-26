@@ -81,10 +81,10 @@ export default function CareersClientPage({ jobs = [] }) {
               </p>
             </div>
 
-            {/* Search Section */}
-            <section className="py-8  w-full">
+            <section className="py-8 w-full">
               <div className="mb-8 w-full">
                 <div className="flex flex-col lg:flex-row gap-6 w-full">
+                  {/* Search Input */}
                   <div className="relative bg-white rounded-lg flex-1 border border-gray-200">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                     <Input
@@ -94,33 +94,49 @@ export default function CareersClientPage({ jobs = [] }) {
                       className="pl-10 py-[23px] bg-[#f0eeff] w-full"
                     />
                   </div>
+
+                  {/* Department Dropdown */}
                   <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
-                    <SelectTrigger className="w-full lg:w-60 py-[23px] bg-[#f0eeff]">
+                    <SelectTrigger
+                      className="w-full lg:w-60 py-[23px] bg-[#f0eeff]"
+                    >
                       <SelectValue placeholder="Department" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent
+                      className="bg-primary/15 border border-primary/20 backdrop-blur-xl shadow-xl rounded-xl text-pot-black"
+                    >
                       <SelectItem value="all">All Departments</SelectItem>
-                      {departments.filter((dept) => dept !== "all").map((dept) => (
-                        <SelectItem key={dept} value={dept}>
-                          {dept}
-                        </SelectItem>
-                      ))}
+                      {departments
+                        .filter((dept) => dept !== "all")
+                        .map((dept) => (
+                          <SelectItem key={dept} value={dept}>
+                            {dept}
+                          </SelectItem>
+                        ))}
                     </SelectContent>
                   </Select>
 
+                  {/* Location Dropdown */}
                   <Select value={locationFilter} onValueChange={setLocationFilter}>
-                    <SelectTrigger className="w-full lg:w-60 py-[23px] bg-[#f0eeff]  ">
+                    <SelectTrigger
+                      className="w-full lg:w-60 py-[23px] bg-[#f0eeff]"
+                    >
                       <SelectValue placeholder="Location" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent
+                      className="bg-primary/15 border border-primary/20 backdrop-blur-xl shadow-xl rounded-xl text-pot-black"
+                    >
                       <SelectItem value="all">All Locations</SelectItem>
-                      {locations.filter((loc) => loc !== "all").map((loc) => (
-                        <SelectItem key={loc} value={loc}>
-                          {loc}
-                        </SelectItem>
-                      ))}
+                      {locations
+                        .filter((loc) => loc !== "all")
+                        .map((loc) => (
+                          <SelectItem key={loc} value={loc}>
+                            {loc}
+                          </SelectItem>
+                        ))}
                     </SelectContent>
                   </Select>
+
                 </div>
               </div>
             </section>

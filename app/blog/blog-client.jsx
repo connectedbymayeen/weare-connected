@@ -84,8 +84,6 @@ export default function BlogClientPage({ posts }) {
 
                     <div className="flex gap-2">
                       {categories.map((category) => {
-                        const highlightedCategories = ["Technology", "Business"] // control highlights here
-                        const isHighlighted = highlightedCategories.includes(category)
                         const isSelected = selectedCategory === category
 
                         return (
@@ -94,15 +92,14 @@ export default function BlogClientPage({ posts }) {
                             onClick={() => setSelectedCategory(category)}
                             className={`capitalize py-[23px] border transition-colors duration-200 ${isSelected
                               ? "bg-[#6529b2] text-white hover:bg-purple-700"
-                              : isHighlighted
-                                ? "bg-[#e6e4f6] text-black hover:bg-[#d9d7eb] border-[#cdcdcd]"
-                                : "bg-white text-black hover:bg-gray-100 border-[#e4e4e7]"
+                              : "bg-[#e6e4f6] text-black hover:bg-[#d9d7eb] border-[#cdcdcd]"
                               }`}
                           >
                             {category}
                           </Button>
                         )
                       })}
+
                     </div>
 
 

@@ -71,7 +71,7 @@ export default function BlogClientPage({ posts }) {
               <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-8xl">
                 <div className="max-w-6xl mx-auto">
                   <div className="flex flex-col md:flex-row gap-4 mb-8">
-                    <div className="relative flex-1 border-[#cdcdcd] border-2 bg-[#e6e4f6] rounded-xl">
+                    <div className="relative flex-1 bg-[#f0eeff] rounded-xl">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                       <Input
                         type="text"
@@ -92,7 +92,7 @@ export default function BlogClientPage({ posts }) {
                             onClick={() => setSelectedCategory(category)}
                             className={`capitalize py-[23px] border transition-colors duration-200 ${isSelected
                               ? "bg-[#6529b2] text-white hover:bg-purple-700"
-                              : "bg-[#e6e4f6] text-black hover:bg-[#d9d7eb] border-[#cdcdcd]"
+                              : "bg-[#f0eeff] text-black hover:bg-[#d9d7eb] "
                               }`}
                           >
                             {category}
@@ -114,7 +114,6 @@ export default function BlogClientPage({ posts }) {
                 </div>
               </div>
             </div>
-
             {/* Featured Post */}
             {featuredPost && (
               <section className="py-12 ">

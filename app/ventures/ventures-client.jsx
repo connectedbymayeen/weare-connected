@@ -132,7 +132,7 @@ export default function VenturesClientPage({ ventures: dbVentures = [] }) {
           </div>
 
           <section className="py-8 sm:py-10">
-            <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-[1800px]">
+            <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-[1900px]">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-16">
                 {ventures.map((venture, index) => (
                   <Card

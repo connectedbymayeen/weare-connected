@@ -22,7 +22,7 @@ import { useState } from "react"
 const defaultContactData = {
   title: "Get in Touch",
   description:
-    "Whether you have a specific project in mind or just want to explore possibilities, we're here to help. Our team of experts is ready to discuss your vision and provide tailored solutions.",
+    "Ready to Start a Revolution? Whether you're a founder, investor, collaborator, or someone with a bold idea, we're always open to conversations that lead to action. Reach out.",
   office: {
     address:
       "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",

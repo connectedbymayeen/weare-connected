@@ -71,7 +71,7 @@ export default function Footer() {
               {[
                 { href: "/press-kit", label: "Press Kit" },
                 { href: "/case-studies", label: "Case Studies" },
-                { href: "/help-center", label: "Help Center" },
+                // { href: "/help-center", label: "Help Center" },
                 { href: "/contact", label: "Contact Us" },
               ].map((link) => (
                 <li key={link.href}>

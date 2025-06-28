@@ -1,7 +1,8 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { motion } from "framer-motion"
+import { useInView } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
 
 export default function AboutSection({ content }) {
   const ref = useRef(null)
@@ -44,7 +45,7 @@ export default function AboutSection({ content }) {
   }, [content])
 
   return (
-    <section ref={ref} className="w-full py-12 sm:py-16 md:py-20 lg:py-20 xl:py-32 bg-white">
+    <section ref={ref} className="w-full py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-white">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

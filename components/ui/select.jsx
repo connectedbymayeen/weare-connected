@@ -35,17 +35,20 @@ function SelectTrigger({ className, size = "default", children, ...props }) {
   )
 }
 
-function SelectContent({ className, children, position = "popper", sideOffset = 4, ...props }) {
+function SelectContent({ className, children, sideOffset = 4, ...props }) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
-        position={position}
+
+        side="bottom"
+        align="start"
+        avoidCollisions={false}
+        position="popper"
         sideOffset={sideOffset}
         data-slot="select-content"
         className={cn(
-          "z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-          position === "popper" &&
-          "data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1",
+          "z-50 min-w-[8rem] overflow-hidden rounded-md border bg-primary/15 backdrop-blur-xl text-popover-foreground shadow-xl",
+          "data-[state=open]:animate-in data-[state=closed]:animate-out",
           className
         )}
         {...props}
@@ -53,9 +56,7 @@ function SelectContent({ className, children, position = "popper", sideOffset = 
         <SelectScrollUpButton />
         <SelectPrimitive.Viewport
           className={cn(
-            "p-1",
-            position === "popper" &&
-            "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"
+            "p-1 h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"
           )}
         >
           {children}
@@ -65,6 +66,7 @@ function SelectContent({ className, children, position = "popper", sideOffset = 
     </SelectPrimitive.Portal>
   )
 }
+
 
 function SelectLabel({ className, ...props }) {
   return (

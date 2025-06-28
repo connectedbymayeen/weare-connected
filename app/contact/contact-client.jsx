@@ -1,10 +1,16 @@
 "use client"
-
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { motion } from "framer-motion"
 import { AlertCircle, CheckCircle, Clock, Loader2, Mail, MapPin, Phone, Send } from "lucide-react"
@@ -244,27 +250,37 @@ export default function ContactPageClient() {
                         />
                       </div>
 
-                      <div className="space-y-2">
+                      <div className="space-y-2 relative z-20 overflow-visible">
                         <Label htmlFor="subject">Subject *</Label>
-                        <select
-                          id="subject"
+                        <Select
                           value={formData.subject}
-                          onChange={(e) => handleChange("subject", e.target.value)}
-                          required
+                          onValueChange={(value) => handleChange("subject", value)}
                           disabled={isSubmitting}
-                          className="flex h-11 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                          <option value="" disabled>
-                            Select a subject
-                          </option>
-                          <option value="general">General Inquiry</option>
-                          <option value="partnership">Partnership</option>
-                          <option value="investment">Investment Opportunity</option>
-                          <option value="careers">Careers</option>
-                          <option value="press">Press & Media</option>
-                          <option value="support">Support</option>
-                        </select>
+                          <SelectTrigger
+                            id="subject"
+                            className="flex h-11 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm 
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 
+      disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            <SelectValue placeholder="Select a subject" />
+                          </SelectTrigger>
+
+                          <SelectContent
+                            side="bottom"
+                            align="start"
+                            className="z-50 bg-primary/15 backdrop-blur-xl border border-primary/20 shadow-xl"
+                          >
+                            <SelectItem value="general">General Inquiry</SelectItem>
+                            <SelectItem value="partnership">Partnership</SelectItem>
+                            <SelectItem value="investment">Investment Opportunity</SelectItem>
+                            <SelectItem value="careers">Careers</SelectItem>
+                            <SelectItem value="press">Press & Media</SelectItem>
+                            <SelectItem value="support">Support</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
+
 
                       <div className="space-y-2">
                         <Label htmlFor="message">Message *</Label>
@@ -396,6 +412,36 @@ export default function ContactPageClient() {
             </p>
           </div>
 
+          <div className="max-w-4xl mx-auto">
+            <Card className="overflow-hidden border-2 border-lynx-white">
+              <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
+                <div className="text-center">
+                  <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
+                  <p className="text-muted-foreground">
+                    {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
+                    <br />
+                    {contactData.office?.city || "San Francisco, CA 94107"}
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <Card className="overflow-hidden border-2 border-lynx-white">
+              <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
+                <div className="text-center">
+                  <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
+                  <p className="text-muted-foreground">
+                    {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
+                    <br />
+                    {contactData.office?.city || "San Francisco, CA 94107"}
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </div>
           <div className="max-w-4xl mx-auto">
             <Card className="overflow-hidden border-2 border-lynx-white">
               <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">

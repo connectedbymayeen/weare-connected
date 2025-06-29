@@ -1,21 +1,26 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import dynamic from "next/dynamic"
 import { useRouter } from "next/navigation"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { ArrowLeft, Save, Loader2, Eye } from "lucide-react"
-import Link from "next/link"
-import ImageUpload from "@/app/components/admin/image-upload"
+import { useEffect, useState } from "react"
+import "react-quill/dist/quill.snow.css"
 
-// Calculate dynamic read time
+import ImageUpload from "@/app/components/admin/image-upload"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ArrowLeft, Eye, Loader2, Save } from "lucide-react"
+import Link from "next/link"
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
+
+// Strip HTML tags for plain text word count
 function calculateReadTime(content) {
   if (!content) return "1 min read"
+  const plainText = content.replace(/<[^>]+>/g, "")
   const wordsPerMinute = 200
-  const wordCount = content.trim().split(/\s+/).length
+  const wordCount = plainText.trim().split(/\s+/).length
   const readTime = Math.ceil(wordCount / wordsPerMinute)
   return `${readTime} min read`
 }
@@ -44,26 +49,16 @@ export default function EditBlogPost({ params }) {
   })
   const [formErrors, setFormErrors] = useState({})
 
-  // Fetch blog post data
   useEffect(() => {
     const fetchPost = async () => {
       try {
         setLoading(true)
-        console.log(`Fetching blog post with ID: ${id}`)
-
         const response = await fetch(`/api/admin/blog/${id}`)
-        console.log(`API response status: ${response.status}`)
-
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}))
-          console.error("API error:", errorData)
           throw new Error(errorData.error || `HTTP ${response.status}: Failed to fetch blog post`)
         }
-
         const post = await response.json()
-        console.log("Fetched post:", post)
-
-        // Format data for form
         setFormData({
           title: post.title || "",
           slug: post.slug || "",
@@ -80,93 +75,70 @@ export default function EditBlogPost({ params }) {
           featuredImage: post.featuredImage || null,
         })
       } catch (err) {
-        console.error("Error fetching post:", err)
         setError(`Failed to load blog post: ${err.message}`)
       } finally {
         setLoading(false)
       }
     }
 
-    if (id) {
-      fetchPost()
-    }
+    if (id) fetchPost()
   }, [id])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-
     if (name.startsWith("author.")) {
-      const authorField = name.split(".")[1]
+      const field = name.split(".")[1]
       setFormData((prev) => ({
         ...prev,
-        author: {
-          ...prev.author,
-          [authorField]: value,
-        },
+        author: { ...prev.author, [field]: value },
       }))
     } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }))
+      setFormData((prev) => ({ ...prev, [name]: value }))
     }
 
-    // Clear validation error when field is edited
     if (formErrors[name]) {
       setFormErrors((prev) => ({ ...prev, [name]: "" }))
     }
   }
 
   const handleImageUpload = (imageData) => {
-    setFormData((prev) => ({
-      ...prev,
-      featuredImage: imageData,
-    }))
+    setFormData((prev) => ({ ...prev, featuredImage: imageData }))
   }
 
   const handleAuthorImageUpload = (imageData) => {
     setFormData((prev) => ({
       ...prev,
-      author: {
-        ...prev.author,
-        image: imageData,
-      },
+      author: { ...prev.author, image: imageData },
     }))
   }
 
   const validateForm = () => {
     const errors = {}
     if (!formData.title.trim()) errors.title = "Title is required"
-    if (!formData.content.trim()) errors.content = "Content is required"
     if (!formData.slug.trim()) errors.slug = "Slug is required"
+    if (!formData.content || formData.content.replace(/<[^>]+>/g, "").trim().length === 0)
+      errors.content = "Content is required"
     if (!formData.author.name.trim()) errors.authorName = "Author name is required"
-
     setFormErrors(errors)
     return Object.keys(errors).length === 0
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     if (!validateForm()) return
 
     try {
       setSaving(true)
-      console.log("Submitting form data:", formData)
-
-      // Calculate dynamic read time
       const readTime = calculateReadTime(formData.content)
-
-      // Format data for submission
       const formattedData = {
         ...formData,
         tags: formData.tags ? formData.tags.split(",").map((tag) => tag.trim()) : [],
         readTime,
         publishedAt:
-          formData.status === "published" && !formData.publishedAt ? new Date().toISOString() : formData.publishedAt,
+          formData.status === "published" && !formData.publishedAt
+            ? new Date().toISOString()
+            : formData.publishedAt,
       }
-
-      console.log("Formatted data for API:", formattedData)
 
       const response = await fetch(`/api/admin/blog/${id}`, {
         method: "PUT",
@@ -174,20 +146,14 @@ export default function EditBlogPost({ params }) {
         body: JSON.stringify(formattedData),
       })
 
-      console.log(`Update API response status: ${response.status}`)
-
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
-        console.error("Update API error:", errorData)
         throw new Error(errorData.error || `HTTP ${response.status}: Failed to update blog post`)
       }
 
-      const result = await response.json()
-      console.log("Update result:", result)
-
-      // Trigger revalidation for production
+      // Optional: revalidate static blog page
       try {
-        const revalidateResponse = await fetch("/api/revalidate", {
+        await fetch("/api/revalidate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -195,20 +161,12 @@ export default function EditBlogPost({ params }) {
             secret: process.env.REVALIDATE_SECRET || "fallback-secret",
           }),
         })
-
-        if (revalidateResponse.ok) {
-          console.log("Revalidation successful")
-        } else {
-          console.warn("Revalidation failed:", await revalidateResponse.text())
-        }
-      } catch (revalidateError) {
-        console.warn("Failed to revalidate:", revalidateError)
+      } catch (err) {
+        console.warn("Failed to revalidate:", err)
       }
 
-      // Redirect back to blog management page
       router.push("/admin/blog")
     } catch (err) {
-      console.error("Error updating post:", err)
       setFormErrors((prev) => ({ ...prev, submit: err.message }))
     } finally {
       setSaving(false)
@@ -234,7 +192,6 @@ export default function EditBlogPost({ params }) {
           </Button>
           <h1 className="text-3xl font-bold text-gray-900">Error</h1>
         </div>
-
         <Card>
           <CardContent className="p-6">
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
@@ -286,164 +243,87 @@ export default function EditBlogPost({ params }) {
         </div>
       </div>
 
-      {/* Edit Form */}
+      {/* Form */}
       <Card>
         <CardContent className="p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Title & Slug */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="title">
-                  Title <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="title"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  placeholder="Enter post title"
-                />
+                <Label htmlFor="title">Title <span className="text-red-500">*</span></Label>
+                <Input id="title" name="title" value={formData.title} onChange={handleInputChange} />
                 {formErrors.title && <p className="text-sm text-red-500">{formErrors.title}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="slug">
-                  Slug <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="slug"
-                  name="slug"
-                  value={formData.slug}
-                  onChange={handleInputChange}
-                  placeholder="enter-post-slug"
-                />
+                <Label htmlFor="slug">Slug <span className="text-red-500">*</span></Label>
+                <Input id="slug" name="slug" value={formData.slug} onChange={handleInputChange} />
                 {formErrors.slug && <p className="text-sm text-red-500">{formErrors.slug}</p>}
               </div>
             </div>
 
+            {/* Rich Text Content */}
             <div className="space-y-2">
-              <Label htmlFor="content">
-                Content <span className="text-red-500">*</span>
-              </Label>
-              <Textarea
-                id="content"
-                name="content"
-                value={formData.content}
-                onChange={handleInputChange}
-                placeholder="Write your blog post content here..."
-                rows={12}
-              />
+              <Label htmlFor="content">Content <span className="text-red-500">*</span></Label>
+              <ReactQuill value={formData.content} onChange={(val) => setFormData((prev) => ({ ...prev, content: val }))} />
               {formErrors.content && <p className="text-sm text-red-500">{formErrors.content}</p>}
               <p className="text-sm text-gray-500">Read time: {calculateReadTime(formData.content)}</p>
             </div>
 
+            {/* Excerpt */}
             <div className="space-y-2">
               <Label htmlFor="excerpt">Excerpt</Label>
-              <Textarea
-                id="excerpt"
-                name="excerpt"
-                value={formData.excerpt}
-                onChange={handleInputChange}
-                placeholder="Brief summary of the post (optional)"
-                rows={3}
-              />
+              <Input id="excerpt" name="excerpt" value={formData.excerpt} onChange={handleInputChange} />
             </div>
 
-            {/* Author Section */}
+            {/* Author */}
             <div className="border rounded-lg p-6 space-y-4">
               <h3 className="text-lg font-semibold">Author Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="author.name">
-                    Author Name <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="author.name"
-                    name="author.name"
-                    value={formData.author.name}
-                    onChange={handleInputChange}
-                    placeholder="Author full name"
-                  />
+                  <Label htmlFor="author.name">Author Name <span className="text-red-500">*</span></Label>
+                  <Input id="author.name" name="author.name" value={formData.author.name} onChange={handleInputChange} />
                   {formErrors.authorName && <p className="text-sm text-red-500">{formErrors.authorName}</p>}
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="author.role">Author Role</Label>
-                  <Input
-                    id="author.role"
-                    name="author.role"
-                    value={formData.author.role}
-                    onChange={handleInputChange}
-                    placeholder="e.g., Senior Developer, Content Writer"
-                  />
+                  <Input id="author.role" name="author.role" value={formData.author.role} onChange={handleInputChange} />
                 </div>
               </div>
-
-              <ImageUpload
-                onImageUpload={handleAuthorImageUpload}
-                defaultImage={formData.author.image}
-                label="Author Profile Image"
-              />
+              <ImageUpload onImageUpload={handleAuthorImageUpload} defaultImage={formData.author.image} label="Author Profile Image" />
             </div>
 
+            {/* Category, Tags, Status */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
-                <Input
-                  id="category"
-                  name="category"
-                  value={formData.category}
-                  onChange={handleInputChange}
-                  placeholder="Post category"
-                />
+                <Input id="category" name="category" value={formData.category} onChange={handleInputChange} />
               </div>
-
               <div className="space-y-2">
                 <Label htmlFor="status">Status</Label>
-                <select
-                  id="status"
-                  name="status"
-                  value={formData.status}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                >
+                <select id="status" name="status" value={formData.status} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md">
                   <option value="draft">Draft</option>
                   <option value="published">Published</option>
                   <option value="scheduled">Scheduled</option>
                 </select>
               </div>
-
               <div className="space-y-2">
                 <Label htmlFor="tags">Tags (comma separated)</Label>
-                <Input
-                  id="tags"
-                  name="tags"
-                  value={formData.tags}
-                  onChange={handleInputChange}
-                  placeholder="tag1, tag2, tag3"
-                />
+                <Input id="tags" name="tags" value={formData.tags} onChange={handleInputChange} />
               </div>
             </div>
 
-            <ImageUpload
-              onImageUpload={handleImageUpload}
-              defaultImage={formData.featuredImage}
-              label="Featured Image"
-            />
+            <ImageUpload onImageUpload={handleImageUpload} defaultImage={formData.featuredImage} label="Featured Image" />
 
             {formErrors.submit && (
               <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">{formErrors.submit}</div>
             )}
 
             <div className="flex justify-end space-x-3">
-              <Button type="button" variant="outline" onClick={() => router.push("/admin/blog")}>
-                Cancel
-              </Button>
+              <Button type="button" variant="outline" onClick={() => router.push("/admin/blog")}>Cancel</Button>
               <Button type="submit" disabled={saving} className="bg-purple-emperor hover:bg-purple-emperor/90">
                 {saving ? (
-                  <div>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Saving...
-                  </div>
+                  <div><Loader2 className="h-4 w-4 mr-2 animate-spin" />Saving...</div>
                 ) : (
                   "Save Changes"
                 )}

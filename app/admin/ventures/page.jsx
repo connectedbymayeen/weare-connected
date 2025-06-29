@@ -187,7 +187,7 @@ export default function VenturesPage() {
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
               <option value="scaling">Scaling</option>
-              <option value="scaling">Upcoming</option>
+              <option value="upcoming">Upcoming</option>
             </select>
           </div>
         </CardContent>

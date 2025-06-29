@@ -1,4 +1,5 @@
 "use client"
+
 import ImageUpload from "@/app/components/admin/image-upload"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,9 +10,6 @@ import { ArrowLeft, Eye, Loader2, Save } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import "react-quill/dist/quill.snow.css"
-
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 
 // Calculate dynamic read time
 function calculateReadTime(content) {
@@ -323,14 +321,16 @@ export default function EditBlogPost({ params }) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="content">Content <span className="text-red-500">*</span></Label>
-              <ReactQuill
+              <Label htmlFor="content">
+                Content <span className="text-red-500">*</span>
+              </Label>
+              <Textarea
                 id="content"
-                theme="snow"
+                name="content"
                 value={formData.content}
-                onChange={(value) => setFormData((prev) => ({ ...prev, content: value }))}
+                onChange={handleInputChange}
                 placeholder="Write your blog post content here..."
-                style={{ minHeight: "300px" }}
+                rows={12}
               />
               {formErrors.content && <p className="text-sm text-red-500">{formErrors.content}</p>}
               <p className="text-sm text-gray-500">Read time: {calculateReadTime(formData.content)}</p>

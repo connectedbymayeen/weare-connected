@@ -216,7 +216,7 @@ function page() {
                                         >
                                                 <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
                                                         <img
-                                                                src="https://scontent.fccu25-1.fna.fbcdn.net/v/t39.30808-6/499239771_122214119204139774_8275103925858929384_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG4WUlACy1-DDp1FH-JoU9YHT3b1VtCKHAdPdvVW0IocGlPCqtOz330oHEG1WBWPz0eEzDyXw9XP0asK763UNjE&_nc_ohc=-CcLa3xStUwQ7kNvwHcZYFE&_nc_oc=Adly82Wjk3kCnqDpdwSjFD_iyTr0qNaBj14dp_oMvLlGubBg39HO9pYPe7_X3hiw9c23k868Zkivhjwqp_pGcH9U&_nc_zt=23&_nc_ht=scontent.fccu25-1.fna&_nc_gid=_rZg1_B0zDCnJPT93UZ1CA&oh=00_AfPaxUF2L0613Ybxf_Cl9Ok5Mf8RCmeeLGv2BFb9E5TYBA&oe=6865B276"
+                                                                src="https://images.unsplash.com/photo-1690586842052-e8495d1aceef?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                                                 alt="Landing page preview"
                                                                 className="aspect-[16/9] h-auto w-full object-cover"
                                                                 height={1000}

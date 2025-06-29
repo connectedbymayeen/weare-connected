@@ -2,24 +2,24 @@
 
 import {
   Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
   DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
   DialogOverlay,
   DialogPortal,
+  DialogTitle,
 } from "@/components/ui/dialog"
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Search, Edit, Trash2, Eye, Loader2, Building, Plus } from "lucide-react"
+import { Building, Edit, Eye, Loader2, Plus, Search, Trash2 } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
 const mockVentures = [
   {
@@ -187,6 +187,7 @@ export default function VenturesPage() {
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
               <option value="scaling">Scaling</option>
+              <option value="scaling">Upcoming</option>
             </select>
           </div>
         </CardContent>

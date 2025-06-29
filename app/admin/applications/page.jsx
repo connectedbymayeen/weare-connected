@@ -128,7 +128,7 @@ export default function ApplicationsPage() {
 
     return (
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="max-w-4xl mt-24 max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-5xl mt-24 max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-xl">
               Application for {application.jobTitle} - {application.applicantInfo.fullName}

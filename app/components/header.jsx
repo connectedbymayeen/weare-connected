@@ -73,9 +73,9 @@
 //                 <div className="flex h-20 items-center justify-between">
 //                   {/* Logo */}
 //                   <Link href="/" className="flex items-center group shrink-0">
-                    // <div className="relative h-10 w-48 transition-transform duration-300 group-hover:scale-105">
-                    //   <img src="/logo.png" alt="Connected" className="object-cover" />
-                    // </div>
+// <div className="relative h-10 w-48 transition-transform duration-300 group-hover:scale-105">
+//   <img src="/logo.png" alt="Connected" className="object-cover" />
+// </div>
 //                   </Link>
 
 //                   {/* Combined Nav, Icon Divider, and CTA for Desktop */}
@@ -238,12 +238,11 @@
 
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import Image from "next/image"
+import { Menu, X } from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
 
 const navItems = [
   { name: "About", href: "/about" },
@@ -270,8 +269,8 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center group">
               <div className="relative h-10 w-48 transition-transform duration-300 group-hover:scale-105">
-                      <img src="/logo.png" alt="Connected" className="object-cover" />
-                    </div>
+                <img src="/logo.png" alt="Connected" className="object-cover" />
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
@@ -289,13 +288,13 @@ export default function Header() {
 
               {/* CTA Button */}
               <Link href='/contact'>
-              <Button
-                variant="outline"
-                size="sm"
-                className="ml-4 bg-[#6529b2] border-[#6529b2] text-white hover:bg-[#5a24a0] hover:border-[#5a24a0] transition-all duration-300 font-satoshi"
-              >
-                Let's Talk
-              </Button></Link>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer ml-4 bg-[#6529b2] border-[#6529b2] text-white hover:bg-[#5a24a0] hover:border-[#5a24a0] transition-all duration-300 font-satoshi"
+                >
+                  Let's Talk
+                </Button></Link>
             </nav>
 
             {/* Mobile Menu Button */}

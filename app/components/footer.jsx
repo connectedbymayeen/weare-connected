@@ -30,14 +30,14 @@ export default function Footer() {
         {/* Radial gradient overlay */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-slate-950/30 to-slate-950/60"></div>
 
-        <div className="container mx-auto px-14 sm:px-6 lg:px-18 flex justify-center relative z-10">
+        <div className="container w-[300px] sm:w-[230px] md:w-[460px] lg:w-[660px] mx-auto px-14 sm:px-6 lg:px-18 flex justify-center relative z-10">
           <Link href="/" aria-label="Connected Home">
             <Image
               src="/whitelogo.png"
               alt="Connected Logo"
-              width={384}
+              width={84}
               height={64}
-              className="h-auto w-48 sm:w-60 md:w-72 lg:w-80 xl:w-96 brightness-0 invert drop-shadow-2xl"
+              className="h-auto w-38 sm:w-40 md:w-62 lg:w-50 xl:w-66 brightness-0 invert drop-shadow-2xl"
               style={{ width: "auto", height: "auto" }}
             />
           </Link>

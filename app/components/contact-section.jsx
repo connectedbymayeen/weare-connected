@@ -294,12 +294,12 @@ export default function ContactSection() {
               {/* Send Message Button */}
               <Button
                 type="submit"
-                className="w-full h-12 bg-[#6529b2] hover:bg-purple-700 text-white font-medium"
+                className="w-full h-12 bg-[#6529b2] hover:bg-purple-700 text-white font-medium cursor:pointer"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="cursor:pointer mr-2 h-4 w-4 animate-spin" />
                     Sending Message...
                   </>
                 ) : (

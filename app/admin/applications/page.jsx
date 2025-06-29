@@ -1,4 +1,5 @@
 "use client"
+import { motion } from "framer-motion"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -127,194 +128,200 @@ export default function ApplicationsPage() {
     if (!application) return null
 
     return (
-      <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="max-w-5xl mt-24 max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-xl">
-              Application for {application.jobTitle} - {application.applicantInfo.fullName}
-            </DialogTitle>
-          </DialogHeader>
+      <motion.div
+        drag
+        dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        className="space-y-6 cursor-move"
+      >
+        <Dialog open={isOpen} onOpenChange={onClose}>
+          <DialogContent className="max-w-5xl mt-24 max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-xl">
+                Application for {application.jobTitle} - {application.applicantInfo.fullName}
+              </DialogTitle>
+            </DialogHeader>
 
-          <div className="space-y-6">
-            {/* Status and Actions */}
-            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-              <div className="flex items-center gap-4">
-                <span className="font-medium">Current Status:</span>
-                {getStatusBadge(application.status)}
-              </div>
-              <div className="flex items-center gap-2">
-                <Select value={newStatus} onValueChange={setNewStatus}>
-                  <SelectTrigger className="w-40">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="pending">Pending</SelectItem>
-                    <SelectItem value="reviewing">Reviewing</SelectItem>
-                    <SelectItem value="approved">Approved</SelectItem>
-                    <SelectItem value="rejected">Rejected</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Button
-                  onClick={() => updateApplicationStatus(application._id, newStatus, adminNotes)}
-                  className="bg-purple-700 hover:bg-purple-800"
-                >
-                  Update Status
-                </Button>
-              </div>
-            </div>
-
-            {/* Applicant Information */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <User className="h-5 w-5" />
-                  Applicant Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label className="text-sm font-medium text-gray-600">Full Name</Label>
-                    <p className="text-sm">{application.applicantInfo.fullName}</p>
-                  </div>
-                  <div>
-                    <Label className="text-sm font-medium text-gray-600">Email</Label>
-                    <p className="text-sm flex items-center gap-1">
-                      <Mail className="h-4 w-4" />
-                      {application.applicantInfo.email}
-                    </p>
-                  </div>
-                  <div>
-                    <Label className="text-sm font-medium text-gray-600">Phone</Label>
-                    <p className="text-sm flex items-center gap-1">
-                      <Phone className="h-4 w-4" />
-                      {application.applicantInfo.phone}
-                    </p>
-                  </div>
-                  <div>
-                    <Label className="text-sm font-medium text-gray-600">Applied Date</Label>
-                    <p className="text-sm flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {formatDate(application.appliedAt)}
-                    </p>
-                  </div>
+            <div className="space-y-6">
+              {/* Status and Actions */}
+              <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center gap-4">
+                  <span className="font-medium">Current Status:</span>
+                  {getStatusBadge(application.status)}
                 </div>
-
-                {application.applicantInfo.linkedin && (
-                  <div>
-                    <Label className="text-sm font-medium text-gray-600">LinkedIn</Label>
-                    <p className="text-sm">
-                      <a
-                        href={application.applicantInfo.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline flex items-center gap-1"
-                      >
-                        {application.applicantInfo.linkedin}
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    </p>
-                  </div>
-                )}
-
-                {application.applicantInfo.portfolio && (
-                  <div>
-                    <Label className="text-sm font-medium text-gray-600">Portfolio</Label>
-                    <p className="text-sm">
-                      <a
-                        href={application.applicantInfo.portfolio}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline flex items-center gap-1"
-                      >
-                        {application.applicantInfo.portfolio}
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    </p>
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {application.applicantInfo.experience && (
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Experience</Label>
-                      <p className="text-sm">{application.applicantInfo.experience}</p>
-                    </div>
-                  )}
-                  {application.applicantInfo.expectedSalary && (
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Expected Salary</Label>
-                      <p className="text-sm">{application.applicantInfo.expectedSalary}</p>
-                    </div>
-                  )}
+                <div className="flex items-center gap-2">
+                  <Select value={newStatus} onValueChange={setNewStatus}>
+                    <SelectTrigger className="w-40">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="pending">Pending</SelectItem>
+                      <SelectItem value="reviewing">Reviewing</SelectItem>
+                      <SelectItem value="approved">Approved</SelectItem>
+                      <SelectItem value="rejected">Rejected</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    onClick={() => updateApplicationStatus(application._id, newStatus, adminNotes)}
+                    className="bg-purple-700 hover:bg-purple-800"
+                  >
+                    Update Status
+                  </Button>
                 </div>
+              </div>
 
-                {application.applicantInfo.availableFrom && (
-                  <div>
-                    <Label className="text-sm font-medium text-gray-600">Available From</Label>
-                    <p className="text-sm">{application.applicantInfo.availableFrom}</p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Cover Letter */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Cover Letter</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm whitespace-pre-line">{application.applicantInfo.coverLetter}</p>
-              </CardContent>
-            </Card>
-
-            {/* Attachments */}
-            {application.attachments && Object.keys(application.attachments).length > 0 && (
+              {/* Applicant Information */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <FileText className="h-5 w-5" />
-                    Attachments
+                    <User className="h-5 w-5" />
+                    Applicant Information
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {Object.entries(application.attachments).map(([type, url]) => (
-                      <div key={type} className="flex items-center justify-between p-3 border rounded-lg">
-                        <div className="flex items-center gap-3">
-                          <FileText className="h-5 w-5 text-gray-600" />
-                          <span className="font-medium capitalize">{type.replace(/([A-Z])/g, " $1").trim()}</span>
-                        </div>
-                        <Button variant="outline" size="sm" asChild>
-                          <a href={url} target="_blank" rel="noopener noreferrer">
-                            <Download className="h-4 w-4 mr-2" />
-                            Download
-                          </a>
-                        </Button>
-                      </div>
-                    ))}
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-sm font-medium text-gray-600">Full Name</Label>
+                      <p className="text-sm">{application.applicantInfo.fullName}</p>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium text-gray-600">Email</Label>
+                      <p className="text-sm flex items-center gap-1">
+                        <Mail className="h-4 w-4" />
+                        {application.applicantInfo.email}
+                      </p>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium text-gray-600">Phone</Label>
+                      <p className="text-sm flex items-center gap-1">
+                        <Phone className="h-4 w-4" />
+                        {application.applicantInfo.phone}
+                      </p>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium text-gray-600">Applied Date</Label>
+                      <p className="text-sm flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        {formatDate(application.appliedAt)}
+                      </p>
+                    </div>
                   </div>
+
+                  {application.applicantInfo.linkedin && (
+                    <div>
+                      <Label className="text-sm font-medium text-gray-600">LinkedIn</Label>
+                      <p className="text-sm">
+                        <a
+                          href={application.applicantInfo.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:underline flex items-center gap-1"
+                        >
+                          {application.applicantInfo.linkedin}
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </p>
+                    </div>
+                  )}
+
+                  {application.applicantInfo.portfolio && (
+                    <div>
+                      <Label className="text-sm font-medium text-gray-600">Portfolio</Label>
+                      <p className="text-sm">
+                        <a
+                          href={application.applicantInfo.portfolio}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:underline flex items-center gap-1"
+                        >
+                          {application.applicantInfo.portfolio}
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {application.applicantInfo.experience && (
+                      <div>
+                        <Label className="text-sm font-medium text-gray-600">Experience</Label>
+                        <p className="text-sm">{application.applicantInfo.experience}</p>
+                      </div>
+                    )}
+                    {application.applicantInfo.expectedSalary && (
+                      <div>
+                        <Label className="text-sm font-medium text-gray-600">Expected Salary</Label>
+                        <p className="text-sm">{application.applicantInfo.expectedSalary}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {application.applicantInfo.availableFrom && (
+                    <div>
+                      <Label className="text-sm font-medium text-gray-600">Available From</Label>
+                      <p className="text-sm">{application.applicantInfo.availableFrom}</p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
-            )}
 
-            {/* Admin Notes */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Admin Notes</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Textarea
-                  value={adminNotes}
-                  onChange={(e) => setAdminNotes(e.target.value)}
-                  placeholder="Add internal notes about this application..."
-                  className="min-h-[100px]"
-                />
-              </CardContent>
-            </Card>
-          </div>
-        </DialogContent>
-      </Dialog>
+              {/* Cover Letter */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Cover Letter</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm whitespace-pre-line">{application.applicantInfo.coverLetter}</p>
+                </CardContent>
+              </Card>
+
+              {/* Attachments */}
+              {application.attachments && Object.keys(application.attachments).length > 0 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <FileText className="h-5 w-5" />
+                      Attachments
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {Object.entries(application.attachments).map(([type, url]) => (
+                        <div key={type} className="flex items-center justify-between p-3 border rounded-lg">
+                          <div className="flex items-center gap-3">
+                            <FileText className="h-5 w-5 text-gray-600" />
+                            <span className="font-medium capitalize">{type.replace(/([A-Z])/g, " $1").trim()}</span>
+                          </div>
+                          <Button variant="outline" size="sm" asChild>
+                            <a href={url} target="_blank" rel="noopener noreferrer">
+                              <Download className="h-4 w-4 mr-2" />
+                              Download
+                            </a>
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Admin Notes */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Admin Notes</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Textarea
+                    value={adminNotes}
+                    onChange={(e) => setAdminNotes(e.target.value)}
+                    placeholder="Add internal notes about this application..."
+                    className="min-h-[100px]"
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </motion.div>
     )
   }
 

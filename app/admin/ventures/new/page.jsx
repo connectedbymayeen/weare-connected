@@ -1,16 +1,16 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import ImageUpload from "@/app/components/admin/image-upload"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, Loader2, Plus, Trash2 } from "lucide-react"
 import Link from "next/link"
-import ImageUpload from "@/app/components/admin/image-upload"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function NewVenturePage() {
   const router = useRouter()
@@ -302,6 +302,7 @@ export default function NewVenturePage() {
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                     <option value="scaling">Scaling</option>
+                    <option value="upcoming">Upcoming</option>
                   </select>
                 </div>
 

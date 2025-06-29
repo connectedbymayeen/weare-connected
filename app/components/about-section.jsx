@@ -7,12 +7,12 @@ export default function AboutSection({ content }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
 
-  const [aboutData, setAboutData] = useState({
+  const defaultAboutData = {
     title: "Who We Are",
     description:
       "Connected began with a vision to nurture and scale innovative ideas into leading market solutions.",
     vision:
-      "Our vision is to become the world's leading launchpad for next-generation ventures. ",
+      "Our vision is to become the world's leading launchpad for next-generation ventures.",
     mission:
       "Connected's mission is to build ventures that shape the future.",
     values: [
@@ -35,16 +35,25 @@ export default function AboutSection({ content }) {
           "We're committed to creating meaningful change and lasting value that drives transformative growth across markets.",
       },
     ],
-  })
+  }
+
+  const [aboutData, setAboutData] = useState(defaultAboutData)
 
   useEffect(() => {
-    if (content?.about) {
+    if (
+      content?.about &&
+      aboutData.title === defaultAboutData.title &&
+      aboutData.description === defaultAboutData.description
+    ) {
       setAboutData(content.about)
     }
   }, [content])
 
   return (
-    <section ref={ref} className="w-full py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-white">
+    <section
+      ref={ref}
+      className="w-full py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-white"
+    >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,7 +62,9 @@ export default function AboutSection({ content }) {
           className="flex flex-col items-center justify-center space-y-4 text-center mx-auto"
         >
           <div className="space-y-2 max-w-4xl mx-auto">
-            <div className="inline-block rounded-lg bg-accent px-3 py-1 text-sm font-medium text-primary">About Us</div>
+            <div className="inline-block rounded-lg bg-accent px-3 py-1 text-sm font-medium text-primary">
+              About Us
+            </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter">
               {aboutData.title}
             </h2>
@@ -70,21 +81,29 @@ export default function AboutSection({ content }) {
           className="mx-auto grid max-w-6xl items-start gap-6 sm:gap-8 md:gap-12 py-8 sm:py-12 lg:grid-cols-2 lg:gap-16"
         >
           <div className="space-y-4 sm:space-y-6 mx-auto lg:mx-0 max-w-2xl lg:max-w-none">
-            <h3 className="text-xl sm:text-2xl font-bold text-center lg:text-left">Our Vision & Mission</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-center lg:text-left">
+              Our Vision & Mission
+            </h3>
             <div className="space-y-4">
               <div className="p-4 sm:p-6 rounded-lg bg-purple-50 border-l-4 border-purple-500">
                 <h4 className="font-bold text-purple-900 mb-2">Vision</h4>
-                <p className="text-purple-800 text-sm sm:text-base">{aboutData.vision}</p>
+                <p className="text-purple-800 text-sm sm:text-base">
+                  {aboutData.vision}
+                </p>
               </div>
               <div className="p-4 sm:p-6 rounded-lg bg-blue-50 border-l-4 border-blue-500">
                 <h4 className="font-bold text-blue-900 mb-2">Mission</h4>
-                <p className="text-blue-800 text-sm sm:text-base">{aboutData.mission}</p>
+                <p className="text-blue-800 text-sm sm:text-base">
+                  {aboutData.mission}
+                </p>
               </div>
             </div>
           </div>
 
           <div className="space-y-4 sm:space-y-6 mx-auto lg:mx-0 max-w-2xl lg:max-w-none">
-            <h3 className="text-xl sm:text-2xl font-bold text-center lg:text-left">What We Do</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-center lg:text-left">
+              What We Do
+            </h3>
             <div className="space-y-3">
               {[
                 "We launch future-focused ventures across tech, media, lifestyle, and beyond.",
@@ -101,7 +120,9 @@ export default function AboutSection({ content }) {
                   className="flex items-start space-x-3"
                 >
                   <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-muted-foreground text-sm sm:text-base">{service}</p>
+                  <p className="text-muted-foreground text-sm sm:text-base">
+                    {service}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -126,7 +147,9 @@ export default function AboutSection({ content }) {
                 {item.number}
               </div>
               <h3 className="text-lg sm:text-xl font-bold">{item.title}</h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">{item.description}</p>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                {item.description}
+              </p>
             </motion.div>
           ))}
         </motion.div>

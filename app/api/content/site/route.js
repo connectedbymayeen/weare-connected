@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server"
 import { connectToDatabase } from "@/app/lib/mongodb"
+import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
@@ -24,11 +24,11 @@ export async function GET() {
         about: {
           title: "Who We Are",
           description:
-            "Connected began with a vision to nurture and scale innovative ideas into leading market solutions. We are more than just a conglomerate; we are a community of visionaries and creators dedicated to making a significant impact through our collective expertise and passion for innovation.",
+            "Connected began with a vision to nurture and scale innovative ideas into leading market solutions.",
           vision:
-            "Our vision is to become the world's leading launchpad for next-generation ventures. We aim to create a global ecosystem where bold ideas grow into influential brands that define the future of technology, culture, and commerce.",
+            "Our vision is to become the world's leading launchpad for next-generation ventures.",
           mission:
-            "Connected's mission is to build ventures that shape the future. We turn ideas into impactful businesses across tech, digital, media, and lifestyle. Our goal is to empower creators, disrupt industries, and deliver innovation with purpose and precision.",
+            "Connected's mission is to build ventures that shape the future.",
           values: [
             {
               number: "01",

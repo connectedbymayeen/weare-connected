@@ -7,6 +7,9 @@ import { Lightbulb, Target, TrendingUp } from "lucide-react";
 import Link from "next/link";
 // Do this:
 
+import { Card } from "@/components/ui/card";
+
+import { MapPin } from "lucide-react";
 
 
 const content = [
@@ -87,6 +90,21 @@ const departments = [
         // Add more objects here as needed...
 ];
 function page() {
+        // Use dynamic content with fallbacks
+        const contactData = content?.contact || {
+
+                office: {
+                        address: "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
+
+                },
+                emails: {
+                        general: "hello@weareconnected.io",
+                        business: "press@weareconnected.io",
+                        careers: "careers@weareconnected.io",
+                },
+                phone: "+1 (415) 555-0123",
+                hours: "Monday - Friday: 9:00 AM - 6:00 PM PST\nSaturday - Sunday: Closed",
+        }
         const resources = [
                 {
                         title: "Discover",
@@ -264,81 +282,99 @@ function page() {
                                 ))}
                         </div>
                         <div>
-                                <div className="flex justify-center items-center ">
-                                        <div className="rounded-[22px] w-[300px] px-4 md:px-8 max-w-7xl mx-auto border-2 p-4 sm:p-10 bg-white dark:bg-zinc-900">
-                                                <img
-                                                        src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Fettjl2rGDjHBlCYCXcWMRAoKDr_AQOoXQ&s`}
-                                                        alt="jordans"
-                                                        height="400"
-                                                        width="400"
-                                                        className="object-contain"
-                                                />
-                                                <p className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
-                                                        Air Jordan 4 Retro Reimagined
-                                                </p>
+                                <h3 className="py-6 px-4 md:px-8 max-w-[77rem] mx-auto text-5xl font-black">
+                                        Be a part of what comes NEXT
+                                </h3>
 
-                                                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                                        The Air Jordan 4 Retro Reimagined Bred will release on Saturday,
-                                                        February 17, 2024. Your best opportunity to get these right now is by
-                                                        entering raffles and waiting for the official releases.
-                                                </p>
-                                                <button className="rounded-full pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-black mt-4 text-xs font-bold dark:bg-zinc-800">
-                                                        <span>Buy now </span>
-                                                        <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0 text-white">
-                                                                $100
-                                                        </span>
-                                                </button>
-                                        </div>
-                                        <div className="rounded-[22px] w-[300px] px-4 md:px-8 max-w-7xl mx-auto border-2 p-4 sm:p-10 bg-white dark:bg-zinc-900">
-                                                <img
-                                                        src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Fettjl2rGDjHBlCYCXcWMRAoKDr_AQOoXQ&s`}
-                                                        alt="jordans"
-                                                        height="400"
-                                                        width="400"
-                                                        className="object-contain"
-                                                />
-                                                <p className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
-                                                        Air Jordan 4 Retro Reimagined
-                                                </p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8 py-10 max-w-7xl mx-auto">
+                                        {[1, 2, 3].map((item, index) => (
+                                                <div
+                                                        key={index}
+                                                        className="rounded-[22px] border-2 p-4 sm:p-6 bg-white dark:bg-zinc-900 shadow-sm transition hover:shadow-md"
+                                                >
+                                                        <img
+                                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Fettjl2rGDjHBlCYCXcWMRAoKDr_AQOoXQ&s"
+                                                                alt="jordans"
+                                                                height="400"
+                                                                width="400"
+                                                                className="object-contain w-full h-[250px] sm:h-[300px] rounded-md"
+                                                        />
+                                                        <p className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200 font-semibold">
+                                                                Engineering Department
+                                                        </p>
+                                                        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                                                                The Air Jordan 4 Retro Reimagined Bred will release on Saturday,
+                                                                February 17, 2024. Your best opportunity to get these right now is by
+                                                                entering raffles and waiting for the official releases.
+                                                        </p>
+                                                        <button className="rounded-full px-3 py-1 text-white flex items-center space-x-2 bg-black mt-4 text-xs font-bold dark:bg-zinc-800 hover:bg-gray-800 cursor-pointer">
+                                                                <span className=" items-center">See Jobs</span>
+                                                                {/* <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0.5 text-white">
+                                                                        $100
+                                                                </span> */}
+                                                        </button>
+                                                </div>
+                                        ))}
 
-                                                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                                        The Air Jordan 4 Retro Reimagined Bred will release on Saturday,
-                                                        February 17, 2024. Your best opportunity to get these right now is by
-                                                        entering raffles and waiting for the official releases.
-                                                </p>
-                                                <button className="rounded-full pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-black mt-4 text-xs font-bold dark:bg-zinc-800">
-                                                        <span>Buy now </span>
-                                                        <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0 text-white">
-                                                                $100
-                                                        </span>
-                                                </button>
-                                        </div>
-                                        <div className="rounded-[22px] w-[300px] px-4 md:px-8 max-w-7xl mx-auto border-2 p-4 sm:p-10 bg-white dark:bg-zinc-900">
-                                                <img
-                                                        src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Fettjl2rGDjHBlCYCXcWMRAoKDr_AQOoXQ&s`}
-                                                        alt="jordans"
-                                                        height="400"
-                                                        width="400"
-                                                        className="object-contain"
-                                                />
-                                                <p className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
-                                                        Air Jordan 4 Retro Reimagined
-                                                </p>
-
-                                                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                                        The Air Jordan 4 Retro Reimagined Bred will release on Saturday,
-                                                        February 17, 2024. Your best opportunity to get these right now is by
-                                                        entering raffles and waiting for the official releases.
-                                                </p>
-                                                <button className="rounded-full pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-black mt-4 text-xs font-bold dark:bg-zinc-800">
-                                                        <span>Buy now </span>
-                                                        <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0 text-white">
-                                                                $100
-                                                        </span>
-                                                </button>
-                                        </div>
                                 </div>
                         </div>
+                        {/* Map Section */}
+                        <section className="py-16 sm:py-20 bg-lynx-white">
+                                <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
+                                        <div className="text-center mb-12 mx-auto max-w-4xl">
+                                                <h2 className="text-2xl sm:text-3xl font-bold text-pot-black mb-4 font-syne">Visit Our Office</h2>
+                                                <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+                                                        Located in the heart of San Francisco's innovation district.
+                                                </p>
+                                        </div>
+
+                                        <div className="max-w-4xl mx-auto">
+                                                <Card className="overflow-hidden border-2 border-lynx-white">
+                                                        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
+                                                                <div className="text-center">
+                                                                        <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+                                                                        <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
+                                                                        <p className="text-muted-foreground">
+                                                                                {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
+                                                                                <br />
+                                                                                {contactData.office?.city || "San Francisco, CA 94107"}
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                </Card>
+                                        </div>
+                                        <div className="max-w-4xl mx-auto">
+                                                <Card className="overflow-hidden border-2 border-lynx-white">
+                                                        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
+                                                                <div className="text-center">
+                                                                        <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+                                                                        <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
+                                                                        <p className="text-muted-foreground">
+                                                                                {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
+                                                                                <br />
+                                                                                {contactData.office?.city || "San Francisco, CA 94107"}
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                </Card>
+                                        </div>
+                                        <div className="max-w-4xl mx-auto">
+                                                <Card className="overflow-hidden border-2 border-lynx-white">
+                                                        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
+                                                                <div className="text-center">
+                                                                        <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+                                                                        <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
+                                                                        <p className="text-muted-foreground">
+                                                                                {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
+                                                                                <br />
+                                                                                {contactData.office?.city || "San Francisco, CA 94107"}
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                </Card>
+                                        </div>
+                                </div>
+                        </section>
 
                         <Footer />
                 </div>

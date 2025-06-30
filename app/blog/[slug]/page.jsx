@@ -1,4 +1,5 @@
 "use client"
+
 import Footer from "@/app/components/footer"
 import Header from "@/app/components/header"
 import { Badge } from "@/components/ui/badge"
@@ -7,7 +8,8 @@ import { Separator } from "@/components/ui/separator"
 import { ArrowLeft, Bookmark, Calendar, Clock, Share2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useParams } from "next/navigation"
+import { useEffect, useState } from "react"
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -16,31 +18,35 @@ import {
   TwitterIcon,
   TwitterShareButton,
   WhatsappIcon,
-  WhatsappShareButton
+  WhatsappShareButton,
 } from "react-share"
 
-export default function BlogPage({ params }) {
+export default function BlogPage() {
+  const params = useParams()
   const slug = params.slug
+  const [post, setPost] = useState(null)
   const [showShareOptions, setShowShareOptions] = useState(false)
 
-  // Example Static Data
-  const post = {
-    title: "Example Blog Title",
-    excerpt: "This is a blog about something awesome.",
-    category: "Technology",
-    tags: ["JavaScript", "React", "Next.js"],
-    readTime: "4 min read",
-    publishedAt: new Date().toISOString(),
-    content: "Here is your blog content.\n\nThis is a second paragraph.",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176",
-    author: {
-      name: "Arif Almas",
-      role: "Content Writer",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
-    }
-  }
+  useEffect(() => {
+    fetch(`/api/blog/${slug}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPost(data.post)
+      })
+      .catch((err) => {
+        console.error("Error fetching post:", err)
+      })
+  }, [slug])
 
   const shareUrl = `https://weare-connected.com/blog/${slug}`
+
+  if (!post) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Post not found.</p>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -63,21 +69,20 @@ export default function BlogPage({ params }) {
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">{post.title}</h1>
-
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">{post.excerpt}</p>
 
               <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
                 <div className="flex items-center space-x-4">
                   <Image
-                    src={post.author.image}
-                    alt={post.author.name}
+                    src={post.author?.image || "/default.jpg"}
+                    alt={post.author?.name}
                     width={48}
                     height={48}
                     className="rounded-full object-cover"
                   />
                   <div>
-                    <div className="font-semibold text-gray-900">{post.author.name}</div>
-                    <div className="text-sm text-gray-600">{post.author.role}</div>
+                    <div className="font-semibold text-gray-900">{post.author?.name}</div>
+                    <div className="text-sm text-gray-600">{post.author?.role}</div>
                   </div>
                   <Separator orientation="vertical" className="h-8" />
                   <div className="flex items-center text-sm text-gray-600">
@@ -85,7 +90,7 @@ export default function BlogPage({ params }) {
                     {new Date(post.publishedAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
-                      day: "numeric"
+                      day: "numeric",
                     })}
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
@@ -141,14 +146,14 @@ export default function BlogPage({ params }) {
             </div>
 
             <div className="prose prose-lg max-w-none mb-12 text-gray-700">
-              {post.content.split("\n\n").map((paragraph, index) => (
+              {post.content?.split("\n\n").map((paragraph, index) => (
                 <p key={index} className="text-lg leading-relaxed">
                   {paragraph}
                 </p>
               ))}
             </div>
 
-            {post.tags.length > 0 && (
+            {post.tags?.length > 0 && (
               <div className="mb-12">
                 <h3 className="text-lg font-semibold mb-4">Tags</h3>
                 <div className="flex flex-wrap gap-2">
@@ -166,17 +171,17 @@ export default function BlogPage({ params }) {
             <div className="bg-gray-50 rounded-lg p-8 mb-12">
               <div className="flex items-start space-x-4">
                 <Image
-                  src={post.author.image}
-                  alt={post.author.name}
+                  src={post.author?.image || "/default.jpg"}
+                  alt={post.author?.name}
                   width={80}
                   height={80}
                   className="rounded-full object-cover"
                 />
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{post.author.name}</h3>
-                  <p className="text-gray-600 mb-4">{post.author.role}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{post.author?.name}</h3>
+                  <p className="text-gray-600 mb-4">{post.author?.role}</p>
                   <p className="text-gray-700">
-                    {post.author.name} is a passionate content writer helping people understand complex technology easily.
+                    {post.author?.name} is a passionate content writer helping people understand complex technology easily.
                   </p>
                 </div>
               </div>

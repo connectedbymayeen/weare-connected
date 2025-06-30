@@ -1,5 +1,6 @@
 "use client"
 
+import { Share2 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import {
         FacebookIcon,
@@ -11,7 +12,6 @@ import {
         WhatsappIcon,
         WhatsappShareButton,
 } from "react-share"
-
 export default function ShareButton({ url, title }) {
         const [open, setOpen] = useState(false)
         const ref = useRef()
@@ -38,20 +38,7 @@ export default function ShareButton({ url, title }) {
                                 aria-haspopup="true"
                                 aria-expanded={open}
                         >
-                                <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="w-4 h-4 mr-2"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        strokeWidth={2}
-                                >
-                                        <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M4 12v.01M12 4v.01M20 12v.01M12 20v.01M16.24 7.76l-8.48 8.48"
-                                        />
-                                </svg>
+                                <Share2 className="w-4 h-4 mr-2" />
                                 Share
                         </button>
 

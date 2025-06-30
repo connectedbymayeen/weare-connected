@@ -14,62 +14,33 @@ import OfficesGallerySection from "../components/offices-gallery-section"
 export default function AboutPageClient() {
   const [content, setContent] = useState(null)
   const [teamMembers, setTeamMembers] = useState([])
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchContent = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch("/api/content/site")
-        if (response.ok) {
-          const data = await response.json()
-          setContent(data)
-        }
+        const [contentRes, teamRes] = await Promise.all([
+          fetch("/api/content/site"),
+          fetch("/api/content/team"),
+        ])
+
+        const contentData = contentRes.ok ? await contentRes.json() : null
+        const teamData = teamRes.ok ? await teamRes.json() : []
+
+        setContent(contentData)
+        setTeamMembers(teamData)
       } catch (error) {
-        console.error("Error fetching content:", error)
+        console.error("Error fetching data:", error)
       }
     }
 
-    const fetchTeamMembers = async () => {
-      try {
-        const response = await fetch("/api/content/team")
-        if (response.ok) {
-          const data = await response.json()
-          setTeamMembers(data)
-        }
-      } catch (error) {
-        console.error("Error fetching team members:", error)
-      }
-    }
-
-    Promise.all([fetchContent(), fetchTeamMembers()]).finally(() => {
-      setLoading(false)
-    })
+    fetchData()
   }, [])
-
-  if (loading) {
-    return (
-      <>
-        <Header />
-        <div className="min-h-screen bg-white">
-          <div className="animate-pulse">
-            <div className="h-96 bg-gray-200"></div>
-            <div className="max-w-7xl mx-auto px-4 py-16 space-y-8">
-              <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto"></div>
-              <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
-            </div>
-          </div>
-        </div>
-        <Footer />
-      </>
-    )
-  }
 
   // Use dynamic content with your exact current text as fallbacks
   const aboutContent = {
     hero: {
       title: content?.about?.hero?.title || "About Connected",
-      subtitle: content?.about?.hero?.subtitle || "Connected isn't just a name — it's a philosophy.",
+      subtitle: content?.about?.hero?.subtitle || "",
     },
     description:
       content?.about?.description ||

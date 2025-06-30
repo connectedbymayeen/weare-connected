@@ -1,5 +1,5 @@
-import { connectToDatabase, isMongoDBAvailable } from "./mongodb"
 import { ObjectId } from "mongodb"
+import { connectToDatabase, isMongoDBAvailable } from "./mongodb"
 
 // Helper function to handle database errors
 const handleDbError = (error, fallbackData, entityName) => {
@@ -290,38 +290,7 @@ export async function getBlogPosts() {
 
 function getSampleBlogPosts() {
   return [
-    {
-      id: "sample-1",
-      title: "The Future of Technology: Trends to Watch",
-      slug: "future-of-technology",
-      excerpt:
-        "Explore the latest technological trends that are shaping our future and transforming industries worldwide.",
-      content: "Technology continues to evolve at an unprecedented pace, bringing new opportunities and challenges...",
-      author: {
-        name: "Connected Team",
-        role: "Technology Analyst",
-        image: "/placeholder.svg?height=40&width=40&text=CT",
-      },
-      publishedAt: new Date().toLocaleDateString(),
-      image: "/placeholder.svg?height=400&width=600&text=Future+of+Technology",
-      tags: ["Technology", "Innovation", "Future"],
-      category: "Technology",
-      readTime: "8 min read",
-    },
-    {
-      id: "sample-2",
-      title: "Building Successful Ventures: Lessons Learned",
-      slug: "building-successful-ventures",
-      excerpt: "Key insights and strategies for building and scaling successful technology ventures in today's market.",
-      content:
-        "Building a successful venture requires more than just a great idea. It demands strategic planning, execution excellence, and the ability to adapt...",
-      author: { name: "Connected Team", role: "Venture Builder", image: "/placeholder.svg?height=40&width=40&text=VB" },
-      publishedAt: new Date(Date.now() - 86400000).toLocaleDateString(),
-      image: "/placeholder.svg?height=400&width=600&text=Successful+Ventures",
-      tags: ["Ventures", "Startup", "Business"],
-      category: "Business",
-      readTime: "6 min read",
-    },
+
   ]
 }
 
@@ -643,50 +612,7 @@ export async function getVentures() {
 
 function getSampleVentures() {
   return [
-    {
-      id: "1",
-      slug: "techflow",
-      name: "TechFlow",
-      tagline: "Workflow automation reimagined",
-      description:
-        "A comprehensive SaaS platform that revolutionizes how teams manage workflows and automate repetitive tasks.",
-      image: "/placeholder.svg?height=600&width=1200&text=TechFlow+Dashboard",
-      logo: "/placeholder.svg?height=120&width=120&text=TF",
-      status: "active",
-    },
-    {
-      id: "2",
-      slug: "designhub",
-      name: "DesignHub",
-      tagline: "Creative solutions for modern brands",
-      description:
-        "A full-service design agency specializing in brand identity, digital experiences, and creative campaigns.",
-      image: "/placeholder.svg?height=600&width=1200&text=DesignHub+Portfolio",
-      logo: "/placeholder.svg?height=120&width=120&text=DH",
-      status: "active",
-    },
-    {
-      id: "3",
-      slug: "marketpulse",
-      name: "MarketPulse",
-      tagline: "Data-driven marketing intelligence",
-      description:
-        "Advanced analytics platform providing real-time market insights and competitive intelligence for businesses.",
-      image: "/placeholder.svg?height=600&width=1200&text=MarketPulse",
-      logo: "/placeholder.svg?height=120&width=120&text=MP",
-      status: "active",
-    },
-    {
-      id: "4",
-      slug: "ecolife",
-      name: "EcoLife",
-      tagline: "Sustainable living made simple",
-      description:
-        "A lifestyle platform connecting eco-conscious consumers with sustainable products and green living solutions.",
-      image: "/placeholder.svg?height=600&width=1200&text=EcoLife",
-      logo: "/placeholder.svg?height=120&width=120&text=EL",
-      status: "active",
-    },
+
   ]
 }
 

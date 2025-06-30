@@ -1,12 +1,11 @@
 "use client"
 
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight, Calendar, Users, TrendingUp } from "lucide-react"
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
 import { Button } from "@/components/ui/button"
+import { motion, useInView } from "framer-motion"
+import { ArrowRight, Calendar, TrendingUp, Users } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useRef } from "react"
 
 export default function VenturesSection({ ventures = [] }) {
   const ref = useRef(null)
@@ -16,67 +15,23 @@ export default function VenturesSection({ ventures = [] }) {
   const venturesList =
     ventures.length > 0
       ? ventures.map((venture) => ({
-          ...venture,
-          status: venture.status || "Active",
-          statusColor:
-            venture.status === "Active"
-              ? "bg-green-500"
-              : venture.status === "Scaling"
-                ? "bg-blue-500"
-                : "bg-purple-500",
-          category: venture.category || venture.industry || "Tech",
-          year: venture.foundedYear || venture.year || "2024",
-          teamMembers: venture.teamSize ? `${venture.teamSize} members` : "8 members",
-          growth: venture.growth || "+150%",
-          tags: venture.technologies || venture.tags || ["Technology", "Innovation"],
-        }))
+        ...venture,
+        status: venture.status || "Active",
+        statusColor:
+          venture.status === "Active"
+            ? "bg-green-500"
+            : venture.status === "Scaling"
+              ? "bg-blue-500"
+              : "bg-purple-500",
+        category: venture.category || venture.industry || "Tech",
+        year: venture.foundedYear || venture.year || "2024",
+        teamMembers: venture.teamSize ? `${venture.teamSize} members` : "8 members",
+        growth: venture.growth || "+150%",
+        tags: venture.technologies || venture.tags || ["Technology", "Innovation"],
+      }))
       : [
-          {
-            slug: "ecotech-solutions",
-            name: "EcoTech Solutions",
-            tagline: "Sustainable technology platform for environmental monitoring and carbon tracking.",
-            description: "Sustainable technology platform for environmental monitoring and carbon tracking.",
-            image: "/placeholder.svg?height=600&width=1200&text=EcoTech+Solutions",
-            logo: "/placeholder.svg?height=120&width=120&text=ET",
-            status: "Active",
-            statusColor: "bg-green-500",
-            category: "CleanTech",
-            year: "2024",
-            teamMembers: "8 members",
-            growth: "+150%",
-            tags: ["Sustainability", "IoT", "Analytics"],
-          },
-          {
-            slug: "finflow",
-            name: "FinFlow",
-            tagline: "Next-generation financial management platform for small businesses and freelancers.",
-            description: "Next-generation financial management platform for small businesses and freelancers.",
-            image: "/placeholder.svg?height=600&width=1200&text=FinFlow+Platform",
-            logo: "/placeholder.svg?height=120&width=120&text=FF",
-            status: "Scaling",
-            statusColor: "bg-blue-500",
-            category: "FinTech",
-            year: "2023",
-            teamMembers: "12 members",
-            growth: "+200%",
-            tags: ["Finance", "SaaS", "AI"],
-          },
-          {
-            slug: "healthhub",
-            name: "HealthHub",
-            tagline: "Digital health platform connecting patients with healthcare providers seamlessly.",
-            description: "Digital health platform connecting patients with healthcare providers seamlessly.",
-            image: "/placeholder.svg?height=600&width=1200&text=HealthHub+Platform",
-            logo: "/placeholder.svg?height=120&width=120&text=HH",
-            status: "Development",
-            statusColor: "bg-purple-500",
-            category: "HealthTech",
-            year: "2024",
-            teamMembers: "6 members",
-            growth: "New",
-            tags: ["Healthcare", "Telemedicine", "Mobile"],
-          },
-        ]
+
+      ]
 
   return (
     <section ref={ref} className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-purple-50 to-white">

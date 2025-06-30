@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server"
 import { connectToDatabase } from "@/app/lib/mongodb"
+import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
@@ -129,26 +129,7 @@ export async function GET() {
         ],
       },
       featuredVentures: [
-        {
-          id: "1",
-          slug: "techflow",
-          name: "TechFlow",
-          tagline: "Workflow automation reimagined",
-          description:
-            "A comprehensive SaaS platform that revolutionizes how teams manage workflows and automate repetitive tasks.",
-          image: "/placeholder.svg?height=600&width=1200&text=TechFlow+Dashboard",
-          logo: "/placeholder.svg?height=120&width=120&text=TF",
-        },
-        {
-          id: "2",
-          slug: "designhub",
-          name: "DesignHub",
-          tagline: "Creative solutions for modern brands",
-          description:
-            "A full-service design agency specializing in brand identity, digital experiences, and creative campaigns.",
-          image: "/placeholder.svg?height=600&width=1200&text=DesignHub+Portfolio",
-          logo: "/placeholder.svg?height=120&width=120&text=DH",
-        },
+
       ],
       services: [
         {

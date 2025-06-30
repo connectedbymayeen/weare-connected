@@ -1,9 +1,10 @@
 import Footer from "@/app/components/footer"
 import Header from "@/app/components/header"
+import ShareButton from "@/app/components/ShareButton"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { ArrowLeft, Bookmark, Calendar, Clock, Share2 } from "lucide-react"
+import { ArrowLeft, Bookmark, Calendar, Clock } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -115,10 +116,8 @@ export default async function BlogPage({ params }) {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    Share
-                  </Button>
+                  <ShareButton url={`https://weare-connected-six.vercel.app/blog/${slug}`} title={post.title} />
+
                   <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
                     <Bookmark className="w-4 h-4 mr-2" />
                     Save

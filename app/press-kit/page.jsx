@@ -1,12 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
+import Footer from "@/app/components/footer"
+import Header from "@/app/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Download, FileText, ImageIcon, Video, Globe, Palette, Building, ExternalLink, AlertCircle } from "lucide-react"
-import Header from "@/app/components/header"
-import Footer from "@/app/components/footer"
+import { AlertCircle, Building, Download, ExternalLink, FileText, Globe, ImageIcon, Palette, Video } from "lucide-react"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export default function PressKitPage() {
   const [pressKitData, setPressKitData] = useState({
@@ -82,7 +82,7 @@ export default function PressKitPage() {
         window.URL.revokeObjectURL(url)
       } else {
         // Fallback: try to download from public folder
-        window.open("/press-kit-complete.zip", "_blank")
+        window.open("/press-kit-complete.zip", "_blank");
       }
     } catch (error) {
       console.error("Error downloading complete press kit:", error)
@@ -209,7 +209,6 @@ export default function PressKitPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-
       {/* Hero Section */}
       <section className="bg-[#f3f1fd] text-white py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -443,7 +442,6 @@ export default function PressKitPage() {
           </Card>
         </div>
       </section>
-
       <Footer />
     </div>
   )

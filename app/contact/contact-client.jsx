@@ -1,4 +1,5 @@
 "use client"
+import OfficesGallerySection from "@/app/components/offices-gallery-section"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -403,7 +404,8 @@ export default function ContactPageClient() {
 
 
       {/* Map Section */}
-      <section className="py-16 sm:py-20 bg-lynx-white">
+      {/*  */}
+      {/* <section className="py-16 sm:py-20 bg-lynx-white">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
           <div className="text-center mb-12 mx-auto max-w-4xl">
             <h2 className="text-2xl sm:text-3xl font-bold text-pot-black mb-4 font-syne">Visit Our Office</h2>
@@ -412,53 +414,48 @@ export default function ContactPageClient() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <Card className="overflow-hidden border-2 border-lynx-white">
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
-                  <p className="text-muted-foreground">
-                    {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
-                    <br />
-                    {contactData.office?.city || "San Francisco, CA 94107"}
-                  </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                title: "San Francisco HQ",
+                address: "1234 Innovation Drive, Suite 500",
+                city: "San Francisco, CA 94107",
+              },
+              {
+                title: "New York Branch",
+                address: "78 Madison Ave, 4th Floor",
+                city: "New York, NY 10016",
+              },
+              {
+                title: "Dhaka Office",
+                address: "House 10, Road 12, Dhanmondi",
+                city: "Dhaka 1209, Bangladesh",
+              },
+            ].map((office, index) => (
+              <Card
+                key={index}
+                className="h-full  flex flex-col justify-between border-2 border-lynx-white overflow-hidden"
+              >
+              
+                <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl">
+                  <div className="text-center px-6 py-10">
+                    <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-xl font-bold mb-2">{office.title}</h3>
+                    <p className="text-muted-foreground">
+                      {office.address}
+                      <br />
+                      {office.city}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <Card className="overflow-hidden border-2 border-lynx-white">
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
-                  <p className="text-muted-foreground">
-                    {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
-                    <br />
-                    {contactData.office?.city || "San Francisco, CA 94107"}
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <Card className="overflow-hidden border-2 border-lynx-white">
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
-                  <p className="text-muted-foreground">
-                    {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
-                    <br />
-                    {contactData.office?.city || "San Francisco, CA 94107"}
-                  </p>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            ))}
           </div>
         </div>
-      </section>
+      </section> */}
+      <OfficesGallerySection />
+
+
 
       <Footer />
     </>

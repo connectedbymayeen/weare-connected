@@ -7,7 +7,16 @@ import { ArrowLeft, Bookmark, Calendar, Clock, Share2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton
+} from "react-share"
 async function getBlogPost(slug) {
   const baseUrl = process.env.NODE_ENV === "production" ? "https://weare-connected-six.vercel.app" : "http://localhost:3000"
 
@@ -115,10 +124,36 @@ export default async function BlogPage({ params }) {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    Share
-                  </Button>
+
+                  <div className="relative">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="bg-white text-gray-700 border-gray-300"
+                      onClick={() => setShowShareOptions(!showShareOptions)}
+                    >
+                      <Share2 className="w-4 h-4 mr-2" />
+                      Share
+                    </Button>
+
+                    {showShareOptions && (
+                      <div className="absolute mt-2 z-50 flex gap-2 p-3 rounded-md shadow-lg bg-white border">
+                        <FacebookShareButton url={shareUrl} quote={post.title}>
+                          <FacebookIcon size={32} round />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={shareUrl} title={post.title}>
+                          <TwitterIcon size={32} round />
+                        </TwitterShareButton>
+                        <LinkedinShareButton url={shareUrl} title={post.title}>
+                          <LinkedinIcon size={32} round />
+                        </LinkedinShareButton>
+                        <WhatsappShareButton url={shareUrl} title={post.title}>
+                          <WhatsappIcon size={32} round />
+                        </WhatsappShareButton>
+                      </div>
+                    )}
+                  </div>
+
                   <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
                     <Bookmark className="w-4 h-4 mr-2" />
                     Save

@@ -1,5 +1,3 @@
-"use client"
-
 import Footer from "@/app/components/footer"
 import Header from "@/app/components/header"
 import { Badge } from "@/components/ui/badge"
@@ -9,23 +7,9 @@ import { ArrowLeft, Bookmark, Calendar, Clock, Share2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { useEffect, useState } from "react"
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  LinkedinIcon,
-  LinkedinShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from "react-share"
 
 async function getBlogPost(slug) {
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? "https://weare-connected-six.vercel.app"
-      : "http://localhost:3000"
+  const baseUrl = process.env.NODE_ENV === "production" ? "https://weare-connected-six.vercel.app" : "http://localhost:3000"
 
   try {
     const response = await fetch(`${baseUrl}/api/content/blog/${slug}`, {
@@ -52,26 +36,13 @@ function calculateReadTime(content) {
   return `${readTime} min read`
 }
 
-export default function BlogPage({ params }) {
-  const slug = params.slug
-  const [post, setPost] = useState(null)
-  const [showShareOptions, setShowShareOptions] = useState(false)
+export default async function BlogPage({ params }) {
+  const { slug } = await params
+  const post = await getBlogPost(slug)
 
-  const shareUrl = `https://weare-connected.com/blog/${slug}`
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      const data = await getBlogPost(slug)
-      if (!data) {
-        notFound()
-      } else {
-        setPost(data)
-      }
-    }
-    fetchPost()
-  }, [slug])
-
-  if (!post) return null
+  if (!post) {
+    notFound()
+  }
 
   const authorName = post.author?.name || post.author || "Connected Team"
   const authorRole = post.author?.role || "Author"
@@ -89,6 +60,7 @@ export default function BlogPage({ params }) {
     <>
       <Header />
       <div className="min-h-screen pt-20 bg-white">
+        {/* Navigation */}
         <div className="max-w-7xl mx-auto px-4 py-6">
           <Link href="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -96,8 +68,10 @@ export default function BlogPage({ params }) {
           </Link>
         </div>
 
+        {/* Hero Section */}
         <article className="container mx-auto px-4 pb-12">
           <div className="max-w-4xl mx-auto">
+            {/* Header */}
             <header className="mb-8">
               <div className="flex items-center gap-2 mb-4">
                 <Badge variant="secondary">{post.category || "Blog"}</Badge>
@@ -111,6 +85,7 @@ export default function BlogPage({ params }) {
                 {post.excerpt || "Read our latest insights and perspectives."}
               </p>
 
+              {/* Author and Meta Info */}
               <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
                 <div className="flex items-center space-x-4">
                   <Image
@@ -139,42 +114,20 @@ export default function BlogPage({ params }) {
                   </div>
                 </div>
 
-                <div className="relative">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="bg-white text-gray-700 border-gray-300"
-                    onClick={() => setShowShareOptions(!showShareOptions)}
-                  >
+                <div className="flex items-center space-x-2">
+                  <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
                     <Share2 className="w-4 h-4 mr-2" />
                     Share
                   </Button>
-
-                  {showShareOptions && (
-                    <div className="absolute right-0 mt-2 z-50 flex gap-2 p-3 rounded-md shadow-lg bg-white border">
-                      <FacebookShareButton url={shareUrl} quote={post.title}>
-                        <FacebookIcon size={32} round />
-                      </FacebookShareButton>
-                      <TwitterShareButton url={shareUrl} title={post.title}>
-                        <TwitterIcon size={32} round />
-                      </TwitterShareButton>
-                      <LinkedinShareButton url={shareUrl} title={post.title}>
-                        <LinkedinIcon size={32} round />
-                      </LinkedinShareButton>
-                      <WhatsappShareButton url={shareUrl} title={post.title}>
-                        <WhatsappIcon size={32} round />
-                      </WhatsappShareButton>
-                    </div>
-                  )}
+                  <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
+                    <Bookmark className="w-4 h-4 mr-2" />
+                    Save
+                  </Button>
                 </div>
-
-                <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
-                  <Bookmark className="w-4 h-4 mr-2" />
-                  Save
-                </Button>
               </div>
             </header>
 
+            {/* Featured Image */}
             <div className="mb-12">
               <Image
                 src={postImage || "/placeholder.svg"}
@@ -185,6 +138,7 @@ export default function BlogPage({ params }) {
               />
             </div>
 
+            {/* Content */}
             <div className="prose prose-lg max-w-none mb-12">
               <div className="text-gray-700 leading-relaxed space-y-6">
                 {(post.content || "Content coming soon...").split("\n\n").map((paragraph, index) => (
@@ -195,6 +149,7 @@ export default function BlogPage({ params }) {
               </div>
             </div>
 
+            {/* Tags */}
             {post.tags && post.tags.length > 0 && (
               <div className="mb-12">
                 <h3 className="text-lg font-semibold mb-4">Tags</h3>
@@ -210,6 +165,7 @@ export default function BlogPage({ params }) {
 
             <Separator className="mb-12" />
 
+            {/* Author Bio */}
             <div className="bg-gray-50 rounded-lg p-8 mb-12">
               <div className="flex items-start space-x-4">
                 <Image
@@ -238,7 +194,7 @@ export default function BlogPage({ params }) {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = params
+  const { slug } = await params
   const post = await getBlogPost(slug)
 
   if (!post) {

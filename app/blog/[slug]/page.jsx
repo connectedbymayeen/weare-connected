@@ -71,9 +71,7 @@ export default function BlogPage({ params }) {
     fetchPost()
   }, [slug])
 
-  if (!post) {
-    return null
-  }
+  if (!post) return null
 
   const authorName = post.author?.name || post.author || "Connected Team"
   const authorRole = post.author?.role || "Author"
@@ -116,7 +114,7 @@ export default function BlogPage({ params }) {
               <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
                 <div className="flex items-center space-x-4">
                   <Image
-                    src={authorImage}
+                    src={authorImage || "/placeholder.svg"}
                     alt={authorName}
                     width={48}
                     height={48}
@@ -141,47 +139,45 @@ export default function BlogPage({ params }) {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-2">
-                  <div className="relative">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="bg-white text-gray-700 border-gray-300"
-                      onClick={() => setShowShareOptions(!showShareOptions)}
-                    >
-                      <Share2 className="w-4 h-4 mr-2" />
-                      Share
-                    </Button>
-
-                    {showShareOptions && (
-                      <div className="absolute mt-2 z-50 flex gap-2 p-3 rounded-md shadow-lg bg-white border">
-                        <FacebookShareButton url={shareUrl} quote={post.title}>
-                          <FacebookIcon size={32} round />
-                        </FacebookShareButton>
-                        <TwitterShareButton url={shareUrl} title={post.title}>
-                          <TwitterIcon size={32} round />
-                        </TwitterShareButton>
-                        <LinkedinShareButton url={shareUrl} title={post.title}>
-                          <LinkedinIcon size={32} round />
-                        </LinkedinShareButton>
-                        <WhatsappShareButton url={shareUrl} title={post.title}>
-                          <WhatsappIcon size={32} round />
-                        </WhatsappShareButton>
-                      </div>
-                    )}
-                  </div>
-
-                  <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
-                    <Bookmark className="w-4 h-4 mr-2" />
-                    Save
+                <div className="relative">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="bg-white text-gray-700 border-gray-300"
+                    onClick={() => setShowShareOptions(!showShareOptions)}
+                  >
+                    <Share2 className="w-4 h-4 mr-2" />
+                    Share
                   </Button>
+
+                  {showShareOptions && (
+                    <div className="absolute right-0 mt-2 z-50 flex gap-2 p-3 rounded-md shadow-lg bg-white border">
+                      <FacebookShareButton url={shareUrl} quote={post.title}>
+                        <FacebookIcon size={32} round />
+                      </FacebookShareButton>
+                      <TwitterShareButton url={shareUrl} title={post.title}>
+                        <TwitterIcon size={32} round />
+                      </TwitterShareButton>
+                      <LinkedinShareButton url={shareUrl} title={post.title}>
+                        <LinkedinIcon size={32} round />
+                      </LinkedinShareButton>
+                      <WhatsappShareButton url={shareUrl} title={post.title}>
+                        <WhatsappIcon size={32} round />
+                      </WhatsappShareButton>
+                    </div>
+                  )}
                 </div>
+
+                <Button variant="outline" size="sm" className="bg-white text-gray-700 border-gray-300">
+                  <Bookmark className="w-4 h-4 mr-2" />
+                  Save
+                </Button>
               </div>
             </header>
 
             <div className="mb-12">
               <Image
-                src={postImage}
+                src={postImage || "/placeholder.svg"}
                 alt={post.title}
                 width={800}
                 height={400}
@@ -189,12 +185,14 @@ export default function BlogPage({ params }) {
               />
             </div>
 
-            <div className="prose prose-lg max-w-none mb-12 text-gray-700">
-              {(post.content || "Content coming soon...").split("\n\n").map((paragraph, index) => (
-                <p key={index} className="text-lg leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+            <div className="prose prose-lg max-w-none mb-12">
+              <div className="text-gray-700 leading-relaxed space-y-6">
+                {(post.content || "Content coming soon...").split("\n\n").map((paragraph, index) => (
+                  <p key={index} className="text-lg">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </div>
 
             {post.tags && post.tags.length > 0 && (
@@ -215,7 +213,7 @@ export default function BlogPage({ params }) {
             <div className="bg-gray-50 rounded-lg p-8 mb-12">
               <div className="flex items-start space-x-4">
                 <Image
-                  src={authorImage}
+                  src={authorImage || "/placeholder.svg"}
                   alt={authorName}
                   width={80}
                   height={80}
@@ -226,7 +224,7 @@ export default function BlogPage({ params }) {
                   <p className="text-gray-600 mb-4">{authorRole}</p>
                   <p className="text-gray-700">
                     {authorName} is a leading expert in {(post.category || "technology").toLowerCase()}, helping
-                    businesses navigate modern tech adoption and digital transformation.
+                    businesses navigate the complexities of modern technology adoption and digital transformation.
                   </p>
                 </div>
               </div>
@@ -238,3 +236,28 @@ export default function BlogPage({ params }) {
     </>
   )
 }
+
+export async function generateMetadata({ params }) {
+  const { slug } = params
+  const post = await getBlogPost(slug)
+
+  if (!post) {
+    return {
+      title: "Post Not Found | Connected Blog",
+      description: "The requested blog post could not be found.",
+    }
+  }
+
+  return {
+    title: `${post.title} | Connected Blog`,
+    description: post.excerpt || "Read our latest insights and perspectives.",
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || "Read our latest insights and perspectives.",
+      images: [post.image],
+    },
+  }
+}
+
+export const dynamic = "force-dynamic"
+export const revalidate = 0

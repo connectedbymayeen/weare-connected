@@ -210,7 +210,7 @@ export default function PressKitPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       {/* Hero Section */}
-      <section className="bg-[#f3f1fd] text-white py-20">
+      <section className="bg-[#f3f1fd] text-white py-20 h-90 relative  flex items-center justify-center -mt-[140px] pt-[200px]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#6529b2]">Press Kit</h1>
           <p className="text-xl text-gray-500 max-w-2xl mx-auto">

@@ -5,11 +5,10 @@ import Header from "../components/header";
 // Instead of direct import:
 import { Lightbulb, Target, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import OfficesGallerySection from "../components/offices-gallery-section";
 // Do this:
 
-import { Card } from "@/components/ui/card";
 
-import { MapPin } from "lucide-react";
 
 
 const content = [
@@ -318,63 +317,8 @@ function page() {
 
                                 </div>
                         </div>
-                        {/* Map Section */}
-                        <section className="py-16 sm:py-20 bg-lynx-white">
-                                <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
-                                        <div className="text-center mb-12 mx-auto max-w-4xl">
-                                                <h2 className="text-2xl sm:text-3xl font-bold text-pot-black mb-4 font-syne">Visit Our Office</h2>
-                                                <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-                                                        Located in the heart of San Francisco's innovation district.
-                                                </p>
-                                        </div>
+                        <OfficesGallerySection />
 
-                                        <div className="max-w-4xl mx-auto">
-                                                <Card className="overflow-hidden border-2 border-lynx-white">
-                                                        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
-                                                                <div className="text-center">
-                                                                        <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
-                                                                        <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
-                                                                        <p className="text-muted-foreground">
-                                                                                {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
-                                                                                <br />
-                                                                                {contactData.office?.city || "San Francisco, CA 94107"}
-                                                                        </p>
-                                                                </div>
-                                                        </div>
-                                                </Card>
-                                        </div>
-                                        <div className="max-w-4xl mx-auto">
-                                                <Card className="overflow-hidden border-2 border-lynx-white">
-                                                        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
-                                                                <div className="text-center">
-                                                                        <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
-                                                                        <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
-                                                                        <p className="text-muted-foreground">
-                                                                                {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
-                                                                                <br />
-                                                                                {contactData.office?.city || "San Francisco, CA 94107"}
-                                                                        </p>
-                                                                </div>
-                                                        </div>
-                                                </Card>
-                                        </div>
-                                        <div className="max-w-4xl mx-auto">
-                                                <Card className="overflow-hidden border-2 border-lynx-white">
-                                                        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border  rounded-2xl">
-                                                                <div className="text-center">
-                                                                        <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
-                                                                        <h3 className="text-xl font-bold mb-2">San Francisco Office</h3>
-                                                                        <p className="text-muted-foreground">
-                                                                                {contactData.office?.address || "1234 Innovation Drive, Suite 500"}
-                                                                                <br />
-                                                                                {contactData.office?.city || "San Francisco, CA 94107"}
-                                                                        </p>
-                                                                </div>
-                                                        </div>
-                                                </Card>
-                                        </div>
-                                </div>
-                        </section>
 
                         <Footer />
                 </div>

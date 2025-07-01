@@ -139,17 +139,18 @@ export default function ContactSection() {
             </div>
 
             {/* Our Office(s) */}
-            {contactData.offices.map((office, idx) => (
-              <div className="space-y-3" key={idx}>
-                <div className="flex items-center space-x-3">
-                  <MapPin className="h-5 w-5 text-purple-600" />
-                  <h4 className="font-semibold text-black">Our Office {contactData.offices.length > 1 ? `#${idx + 1}` : ""}</h4>
-                </div>
-                <div className="ml-8 text-gray-600">
-                  <p>{office.address}</p>
-                </div>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <MapPin className="h-5 w-5 text-purple-600" />
+                <h4 className="font-semibold text-black">Our Offices</h4>
               </div>
-            ))}
+              <div className="ml-8 text-gray-600 space-y-2">
+                {(contactData.offices || []).map((office, index) => (
+                  <p key={index}>{office.address}</p>
+                ))}
+              </div>
+            </div>
+
 
             {/* Email Us */}
             <div className="space-y-3">

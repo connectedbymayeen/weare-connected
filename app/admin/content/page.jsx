@@ -19,6 +19,11 @@ export default function ContentManagement() {
   useEffect(() => {
     fetchContent()
   }, [])
+  const handleRemoveOffice = (index) => {
+    const updated = [...(content?.contact?.offices || [])]
+    updated.splice(index, 1)
+    updateContent("contact.offices", updated)
+  }
 
   const fetchContent = async () => {
     try {
@@ -1236,50 +1241,26 @@ export default function ContentManagement() {
             <CardContent className="space-y-6">
               {/* Office Information */}
               <div className="space-y-4">
-                <h4 className="font-semibold">Office Information</h4>
+                <h4 className="font-semibold">Office Addresses</h4>
 
-                {/* Multiple Offices Input */}
+                {/* Loop through all office addresses */}
                 {(content?.contact?.offices || []).map((office, index) => (
                   <div
                     key={index}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border rounded-md bg-muted/20 relative"
+                    className="p-4 border rounded-md bg-muted/20 relative space-y-2"
                   >
-                    <div className="space-y-2">
-                      <Label htmlFor={`office-address-${index}`}>Office Address</Label>
-                      <Input
-                        id={`office-address-${index}`}
-                        value={office.address || ""}
-                        onChange={(e) =>
-                          updateContent(`contact.offices.${index}.address`, e.target.value)
-                        }
-                        placeholder="Enter office address"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor={`office-city-${index}`}>City</Label>
-                      <Input
-                        id={`office-city-${index}`}
-                        value={office.city || ""}
-                        onChange={(e) =>
-                          updateContent(`contact.offices.${index}.city`, e.target.value)
-                        }
-                        placeholder="Enter city"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor={`office-country-${index}`}>Country</Label>
-                      <Input
-                        id={`office-country-${index}`}
-                        value={office.country || ""}
-                        onChange={(e) =>
-                          updateContent(`contact.offices.${index}.country`, e.target.value)
-                        }
-                        placeholder="Enter country"
-                      />
-                    </div>
+                    <Label htmlFor={`office-address-${index}`}>Full Address {index + 1}</Label>
+                    <Input
+                      id={`office-address-${index}`}
+                      value={office.address || ""}
+                      onChange={(e) =>
+                        updateContent(`contact.offices.${index}.address`, e.target.value)
+                      }
+                      placeholder="Enter full office address"
+                    />
 
-                    {/* Remove Office Button */}
-                    {(content?.contact?.offices.length > 1) && (
+                    {/* Remove Office Address Button */}
+                    {content.contact.offices.length > 1 && (
                       <button
                         type="button"
                         onClick={() => handleRemoveOffice(index)}
@@ -1291,14 +1272,13 @@ export default function ContentManagement() {
                   </div>
                 ))}
 
-                {/* Add New Office Button */}
+                {/* Add New Address */}
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => {
-                    const newOffice = { address: "", city: "", country: "" }
-                    const updatedOffices = [...(content?.contact?.offices || []), newOffice]
-                    updateContent("contact.offices", updatedOffices)
+                    const updated = [...(content?.contact?.offices || []), { address: "" }]
+                    updateContent("contact.offices", updated)
                   }}
                 >
                   + Add New Office
@@ -1306,68 +1286,71 @@ export default function ContentManagement() {
               </div>
 
 
-              {/* Email Addresses */}
-              <div className="space-y-4">
-                <h4 className="font-semibold">Email Addresses</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-email-general">General Email</Label>
-                    <Input
-                      id="contact-email-general"
-                      value={content?.contact?.emails?.general || ""}
-                      onChange={(e) => updateContent("contact.emails.general", e.target.value)}
-                      placeholder="Enter general email"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-email-business">Business Email</Label>
-                    <Input
-                      id="contact-email-business"
-                      value={content?.contact?.emails?.business || ""}
-                      onChange={(e) => updateContent("contact.emails.business", e.target.value)}
-                      placeholder="Enter business email"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-email-careers">Careers Email</Label>
-                    <Input
-                      id="contact-email-careers"
-                      value={content?.contact?.emails?.careers || ""}
-                      onChange={(e) => updateContent("contact.emails.careers", e.target.value)}
-                      placeholder="Enter careers email"
-                    />
-                  </div>
-                </div>
-              </div>
+            </div>
 
-              {/* Phone & Hours */}
-              <div className="space-y-4">
-                <h4 className="font-semibold">Phone & Hours</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-phone-number">Phone Number</Label>
-                    <Input
-                      id="contact-phone-number"
-                      value={content?.contact?.phone || ""}
-                      onChange={(e) => updateContent("contact.phone", e.target.value)}
-                      placeholder="Enter phone number"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-business-hours">Business Hours</Label>
-                    <Input
-                      id="contact-business-hours"
-                      value={content?.contact?.hours || ""}
-                      onChange={(e) => updateContent("contact.hours", e.target.value)}
-                      placeholder="Enter business hours"
-                    />
-                  </div>
+
+            {/* Email Addresses */}
+            <div className="space-y-4">
+              <h4 className="font-semibold">Email Addresses</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="contact-email-general">General Email</Label>
+                  <Input
+                    id="contact-email-general"
+                    value={content?.contact?.emails?.general || ""}
+                    onChange={(e) => updateContent("contact.emails.general", e.target.value)}
+                    placeholder="Enter general email"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contact-email-business">Business Email</Label>
+                  <Input
+                    id="contact-email-business"
+                    value={content?.contact?.emails?.business || ""}
+                    onChange={(e) => updateContent("contact.emails.business", e.target.value)}
+                    placeholder="Enter business email"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contact-email-careers">Careers Email</Label>
+                  <Input
+                    id="contact-email-careers"
+                    value={content?.contact?.emails?.careers || ""}
+                    onChange={(e) => updateContent("contact.emails.careers", e.target.value)}
+                    placeholder="Enter careers email"
+                  />
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
-    </div>
+            </div>
+
+            {/* Phone & Hours */}
+            <div className="space-y-4">
+              <h4 className="font-semibold">Phone & Hours</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="contact-phone-number">Phone Number</Label>
+                  <Input
+                    id="contact-phone-number"
+                    value={content?.contact?.phone || ""}
+                    onChange={(e) => updateContent("contact.phone", e.target.value)}
+                    placeholder="Enter phone number"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contact-business-hours">Business Hours</Label>
+                  <Input
+                    id="contact-business-hours"
+                    value={content?.contact?.hours || ""}
+                    onChange={(e) => updateContent("contact.hours", e.target.value)}
+                    placeholder="Enter business hours"
+                  />
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+    </div >
   )
 }

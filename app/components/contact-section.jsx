@@ -23,14 +23,10 @@ const defaultContactData = {
   title: "Get in Touch",
   description:
     "Ready to Start a Revolution? Whether you're a founder, investor, collaborator, or someone with a bold idea, we're always open to conversations that lead to action. Reach out.",
-  offices: [
-    {
-      address:
-        "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
-      address:
-        "",
-    },
-  ],
+  office: {
+    address:
+      "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
+  },
   emails: {
     general: "hello@connected.com",
     business: "business@connected.com",
@@ -41,6 +37,7 @@ const defaultContactData = {
 }
 
 export default function ContactSection() {
+  // Only use defaultContactData; no external content or useEffect
   const [contactData] = useState(defaultContactData)
 
   const [formData, setFormData] = useState({
@@ -140,19 +137,24 @@ export default function ContactSection() {
               <p className="text-gray-600 text-base leading-relaxed">{contactData.description}</p>
             </div>
 
-            {/* Our Office(s) */}
+            {/* Our Office */}
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-purple-600" />
-                <h4 className="font-semibold text-black">Our Offices</h4>
+                <h4 className="font-semibold text-black">Our Office</h4>
               </div>
-              <div className="ml-8 text-gray-600 space-y-2">
-                {(contactData.offices || []).map((office, index) => (
-                  <p key={index}>{office.address}</p>
-                ))}
+              <div className="ml-8 text-gray-600">
+                <p
+                  style={{
+                    whiteSpace: "normal",
+                    overflowWrap: "break-word",
+                    wordBreak: "break-word",
+                  }}
+                >
+                  {contactData.office.address}
+                </p>
               </div>
             </div>
-
 
             {/* Email Us */}
             <div className="space-y-3">
@@ -206,7 +208,8 @@ export default function ContactSection() {
               <Alert className="border-green-200 bg-green-50">
                 <CheckCircle className="h-4 w-4 text-green-600" />
                 <AlertDescription className="text-green-800">
-                  Thank you for your message! We've received your inquiry and will get back to you within 24 hours.
+                  Thank you for your message! We've received your inquiry and will get back to you within 24
+                  hours.
                 </AlertDescription>
               </Alert>
             )}

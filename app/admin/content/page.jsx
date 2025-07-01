@@ -19,11 +19,6 @@ export default function ContentManagement() {
   useEffect(() => {
     fetchContent()
   }, [])
-  const handleRemoveOffice = (index) => {
-    const updated = [...(content?.contact?.offices || [])]
-    updated.splice(index, 1)
-    updateContent("contact.offices", updated)
-  }
 
   const fetchContent = async () => {
     try {
@@ -101,10 +96,6 @@ export default function ContentManagement() {
     const currentStats = content?.homepage?.hero?.stats || []
     const newStats = currentStats.filter((_, i) => i !== index)
     updateContent("homepage.hero.stats", newStats)
-  }
-  const handleRemoveOffice = (index) => {
-    const updated = [...(content?.contact?.offices || [])].filter((_, i) => i !== index)
-    updateContent("contact.offices", updated)
   }
 
   const updateStat = (index, field, value) => {
@@ -402,40 +393,44 @@ export default function ContentManagement() {
               </div>
 
               {/* Office Information */}
-              {/* Office Addresses (Dynamic list) */}
-              <div className="space-y-4">
-                <h4 className="font-semibold">Office Addresses</h4>
-
-                {(content?.homepage?.contact?.offices || []).map((office, index) => (
-                  <div key={index} className="space-y-2">
-                    <Label htmlFor={`office-address-${index}`}>Address {index + 1}</Label>
-                    <Input
-                      id={`office-address-${index}`}
-                      value={office.address}
-                      onChange={(e) =>
-                        updateContent(`homepage.contact.offices.${index}.address`, e.target.value)
-                      }
-                      placeholder="Enter full office address"
-                    />
-                  </div>
-                ))}
-
-                {/* Add New Office Address Button */}
-                <Button
-                  variant="outline"
-                  type="button"
-                  onClick={() => {
-                    const updated = [
-                      ...(content?.homepage?.contact?.offices || []),
-                      { address: "" },
-                    ]
-                    updateContent("homepage.contact.offices", updated)
-                  }}
-                >
-                  + Add New Office
-                </Button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="office-address">Office Address</Label>
+                  <Input
+                    id="office-address"
+                    value={content?.homepage?.contact?.office?.address || ""}
+                    onChange={(e) => updateContent("homepage.contact.office.address", e.target.value)}
+                    placeholder="Enter office address"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="office-city">City</Label>
+                  <Input
+                    id="office-city"
+                    value={content?.homepage?.contact?.office?.city || ""}
+                    onChange={(e) => updateContent("homepage.contact.office.city", e.target.value)}
+                    placeholder="Enter city"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="office-country">Country</Label>
+                  <Input
+                    id="office-country"
+                    value={content?.homepage?.contact?.office?.country || ""}
+                    onChange={(e) => updateContent("homepage.contact.office.country", e.target.value)}
+                    placeholder="Enter country"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contact-phone">Phone</Label>
+                  <Input
+                    id="contact-phone"
+                    value={content?.homepage?.contact?.phone || ""}
+                    onChange={(e) => updateContent("homepage.contact.phone", e.target.value)}
+                    placeholder="Enter phone number"
+                  />
+                </div>
               </div>
-
 
               {/* Email Addresses */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1241,116 +1236,100 @@ export default function ContentManagement() {
             <CardContent className="space-y-6">
               {/* Office Information */}
               <div className="space-y-4">
-                <h4 className="font-semibold">Office Addresses</h4>
-
-                {/* Loop through all office addresses */}
-                {(content?.contact?.offices || []).map((office, index) => (
-                  <div
-                    key={index}
-                    className="p-4 border rounded-md bg-muted/20 relative space-y-2"
-                  >
-                    <Label htmlFor={`office-address-${index}`}>Full Address {index + 1}</Label>
+                <h4 className="font-semibold">Office Information</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-office-address">Office Address</Label>
                     <Input
-                      id={`office-address-${index}`}
-                      value={office.address || ""}
-                      onChange={(e) =>
-                        updateContent(`contact.offices.${index}.address`, e.target.value)
-                      }
-                      placeholder="Enter full office address"
+                      id="contact-office-address"
+                      value={content?.contact?.office?.address || ""}
+                      onChange={(e) => updateContent("contact.office.address", e.target.value)}
+                      placeholder="Enter office address"
                     />
-
-                    {/* Remove Office Address Button */}
-                    {content.contact.offices.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveOffice(index)}
-                        className="absolute top-2 right-2 text-sm text-red-500 hover:underline"
-                      >
-                        Remove
-                      </button>
-                    )}
                   </div>
-                ))}
-
-                {/* Add New Address */}
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => {
-                    const updated = [...(content?.contact?.offices || []), { address: "" }]
-                    updateContent("contact.offices", updated)
-                  }}
-                >
-                  + Add New Office
-                </Button>
-              </div>
-
-
-            </div>
-
-
-            {/* Email Addresses */}
-            <div className="space-y-4">
-              <h4 className="font-semibold">Email Addresses</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="contact-email-general">General Email</Label>
-                  <Input
-                    id="contact-email-general"
-                    value={content?.contact?.emails?.general || ""}
-                    onChange={(e) => updateContent("contact.emails.general", e.target.value)}
-                    placeholder="Enter general email"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="contact-email-business">Business Email</Label>
-                  <Input
-                    id="contact-email-business"
-                    value={content?.contact?.emails?.business || ""}
-                    onChange={(e) => updateContent("contact.emails.business", e.target.value)}
-                    placeholder="Enter business email"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="contact-email-careers">Careers Email</Label>
-                  <Input
-                    id="contact-email-careers"
-                    value={content?.contact?.emails?.careers || ""}
-                    onChange={(e) => updateContent("contact.emails.careers", e.target.value)}
-                    placeholder="Enter careers email"
-                  />
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-office-city">City</Label>
+                    <Input
+                      id="contact-office-city"
+                      value={content?.contact?.office?.city || ""}
+                      onChange={(e) => updateContent("contact.office.city", e.target.value)}
+                      placeholder="Enter city"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-office-country">Country</Label>
+                    <Input
+                      id="contact-office-country"
+                      value={content?.contact?.office?.country || ""}
+                      onChange={(e) => updateContent("contact.office.country", e.target.value)}
+                      placeholder="Enter country"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Phone & Hours */}
-            <div className="space-y-4">
-              <h4 className="font-semibold">Phone & Hours</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="contact-phone-number">Phone Number</Label>
-                  <Input
-                    id="contact-phone-number"
-                    value={content?.contact?.phone || ""}
-                    onChange={(e) => updateContent("contact.phone", e.target.value)}
-                    placeholder="Enter phone number"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="contact-business-hours">Business Hours</Label>
-                  <Input
-                    id="contact-business-hours"
-                    value={content?.contact?.hours || ""}
-                    onChange={(e) => updateContent("contact.hours", e.target.value)}
-                    placeholder="Enter business hours"
-                  />
+              {/* Email Addresses */}
+              <div className="space-y-4">
+                <h4 className="font-semibold">Email Addresses</h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-email-general">General Email</Label>
+                    <Input
+                      id="contact-email-general"
+                      value={content?.contact?.emails?.general || ""}
+                      onChange={(e) => updateContent("contact.emails.general", e.target.value)}
+                      placeholder="Enter general email"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-email-business">Business Email</Label>
+                    <Input
+                      id="contact-email-business"
+                      value={content?.contact?.emails?.business || ""}
+                      onChange={(e) => updateContent("contact.emails.business", e.target.value)}
+                      placeholder="Enter business email"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-email-careers">Careers Email</Label>
+                    <Input
+                      id="contact-email-careers"
+                      value={content?.contact?.emails?.careers || ""}
+                      onChange={(e) => updateContent("contact.emails.careers", e.target.value)}
+                      placeholder="Enter careers email"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </TabsContent>
-    </Tabs>
-    </div >
+
+              {/* Phone & Hours */}
+              <div className="space-y-4">
+                <h4 className="font-semibold">Phone & Hours</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-phone-number">Phone Number</Label>
+                    <Input
+                      id="contact-phone-number"
+                      value={content?.contact?.phone || ""}
+                      onChange={(e) => updateContent("contact.phone", e.target.value)}
+                      placeholder="Enter phone number"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-business-hours">Business Hours</Label>
+                    <Input
+                      id="contact-business-hours"
+                      value={content?.contact?.hours || ""}
+                      onChange={(e) => updateContent("contact.hours", e.target.value)}
+                      placeholder="Enter business hours"
+                    />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
   )
 }

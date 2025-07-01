@@ -248,7 +248,7 @@ const navItems = [
   { name: "About", href: "/about" },
   { name: "Ventures", href: "/ventures" },
   { name: "Blog", href: "/blog" },
-  { name: "Careers", href: "/careers" },
+  { name: "Careers", href: "/career" },
   { name: "Contact", href: "/contact" },
 ]
 

@@ -215,11 +215,11 @@ function page() {
                                                 transition={{ duration: 0.3, delay: 1 }}
                                                 className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
                                         >
-                                                <button className="w-60 transform rounded-lg bg-purple-500 px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-                                                        <Link href="/careers">See All Jobs</Link>
+                                                <button className="w-60 cursor:pointer transform rounded-lg bg-purple-500 px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+                                                        <Link href="careers">See All Jobs</Link>
                                                 </button>
-                                                <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
-                                                        <Link href="/life-at">Life at Connected</Link>
+                                                <button className="w-60 cursor:pointer transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
+                                                        <Link href="/#">Life at Connected</Link>
                                                 </button>
                                         </motion.div>
 
@@ -231,7 +231,7 @@ function page() {
                                         >
                                                 <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
                                                         <img
-                                                                src="https://images.unsplash.com/photo-1690586842052-e8495d1aceef?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                                                src="https://images.unsplash.com/photo-1718220216044-006f43e3a9b1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBvZmZpY2V8ZW58MHx8MHx8fDA%3D"
                                                                 alt="Landing page preview"
                                                                 className="aspect-[16/9] h-auto w-full object-cover"
                                                                 height={1000}

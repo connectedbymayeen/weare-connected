@@ -353,11 +353,7 @@ export default function ContactPageClient() {
                               ? `${contactData.office.address}, ${contactData.office.city}`
                               : "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212,Dhaka, Bangladesh"}
                           </p>
-                          <p className="text-muted-foreground mt-2">
-                            {(contactData.office?.address && contactData.office?.city)
-                              ? `${contactData.office.address}, ${contactData.office.city}`
-                              : ""}
-                          </p>
+
                         </div>
                       </div>
 

@@ -27,6 +27,8 @@ const defaultContactData = {
     {
       address:
         "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
+      address:
+        "",
     },
   ],
   emails: {

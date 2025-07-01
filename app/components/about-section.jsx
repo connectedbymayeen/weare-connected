@@ -12,9 +12,9 @@ export default function AboutSection({ content }) {
     description:
       "Connected began with a vision to nurture and scale innovative ideas into leading market solutions.",
     vision:
-      "Our vision is to become the world's leading launchpad for next-generation ventures.",
+      "Our vision is to become the world's leading launchpad for next generation ventures. We aim to create a global ecosystem where bold ideas grow into influential brands that define the future of technology, culture, and commerce.",
     mission:
-      "Connected's mission is to build ventures that shape the future.",
+      "Connected's mission is to build ventures that shape the future. We turn ideas into impactful businesses across tech, digital, media, and lifestyle. Our goal is to empower creators, disrupt industries, and deliver innovation with purpose and precision.",
     values: [
       {
         number: "01",

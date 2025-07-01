@@ -397,44 +397,40 @@ export default function ContentManagement() {
               </div>
 
               {/* Office Information */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="office-address">Office Address</Label>
-                  <Input
-                    id="office-address"
-                    value={content?.homepage?.contact?.office?.address || ""}
-                    onChange={(e) => updateContent("homepage.contact.office.address", e.target.value)}
-                    placeholder="Enter office address"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="office-city">City</Label>
-                  <Input
-                    id="office-city"
-                    value={content?.homepage?.contact?.office?.city || ""}
-                    onChange={(e) => updateContent("homepage.contact.office.city", e.target.value)}
-                    placeholder="Enter city"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="office-country">Country</Label>
-                  <Input
-                    id="office-country"
-                    value={content?.homepage?.contact?.office?.country || ""}
-                    onChange={(e) => updateContent("homepage.contact.office.country", e.target.value)}
-                    placeholder="Enter country"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="contact-phone">Phone</Label>
-                  <Input
-                    id="contact-phone"
-                    value={content?.homepage?.contact?.phone || ""}
-                    onChange={(e) => updateContent("homepage.contact.phone", e.target.value)}
-                    placeholder="Enter phone number"
-                  />
-                </div>
+              {/* Office Addresses (Dynamic list) */}
+              <div className="space-y-4">
+                <h4 className="font-semibold">Office Addresses</h4>
+
+                {(content?.homepage?.contact?.offices || []).map((office, index) => (
+                  <div key={index} className="space-y-2">
+                    <Label htmlFor={`office-address-${index}`}>Address {index + 1}</Label>
+                    <Input
+                      id={`office-address-${index}`}
+                      value={office.address}
+                      onChange={(e) =>
+                        updateContent(`homepage.contact.offices.${index}.address`, e.target.value)
+                      }
+                      placeholder="Enter full office address"
+                    />
+                  </div>
+                ))}
+
+                {/* Add New Office Address Button */}
+                <Button
+                  variant="outline"
+                  type="button"
+                  onClick={() => {
+                    const updated = [
+                      ...(content?.homepage?.contact?.offices || []),
+                      { address: "" },
+                    ]
+                    updateContent("homepage.contact.offices", updated)
+                  }}
+                >
+                  + Add New Office
+                </Button>
               </div>
+
 
               {/* Email Addresses */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

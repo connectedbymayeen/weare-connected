@@ -97,6 +97,10 @@ export default function ContentManagement() {
     const newStats = currentStats.filter((_, i) => i !== index)
     updateContent("homepage.hero.stats", newStats)
   }
+  const handleRemoveOffice = (index) => {
+    const updated = [...(content?.contact?.offices || [])].filter((_, i) => i !== index)
+    updateContent("contact.offices", updated)
+  }
 
   const updateStat = (index, field, value) => {
     const currentStats = content?.homepage?.hero?.stats || []
@@ -1237,36 +1241,74 @@ export default function ContentManagement() {
               {/* Office Information */}
               <div className="space-y-4">
                 <h4 className="font-semibold">Office Information</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-office-address">Office Address</Label>
-                    <Input
-                      id="contact-office-address"
-                      value={content?.contact?.office?.address || ""}
-                      onChange={(e) => updateContent("contact.office.address", e.target.value)}
-                      placeholder="Enter office address"
-                    />
+
+                {/* Multiple Offices Input */}
+                {(content?.contact?.offices || []).map((office, index) => (
+                  <div
+                    key={index}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border rounded-md bg-muted/20 relative"
+                  >
+                    <div className="space-y-2">
+                      <Label htmlFor={`office-address-${index}`}>Office Address</Label>
+                      <Input
+                        id={`office-address-${index}`}
+                        value={office.address || ""}
+                        onChange={(e) =>
+                          updateContent(`contact.offices.${index}.address`, e.target.value)
+                        }
+                        placeholder="Enter office address"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`office-city-${index}`}>City</Label>
+                      <Input
+                        id={`office-city-${index}`}
+                        value={office.city || ""}
+                        onChange={(e) =>
+                          updateContent(`contact.offices.${index}.city`, e.target.value)
+                        }
+                        placeholder="Enter city"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`office-country-${index}`}>Country</Label>
+                      <Input
+                        id={`office-country-${index}`}
+                        value={office.country || ""}
+                        onChange={(e) =>
+                          updateContent(`contact.offices.${index}.country`, e.target.value)
+                        }
+                        placeholder="Enter country"
+                      />
+                    </div>
+
+                    {/* Remove Office Button */}
+                    {(content?.contact?.offices.length > 1) && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveOffice(index)}
+                        className="absolute top-2 right-2 text-sm text-red-500 hover:underline"
+                      >
+                        Remove
+                      </button>
+                    )}
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-office-city">City</Label>
-                    <Input
-                      id="contact-office-city"
-                      value={content?.contact?.office?.city || ""}
-                      onChange={(e) => updateContent("contact.office.city", e.target.value)}
-                      placeholder="Enter city"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-office-country">Country</Label>
-                    <Input
-                      id="contact-office-country"
-                      value={content?.contact?.office?.country || ""}
-                      onChange={(e) => updateContent("contact.office.country", e.target.value)}
-                      placeholder="Enter country"
-                    />
-                  </div>
-                </div>
+                ))}
+
+                {/* Add New Office Button */}
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    const newOffice = { address: "", city: "", country: "" }
+                    const updatedOffices = [...(content?.contact?.offices || []), newOffice]
+                    updateContent("contact.offices", updatedOffices)
+                  }}
+                >
+                  + Add New Office
+                </Button>
               </div>
+
 
               {/* Email Addresses */}
               <div className="space-y-4">

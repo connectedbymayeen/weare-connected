@@ -182,7 +182,7 @@ function page() {
                                 </div>
                                 <div className="absolute inset-x-0 bottom-0 h-px w-full bg-white dark:bg-neutral-800/80"></div>
                                 <div className="px-4 py-18 md:py-10">
-                                        <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-6xl dark:text-slate-300">
+                                        <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-[58px] dark:text-slate-300">
                                                 {"You could be the next revolution.".split(" ").map((word, index) => (
                                                         <motion.span
                                                                 key={index}
@@ -203,7 +203,7 @@ function page() {
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 transition={{ duration: 0.3, delay: 0.8 }}
-                                                className="relative z-10 mx-auto max-w-xl py-5 mt-2 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
+                                                className="relative z-10 mx-auto max-w-[590px] py-5 mt-2 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
                                         >
                                                 Turn your ambition into action, your ideas into impact, and your skills into the spark that transforms industries. At Connected, you’re not just building a career you’re launching a legacy.
 

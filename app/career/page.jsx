@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Footer from "../components/footer";
 import Header from "../components/header";
 // Instead of direct import:
-import { Lightbulb, Target, TrendingUp } from "lucide-react";
+import { Activity, BicepsFlexed, HandHeart, Lightbulb, PartyPopper, Rocket, Target, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import OfficesGallerySection from "../components/offices-gallery-section";
 // Do this:
@@ -106,52 +106,67 @@ function page() {
         }
         const resources = [
                 {
-                        title: "Discover",
-                        description: "We identify powerful ideas, emerging trends, and untapped opportunities ready to scale.",
+                        title: "Inspiration",
+                        description: "At Connected, you aren’t just following a roadmap, you help define it. We empower you to envision bold ideas and turn them into reality, driving revolutions that matter.",
                         icon: <Lightbulb className="w-5 h-5" />,
                 },
                 {
-                        title: "Build",
-                        description: "We develop brands, products, and platforms with speed, precision, and bold execution.",
+                        title: "Momentum",
+                        description: "Your ideas deserve more than a slow lane. Here, you’ll move fast, learn fast, and scale what works with the trust and resources to make it happen.",
                         icon: <Target className="w-5 h-5" />,
                 },
                 {
-                        title: "Elevate",
-                        description: "We grow ventures through strategic design, marketing, and long-term vision.",
-                        icon: <TrendingUp className="w-5 h-5" />,
+                        title: "Belonging",
+                        description: "No revolution happens alone. You’ll work with people who amplify your strengths, share your ambition, and stand with you through every breakthrough.",
+                        icon: < TrendingUp className="w-5 h-5" />,
                 },
 
         ];
         const core = [
                 {
-                        title: "Invent & simplify",
-                        description: "We believe in solving tough problems with simple, innovative solutions that change the game.",
-                        icon: <Lightbulb className="w-5 h-5" />,
+                        title: "Be Bold, Stay Humble",
+                        description: "Dare to imagine what others won’t, but stay grounded enough to learn, listen, and adapt.",
+                        icon: <BicepsFlexed className="w-5 h-5" />,
                 },
                 {
-                        title: "Deliver best experiences",
-                        description: "We put people at the heart of everything, creating experiences that truly matter for our team, clients, and traders.",
+                        title: "Engineer the Extraordinary",
+                        description: "Don’t settle for “good enough.” Build solutions that challenge the limits of what’s possible.",
                         icon: <Target className="w-5 h-5" />,
                 },
                 {
-                        title: "Elevate",
-                        description: "We put people at the heart of everything, creating experiences that truly matter for our team, clients, and traders.",
+                        title: "Empower the Collective",
+                        description: "Trust and amplify every voice. We lift each other up because revolutions are never solo acts.",
                         icon: <TrendingUp className="w-5 h-5" />,
                 },
                 {
-                        title: "Elevate",
-                        description: "We put people at the heart of everything, creating experiences that truly matter for our team, clients, and traders.",
-                        icon: <TrendingUp className="w-5 h-5" />,
+                        title: "Act with Velocity",
+                        description: "Time is rocket fuel. Move decisively, experiment fearlessly, and keep momentum alive.",
+                        icon: <Activity className="w-5 h-5" />,
                 },
                 {
-                        title: "Elevate",
-                        description: "We put people at the heart of everything, creating experiences that truly matter for our team, clients, and traders.",
-                        icon: <TrendingUp className="w-5 h-5" />,
+                        title: "Own the Mission",
+                        description: "Treat every challenge like it’s yours to solve. Accountability turns good intentions into real outcomes.",
+                        icon: <Rocket className="w-5 h-5" />,
                 },
                 {
-                        title: "Elevate",
-                        description: "We do what is right, not what is easy. Honesty and integrity are our compass, even in the toughest moments.",
+                        title: "Stay Transparent, Stay Trusted",
+                        description: " Open minds. Open doors. We believe radical transparency earns trust, even in uncomfortable moments.",
+                        icon: < HandHeart className="w-5 h-5" />,
+                },
+                {
+                        title: "Evolve Relentlessly",
+                        description: "Change is our default. We adapt, improve, and grow, because standing still is never an option.",
                         icon: < TrendingUp className="w-5 h-5" />,
+                },
+                {
+                        title: "Think Like Owners",
+                        description: "Act with care, courage, and commitment, every decision should be worthy of your name on it.",
+                        icon: < Lightbulb className="w-5 h-5" />,
+                },
+                {
+                        title: "Celebrate the Climb",
+                        description: "Progress is never easy, but every step forward deserves recognition. We honor effort as much as results.",
+                        icon: < PartyPopper className="w-5 h-5" />,
                 },
 
         ];
@@ -168,7 +183,7 @@ function page() {
                                 <div className="absolute inset-x-0 bottom-0 h-px w-full bg-white dark:bg-neutral-800/80"></div>
                                 <div className="px-4 py-18 md:py-10">
                                         <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-6xl dark:text-slate-300">
-                                                {"Your Next Big Move Starts Here".split(" ").map((word, index) => (
+                                                {"You could be the next revolution.".split(" ").map((word, index) => (
                                                         <motion.span
                                                                 key={index}
                                                                 initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
@@ -190,7 +205,8 @@ function page() {
                                                 transition={{ duration: 0.3, delay: 0.8 }}
                                                 className="relative z-10 mx-auto max-w-xl py-5 mt-2 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
                                         >
-                                                Work with passionate people, solve real-world problems, and shape the future together.
+                                                Turn your ambition into action, your ideas into impact, and your skills into the spark that transforms industries. At Connected, you’re not just building a career you’re launching a legacy.
+
                                         </motion.p>
 
                                         <motion.div
@@ -230,7 +246,8 @@ function page() {
                                 Why Connected
                         </h3>
                         <p className="grid grid-cols-1 md:grid-cols-3 gap-8 py-6 text-xl px-4 md:px-8 max-w-7xl mx-auto">
-                                Because it’s not just about landing the job. It’s about ensuring we’re the right fit for each other.
+                                Join a team that believes bold dreams deserve bold execution. Let’s shape what’s next, together.
+
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-16 px-4 md:px-8 max-w-7xl mx-auto">
@@ -280,43 +297,7 @@ function page() {
                                         </motion.div>
                                 ))}
                         </div>
-                        <div>
-                                <h3 className="py-6 px-4 md:px-8 max-w-[77rem] mx-auto text-5xl font-black">
-                                        Be a part of what comes NEXT
-                                </h3>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8 py-10 max-w-7xl mx-auto">
-                                        {[1, 2, 3].map((item, index) => (
-                                                <div
-                                                        key={index}
-                                                        className="rounded-[22px] border-2 p-4 sm:p-6 bg-white dark:bg-zinc-900 shadow-sm transition hover:shadow-md"
-                                                >
-                                                        <img
-                                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Fettjl2rGDjHBlCYCXcWMRAoKDr_AQOoXQ&s"
-                                                                alt="jordans"
-                                                                height="400"
-                                                                width="400"
-                                                                className="object-contain w-full h-[250px] sm:h-[300px] rounded-md"
-                                                        />
-                                                        <p className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200 font-semibold">
-                                                                Engineering Department
-                                                        </p>
-                                                        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                                                The Air Jordan 4 Retro Reimagined Bred will release on Saturday,
-                                                                February 17, 2024. Your best opportunity to get these right now is by
-                                                                entering raffles and waiting for the official releases.
-                                                        </p>
-                                                        <button className="rounded-full px-3 py-1 text-white flex items-center space-x-2 bg-black mt-4 text-xs font-bold dark:bg-zinc-800 hover:bg-gray-800 cursor-pointer">
-                                                                <span className=" items-center">See Jobs</span>
-                                                                {/* <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0.5 text-white">
-                                                                        $100
-                                                                </span> */}
-                                                        </button>
-                                                </div>
-                                        ))}
-
-                                </div>
-                        </div>
                         <OfficesGallerySection />
 
 

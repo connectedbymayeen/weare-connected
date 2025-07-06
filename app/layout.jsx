@@ -17,6 +17,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
       <Head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-D5KWFSH1KX"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-D5KWFSH1KX');
+        </script>
         <meta name="google-site-verification" content="HG7Ga3y2ghAg3JkWjWQ8bno_3tGlq0yv4q_gR9xkl08" />
       </Head>
       <body

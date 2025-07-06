@@ -249,7 +249,7 @@ const navItems = [
   { name: "Ventures", href: "/ventures" },
   { name: "Blog", href: "/blog" },
   { name: "Careers", href: "/career" },
-  { name: "Contact", href: "/contact" },
+  // { name: "Contact", href: "/contact" },
 ]
 
 export default function Header() {
@@ -293,7 +293,7 @@ export default function Header() {
                   size="sm"
                   className="cursor-pointer ml-4 bg-[#6529b2] border-[#6529b2] text-white hover:bg-[#5a24a0] hover:border-[#5a24a0] transition-all duration-300 font-satoshi"
                 >
-                  Let's Talk
+                  Contact Us
                 </Button></Link>
             </nav>
 
@@ -340,7 +340,7 @@ export default function Header() {
                 className="w-full bg-[#6529b2] border-[#6529b2] text-white hover:bg-[#5a24a0] hover:border-[#5a24a0] transition-all duration-300 font-satoshi"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Let's Talk
+                Contact Us
               </Button>
             </div>
           </nav>

@@ -133,7 +133,7 @@ export default function ContactSection() {
           {/* Left Column - Contact Info */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-black mb-4">Let's Talk</h3>
+              <h3 className="text-2xl font-bold text-black mb-4">Contact Us</h3>
               <p className="text-gray-600 text-base leading-relaxed">{contactData.description}</p>
             </div>
 

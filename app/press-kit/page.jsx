@@ -419,8 +419,8 @@ export default function PressKitPage() {
           <Card className="max-w-md mx-auto bg-white">
             <CardContent className="p-8">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Press Relations</h3>
-              <p className="text-gray-600 mb-2">press@connected.com</p>
-              <p className="text-gray-600 mb-6">+1 (415) 555-0123</p>
+              <p className="text-gray-600 mb-2">press@weareconnected.io</p>
+              <p className="text-gray-600 mb-6">+8801318250903</p>
               <Button className="bg-[#6529b2] hover:bg-purple-700 text-white" asChild>
                 <Link href="mailto:press@connected.com">Contact Media Team</Link>
               </Button>

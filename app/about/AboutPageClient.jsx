@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
-import { Github, Lightbulb, Linkedin, Mail, Target, Twitter } from "lucide-react"
+import { Github, Lightbulb, Linkedin, Mail, Target, YoutubeIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -557,10 +557,10 @@ export default function AboutPageClient() {
                             </a>
                           </Button>
                         )}
-                        {member.social?.twitter && (
+                        {member.social?.YoutubeIcon && (
                           <Button variant="ghost" size="sm" asChild className="hover:bg-primary/10">
-                            <a href={member.social.twitter} target="_blank" rel="noopener noreferrer">
-                              <Twitter className="h-4 w-4 text-gray-600" />
+                            <a href={member.social.YoutubeIcon} target="_blank" rel="noopener noreferrer">
+                              <YoutubeIcon className="h-4 w-4 text-gray-600" />
                             </a>
                           </Button>
                         )}

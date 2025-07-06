@@ -15,7 +15,7 @@ import {
   Mail,
   MapPin,
   Phone,
-  Twitter,
+  YoutubeIcon
 } from "lucide-react"
 import { useState } from "react"
 
@@ -37,7 +37,6 @@ const defaultContactData = {
 }
 
 export default function ContactSection() {
-  // Only use defaultContactData; no external content or useEffect
   const [contactData] = useState(defaultContactData)
 
   const [formData, setFormData] = useState({
@@ -185,18 +184,38 @@ export default function ContactSection() {
             <div className="space-y-4">
               <h4 className="font-semibold text-black">Follow Us</h4>
               <div className="flex space-x-4">
-                <div className="w-10 h-10 bg-[#f4f2ff] rounded-lg flex items-center justify-center hover:bg-purple-100 transition-colors cursor-pointer">
+                <a
+                  href="https://www.instagram.com/weareconnected.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-[#f4f2ff] rounded-lg flex items-center justify-center hover:bg-purple-100 transition-colors cursor-pointer"
+                >
                   <Instagram className="h-5 w-5 text-gray-600 hover:text-purple-600" />
-                </div>
-                <div className="w-10 h-10 bg-[#f4f2ff] rounded-lg flex items-center justify-center hover:bg-purple-100 transition-colors cursor-pointer">
-                  <Twitter className="h-5 w-5 text-gray-600 hover:text-purple-600" />
-                </div>
-                <div className="w-10 h-10 bg-[#f4f2ff] rounded-lg flex items-center justify-center hover:bg-purple-100 transition-colors cursor-pointer">
+                </a>
+                <a
+                  href="https://www.youtube.com/@connectedglobal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-[#f4f2ff] rounded-lg flex items-center justify-center hover:bg-purple-100 transition-colors cursor-pointer"
+                >
+                  <YoutubeIcon className="h-5 w-5 text-gray-600 hover:text-purple-600" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/connectedglobal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-[#f4f2ff] rounded-lg flex items-center justify-center hover:bg-purple-100 transition-colors cursor-pointer"
+                >
                   <Linkedin className="h-5 w-5 text-gray-600 hover:text-purple-600" />
-                </div>
-                <div className="w-10 h-10 bg-[#f4f2ff] rounded-lg flex items-center justify-center hover:bg-purple-100 transition-colors cursor-pointer">
+                </a>
+                <a
+                  href="https://www.facebook.com/weareconnected.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-[#f4f2ff] rounded-lg flex items-center justify-center hover:bg-purple-100 transition-colors cursor-pointer"
+                >
                   <Facebook className="h-5 w-5 text-gray-600 hover:text-purple-600" />
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -294,12 +313,12 @@ export default function ContactSection() {
               {/* Send Message Button */}
               <Button
                 type="submit"
-                className="w-full h-12 bg-[#6529b2] hover:bg-purple-700 text-white font-medium cursor:pointer"
+                className="w-full h-12 bg-[#6529b2] hover:bg-purple-700 text-white font-medium cursor-pointer"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="cursor:pointer mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="cursor-pointer mr-2 h-4 w-4 animate-spin" />
                     Sending Message...
                   </>
                 ) : (

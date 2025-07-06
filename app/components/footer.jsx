@@ -1,6 +1,6 @@
 "use client"
 
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react"
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, YoutubeIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -87,15 +87,17 @@ export default function Footer() {
             <ul className="space-y-2 sm:space-y-3">
               <li className="flex items-start">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
-                <span className="text-sm sm:text-base">San Francisco, CA</span>
+                <span className="text-sm sm:text-base">Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh
+
+                </span>
               </li>
               <li className="flex items-start">
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
                 <a
-                  href="mailto:hello@connected.com"
+                  href="mailto:hi@weareconnected.io"
                   className="hover:text-purple-400 transition-colors text-sm sm:text-base"
                 >
-                  hello@connected.com
+                  hi@weareconnected.io
                 </a>
               </li>
               <li className="flex items-start">
@@ -112,10 +114,10 @@ export default function Footer() {
         <div className="pt-6 sm:pt-8 border-t border-gray-700 flex flex-col md:flex-row-reverse justify-between items-center gap-4 sm:gap-6">
           <div className="flex space-x-4 sm:space-x-5">
             {[
-              { icon: Instagram, href: "https://instagram.com/connected", label: "Instagram" },
-              { icon: Twitter, href: "https://twitter.com/connected", label: "Twitter" },
-              { icon: Linkedin, href: "https://linkedin.com/company/connected", label: "LinkedIn" },
-              { icon: Facebook, href: "https://facebook.com/connected", label: "Facebook" },
+              { icon: Instagram, href: "https://www.instagram.com/weareconnected.io/", label: "Instagram" },
+              { icon: YoutubeIcon, href: "https://www.youtube.com/@connectedglobal", label: "YoutubeIcon" },
+              { icon: Linkedin, href: "https://www.linkedin.com/company/connectedglobal", label: "LinkedIn" },
+              { icon: Facebook, href: "https://www.facebook.com/weareconnected.io", label: "Facebook" },
             ].map((social) => (
               <a
                 key={social.label}

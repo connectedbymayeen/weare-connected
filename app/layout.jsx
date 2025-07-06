@@ -1,5 +1,4 @@
 import { inter, satoshi, syne } from "@/lib/fonts";
-import Head from "next/head";
 import "./globals.css";
 import { AuthProvider } from "./lib/auth-context";
 
@@ -19,10 +18,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <Head>
-
-        <meta name="google-site-verification" content="HG7Ga3y2ghAg3JkWjWQ8bno_3tGlq0yv4q_gR9xkl08" />
-      </Head>
       <body
         className={`${inter.variable} ${satoshi.variable} ${syne.variable} flex flex-col min-h-screen bg-white text-gray-900 antialiased`}
       >

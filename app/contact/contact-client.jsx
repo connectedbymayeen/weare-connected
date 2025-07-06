@@ -364,7 +364,6 @@ export default function ContactPageClient() {
                           <p className="text-muted-foreground">
                             {contactData.hours || "Monday - Friday: 9:00 AM - 6:00 PM PST"}
                             <br />
-                            Saturday - Sunday: Closed
                           </p>
                         </div>
                       </div>

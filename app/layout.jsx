@@ -3,9 +3,9 @@ import "./globals.css";
 import { AuthProvider } from "./lib/auth-context";
 
 export const metadata = {
-  title: "Connected - The Launchpad for Limitless Revolutions",
+  title: "Connected - The Launchpad for Limitless Revolutions",
   description:
-    "Connected is a modern venture ecosystem that builds, launches, and scales bold ideas into global movements.From disruptive software to category- defining brands, we ignite revolutions that reshape industries across tech, media, consumer goods, and beyond",
+    "Connected is a modern venture ecosystem that builds, launches, and scales bold ideas into global movements. From disruptive software to category-defining brands, we ignite revolutions that reshape industries across tech, media, consumer goods, and beyond",
   generator: "v0.dev",
   icons: {
     icon: "/favicon.ico",

@@ -28,12 +28,12 @@ const defaultContactData = {
       "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
   },
   emails: {
-    general: "hello@connected.com",
-    business: "business@connected.com",
-    careers: "careers@connected.com",
+    general: "hi@weareconnected.io",
+    business: "business@weareconnected.io",
+    careers: "careers@weareconnected.io",
   },
-  phone: "+1 (415) 555-0164",
-  hours: "Mon-Fri: 9:00 AM - 6:00 PM (PST)",
+  phone: "+8801318250903",
+  hours: "Mon–Sun: 11AM – 9:00 PM (BD Time)",
 }
 
 export default function ContactSection() {

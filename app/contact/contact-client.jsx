@@ -71,12 +71,12 @@ export default function ContactPageClient() {
       address: "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
     },
     emails: {
-      general: "hello@weareconnected.io",
-      business: "press@weareconnected.io",
+      general: "hi@weareconnected.io",
+      business: "business@weareconnected.io",
       careers: "careers@weareconnected.io",
     },
-    phone: "+1 (415) 555-0123",
-    hours: "Monday - Friday: 9:00 AM - 6:00 PM PST\nSaturday - Sunday: Closed",
+    phone: "+8801318250903",
+    hours: "Mon–Sun: 11AM – 9:00 PM (BD Time)",
   }
 
   const handleSubmit = async (e) => {

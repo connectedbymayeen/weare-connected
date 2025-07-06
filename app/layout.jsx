@@ -1,4 +1,5 @@
 import { inter, satoshi, syne } from "@/lib/fonts";
+import Script from "next/script";
 import "./globals.css";
 import { AuthProvider } from "./lib/auth-context";
 
@@ -11,13 +12,28 @@ export const metadata = {
     icon: "/favicon.ico",
   },
   verification: {
-    google: "HG7Ga3y2ghAg3JkWjWQ8bno_3tGlq0yv4q_gR9xkl08",
+    google: "HG7Ga3y2ghAg3JkWQ8bno_3tGlq0yv4q_gR9xkl08",
   },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        {/* Google Analytics Script */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-D5KWFSH1KX"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-D5KWFSH1KX');
+          `}
+        </Script>
+      </head>
       <body
         className={`${inter.variable} ${satoshi.variable} ${syne.variable} flex flex-col min-h-screen bg-white text-gray-900 antialiased`}
       >

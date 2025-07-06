@@ -16,6 +16,11 @@ export default function PressKitPage() {
   const [loading, setLoading] = useState(true)
   const [downloadingItems, setDownloadingItems] = useState(new Set())
 
+  const fallbackLinks = {
+    "Primary Logo (SVG)": "https://drive.google.com/drive/folders/1Iaa5D4P7qzBBU13mrHmNhJpDO3wsN4lv?usp=drive_link",
+    "Brand Guidelines (PDF)": "https://drive.google.com/drive/folders/1Iaa5D4P7qzBBU13mrHmNhJpDO3wsN4lv?usp=drive_link"
+  }
+
   useEffect(() => {
     fetchPressKitData()
   }, [])
@@ -66,28 +71,9 @@ export default function PressKitPage() {
     }
   }
 
-  const handleCompleteKitDownload = async () => {
-    try {
-      // Try to download the complete press kit
-      const response = await fetch("/api/content/press-kit/complete-download")
-      if (response.ok) {
-        const blob = await response.blob()
-        const url = window.URL.createObjectURL(blob)
-        const link = document.createElement("a")
-        link.href = url
-        link.download = "Connected-Press-Kit-Complete.zip"
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        window.URL.revokeObjectURL(url)
-      } else {
-        // Fallback: try to download from public folder
-        window.open("/press-kit-complete.zip", "_blank");
-      }
-    } catch (error) {
-      console.error("Error downloading complete press kit:", error)
-      alert("Complete press kit not available. Please contact support.")
-    }
+  // UPDATED: Open Google Drive link on full press kit button click
+  const handleCompleteKitDownload = () => {
+    window.open("https://drive.google.com/drive/folders/1Iaa5D4P7qzBBU13mrHmNhJpDO3wsN4lv?usp=drive_link", "_blank")
   }
 
   const getCategoryIcon = (category) => {
@@ -191,20 +177,20 @@ export default function PressKitPage() {
     }
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <div className="flex justify-center items-center py-20">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#6529b2] mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading press kit...</p>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    )
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="min-h-screen bg-gray-50">
+  //       <Header />
+  //       <div className="flex justify-center items-center py-20">
+  //         <div className="text-center">
+  //           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#6529b2] mx-auto mb-4"></div>
+  //           <p className="text-gray-600">Loading press kit...</p>
+  //         </div>
+  //       </div>
+  //       <Footer />
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="min-h-screen bg-gray-50">

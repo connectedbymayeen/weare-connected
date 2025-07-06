@@ -111,6 +111,9 @@ export default function AboutSection({ content }) {
                 "We invest in people, products, and platforms that redefine what's possible.",
                 "We build brands that inspire, influence, and lead entire industries.",
                 "We don't just create companies, we create movements.",
+                "We nurture bold thinkers and provide them with the tools to thrive.",
+                "We foster innovation through deep collaboration and diverse perspectives.",
+                "We scale ideas from concept to global impact with precision and care.",
               ].map((service, index) => (
                 <motion.div
                   key={index}
@@ -133,7 +136,7 @@ export default function AboutSection({ content }) {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mx-auto grid max-w-5xl items-center gap-6 sm:gap-8 md:gap-12 py-8 sm:py-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+          className="mx-auto grid max-w-6xl items-center gap-6 sm:gap-8 md:gap-12 py-8 sm:py-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
         >
           {aboutData.values.map((item, index) => (
             <motion.div

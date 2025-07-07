@@ -8,9 +8,22 @@ export const metadata = {
   description:
     "Connected is a modern venture ecosystem that builds, launches, and scales bold ideas into global movements. From disruptive software to category-defining brands, we ignite revolutions that reshape industries across tech, media, consumer goods, and beyond",
   generator: "v0.dev",
-  icons: {
-    icon: "/favicon.ico",
-  },
+  icons: [
+    {
+      rel: "icon",
+      url: "/favicon.ico",
+      media: "(prefers-color-scheme: light)",
+    },
+    {
+      rel: "icon",
+      url: "/white_favicon.png",
+      media: "(prefers-color-scheme: dark)",
+    },
+    {
+      rel: "icon",
+      url: "/favicon.ico",
+    },
+  ],
   verification: {
     google: "HG7Ga3y2ghAg3JkWQ8bno_3tGlq0yv4q_gR9xkl08",
   },
@@ -20,6 +33,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+
         {/* Google Analytics Script */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-D5KWFSH1KX"

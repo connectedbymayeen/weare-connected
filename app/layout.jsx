@@ -16,7 +16,7 @@ export const metadata = {
     },
     {
       rel: "icon",
-      url: "/white_favicon.png",
+      url: "/favicon-dark.ico",
       media: "(prefers-color-scheme: dark)",
     },
     {
@@ -24,6 +24,7 @@ export const metadata = {
       url: "/favicon.ico",
     },
   ],
+
   verification: {
     google: "HG7Ga3y2ghAg3JkWQ8bno_3tGlq0yv4q_gR9xkl08",
   },

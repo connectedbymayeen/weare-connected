@@ -406,7 +406,8 @@ export default function AboutPageClient() {
               <span className="text-pot-black font-semibold">{aboutContent.ecosystem.subtitle}</span>
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+          <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
             {aboutContent.ecosystem.items.map((ecosystem, index) => (
               <motion.div
                 key={index}
@@ -415,8 +416,9 @@ export default function AboutPageClient() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
+                className="w-full sm:w-[48%] lg:w-[30%]"
               >
-                <Card className="text-center border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 bg-white">
+                <Card className="text-center border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 bg-white h-full">
                   <CardContent className="p-6">
                     <div className="w-4 h-4 bg-primary rounded-full mx-auto mb-4"></div>
                     <h3 className="font-bold text-lg mb-3 text-pot-black">{ecosystem.title}</h3>
@@ -426,6 +428,8 @@ export default function AboutPageClient() {
               </motion.div>
             ))}
           </div>
+
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -439,6 +443,8 @@ export default function AboutPageClient() {
           </motion.div>
         </div>
       </section>
+
+
 
       {/* What Makes Us Different Section */}
       <section className="py-16 sm:py-20 bg-white">

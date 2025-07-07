@@ -1,7 +1,7 @@
 // app/sitemap.xml/route.js
 
 export async function GET() {
-        const baseUrl = "https://weareconnected.io" // তোমার লাইভ ডোমেইন দিয়ে replace করো
+        const baseUrl = "https://weareconnected.io"
 
         const staticRoutes = [
                 "",

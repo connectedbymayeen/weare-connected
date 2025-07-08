@@ -392,9 +392,11 @@ export default async function VentureDetailPage({ params }) {
         <section className="py-16 bg-[#6529b2] text-white">
           <div className="container px-4 md:px-6 mx-auto text-center max-w-7xl">
             <h2 className="text-3xl font-bold mb-4">Interested in {venture.name}?</h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Get in touch to learn more about our venture or explore partnership opportunities.
-            </p>
+            {venture.ctaDescription && (
+              <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+                {venture.ctaDescription}
+              </p>
+            )}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="secondary" size="lg" className="rounded-lg" asChild>
                 <Link href="/contact">Contact Us</Link>
@@ -414,6 +416,7 @@ export default async function VentureDetailPage({ params }) {
             </div>
           </div>
         </section>
+
       </main>
       <Footer />
     </>

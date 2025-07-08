@@ -41,6 +41,7 @@ export default function EditVenture({ params }) {
     features: [],
     achievements: [],
     testimonials: [],
+    cta: "",
   })
   const [techInput, setTechInput] = useState("")
   const [formErrors, setFormErrors] = useState({})
@@ -94,6 +95,7 @@ export default function EditVenture({ params }) {
         features: venture.features || [],
         achievements: venture.achievements || [],
         testimonials: venture.testimonials || [],
+        cta: venture.cta || "",
       })
     } catch (err) {
       console.error("Error fetching venture:", err)
@@ -172,6 +174,7 @@ export default function EditVenture({ params }) {
     if (!formData.description.trim()) errors.description = "Description is required"
     if (!formData.slug.trim()) errors.slug = "Slug is required"
     if (!formData.tagline.trim()) errors.tagline = "Tagline is required"
+    if (!formData.cta.trim()) errors.cta = "CTA description is required"
 
     setFormErrors(errors)
     return Object.keys(errors).length === 0
@@ -372,6 +375,20 @@ export default function EditVenture({ params }) {
                         placeholder="Brief tagline (e.g. Workflow automation reimagined)"
                       />
                       {formErrors.tagline && <p className="text-sm text-red-500">{formErrors.tagline}</p>}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="cta">
+                        CTA Description <span className="text-red-500">*</span>
+                      </Label>
+                      <Textarea
+                        id="cta"
+                        name="cta"
+                        value={formData.cta}
+                        onChange={handleInputChange}
+                        placeholder="Write a call-to-action message (e.g. Get started free, Join the waitlist)"
+                        rows={3}
+                      />
+                      {formErrors.cta && <p className="text-sm text-red-500">{formErrors.cta}</p>}
                     </div>
 
                     <div className="space-y-2">

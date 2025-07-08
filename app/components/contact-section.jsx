@@ -268,7 +268,7 @@ export default function ContactSection() {
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="your.email@company.com"
+                  placeholder="hi@weareconnected.io"
                   value={formData.email}
                   onChange={handleChange}
                   required

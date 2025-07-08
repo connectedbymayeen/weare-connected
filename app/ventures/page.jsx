@@ -25,6 +25,7 @@ function serializeVentures(ventures) {
     name: venture.name || "Untitled Venture",
     tagline: venture.tagline || venture.description?.substring(0, 50) + "..." || "Innovative solutions",
     description: venture.description || "No description available",
+    ctaDescription: venture.ctaDescription || venture.cta?.description || "",
     category: venture.category || venture.industry || "Technology",
     status: venture.status || "Active",
     founded: venture.foundedYear?.toString() || venture.year?.toString() || "2023",

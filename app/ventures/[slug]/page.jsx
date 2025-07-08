@@ -383,21 +383,7 @@ export default async function VentureDetailPage({ params }) {
                 </div>
               ) : (
                 // Default testimonial
-                <div>
-                  <p className="text-xl italic text-gray-700 mb-8">
-                    "DesignHub created a brand identity that perfectly captures our vision. The attention to detail is
-                    exceptional."
-                  </p>
-                  <div className="flex items-center justify-center gap-4">
-                    <div className="relative w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                      <span className="text-gray-500 font-medium">ER</span>
-                    </div>
-                    <div className="text-left">
-                      <div className="font-semibold text-gray-900">Emily Rodriguez</div>
-                      <div className="text-sm text-gray-600">CEO at GreenTech Solutions</div>
-                    </div>
-                  </div>
-                </div>
+                
               )}
             </div>
           </div>

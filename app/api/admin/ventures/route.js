@@ -2,7 +2,7 @@ import { verifyAuth } from "@/app/lib/auth"
 import { connectToDatabase } from "@/app/lib/mongodb"
 import { NextResponse } from "next/server"
 
-// GET all ventures
+// GET all ventures without filtering by status
 export async function GET(request) {
   try {
     // Verify admin authentication
@@ -14,7 +14,7 @@ export async function GET(request) {
 
     const { searchParams } = new URL(request.url)
     const search = searchParams.get("search") || ""
-    const status = searchParams.get("status") || ""
+    // const status = searchParams.get("status") || ""  // <-- Remove this line
 
     const { db } = await connectToDatabase()
 
@@ -27,7 +27,8 @@ export async function GET(request) {
         { tagline: { $regex: search, $options: "i" } },
       ]
     }
-    if (status) query.status = status
+    // Remove filtering by status completely
+    // if (status) query.status = status
 
     const ventures = await db.collection("ventures").find(query).sort({ createdAt: -1 }).toArray()
 
@@ -35,7 +36,7 @@ export async function GET(request) {
     const transformedVentures = ventures.map((venture) => ({
       ...venture,
       id: venture._id.toString(),
-      ctaDescription: venture.ctaDescription || "", // ✅ Ensured here
+      ctaDescription: venture.ctaDescription || "",
     }))
 
     return NextResponse.json(transformedVentures)
@@ -81,7 +82,7 @@ export async function POST(request) {
     // Create venture with timestamps
     const venture = {
       ...data,
-      ctaDescription: data.ctaDescription || "", // ✅ Ensure it's saved in DB
+      ctaDescription: data.ctaDescription || "",
       status: data.status || "active",
       createdAt: new Date(),
       updatedAt: new Date(),

@@ -36,6 +36,7 @@ export default function NewVenturePage() {
     testimonials: [],
     logo: null,
     featuredImage: null,
+    cta: "",
   })
   const [techInput, setTechInput] = useState("")
   const [formErrors, setFormErrors] = useState({})
@@ -164,6 +165,7 @@ export default function NewVenturePage() {
     if (!formData.description.trim()) errors.description = "Description is required"
     if (!formData.slug.trim()) errors.slug = "Slug is required"
     if (!formData.tagline.trim()) errors.tagline = "Tagline is required"
+    if (!formData.cta.trim()) errors.cta = "CTA is required"
 
     setFormErrors(errors)
     return Object.keys(errors).length === 0
@@ -277,7 +279,11 @@ export default function NewVenturePage() {
                 />
                 {formErrors.description && <p className="text-sm text-red-500">{formErrors.description}</p>}
               </div>
-
+              <div className="space-y-2">
+                <Label htmlFor="cta">CTA Description <span className="text-red-500">*</span></Label>
+                <Textarea id="cta" name="cta" value={formData.cta} onChange={handleInputChange} placeholder="Call-to-action (e.g. Try for free, Join waitlist)" rows={3} />
+                {formErrors.cta && <p className="text-sm text-red-500">{formErrors.cta}</p>}
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="category">Category</Label>

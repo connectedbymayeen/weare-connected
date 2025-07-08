@@ -41,7 +41,7 @@ export default function EditVenture({ params }) {
     features: [],
     achievements: [],
     testimonials: [],
-    cta: "",
+    ctaDescription: "",
   })
   const [techInput, setTechInput] = useState("")
   const [formErrors, setFormErrors] = useState({})
@@ -95,7 +95,7 @@ export default function EditVenture({ params }) {
         features: venture.features || [],
         achievements: venture.achievements || [],
         testimonials: venture.testimonials || [],
-        cta: venture.cta || "",
+        ctaDescription: venture.ctaDescription || "",
       })
     } catch (err) {
       console.error("Error fetching venture:", err)
@@ -174,7 +174,7 @@ export default function EditVenture({ params }) {
     if (!formData.description.trim()) errors.description = "Description is required"
     if (!formData.slug.trim()) errors.slug = "Slug is required"
     if (!formData.tagline.trim()) errors.tagline = "Tagline is required"
-    if (!formData.cta.trim()) errors.cta = "CTA description is required"
+    if (!formData.ctaDescription.trim()) errors.ctaDescription = "CTA is required"
 
     setFormErrors(errors)
     return Object.keys(errors).length === 0

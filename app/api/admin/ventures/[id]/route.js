@@ -6,7 +6,6 @@ import { NextResponse } from "next/server"
 // GET a single venture by ID
 export async function GET(request, { params }) {
   try {
-    // Verify admin authentication
     const { authenticated, isAdmin } = await verifyAuth(request)
 
     if (!authenticated || !isAdmin) {
@@ -25,7 +24,12 @@ export async function GET(request, { params }) {
       return NextResponse.json({ error: "Venture not found" }, { status: 404 })
     }
 
-    return NextResponse.json(venture)
+    // Ensure ctaDescription is present
+    return NextResponse.json({
+      ...venture,
+      id: venture._id.toString(),
+      ctaDescription: venture.ctaDescription || "",
+    })
   } catch (error) {
     console.error("Error fetching venture:", error)
     return NextResponse.json({ error: "Failed to fetch venture" }, { status: 500 })
@@ -35,7 +39,6 @@ export async function GET(request, { params }) {
 // PUT update a venture
 export async function PUT(request, { params }) {
   try {
-    // Verify admin authentication
     const { authenticated, isAdmin } = await verifyAuth(request)
 
     if (!authenticated || !isAdmin) {
@@ -49,14 +52,12 @@ export async function PUT(request, { params }) {
 
     const data = await request.json()
 
-    // Validate required fields
     if (!data.name || !data.description) {
       return NextResponse.json({ error: "Name and description are required" }, { status: 400 })
     }
 
     const { db } = await connectToDatabase()
 
-    // Check if slug already exists (excluding current venture)
     if (data.slug) {
       const existingVenture = await db
         .collection("ventures")
@@ -67,19 +68,21 @@ export async function PUT(request, { params }) {
       }
     }
 
-    // Update venture with timestamps
     const updatedVenture = {
       ...data,
+      ctaDescription: data.ctaDescription || "", // ✅ Fallback to empty string
       updatedAt: new Date(),
     }
 
-    const result = await db.collection("ventures").updateOne({ _id: new ObjectId(id) }, { $set: updatedVenture })
+    const result = await db.collection("ventures").updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updatedVenture }
+    )
 
     if (result.matchedCount === 0) {
       return NextResponse.json({ error: "Venture not found" }, { status: 404 })
     }
 
-    // Get the updated venture
     const venture = await db.collection("ventures").findOne({ _id: new ObjectId(id) })
 
     return NextResponse.json({
@@ -95,7 +98,6 @@ export async function PUT(request, { params }) {
 // DELETE a venture
 export async function DELETE(request, { params }) {
   try {
-    // Verify admin authentication
     const { authenticated, isAdmin } = await verifyAuth(request)
 
     if (!authenticated || !isAdmin) {

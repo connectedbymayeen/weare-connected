@@ -31,7 +31,14 @@ export async function GET(request) {
 
     const ventures = await db.collection("ventures").find(query).sort({ createdAt: -1 }).toArray()
 
-    return NextResponse.json(ventures)
+    // Ensure ctaDescription is present and stringified (optional transformation)
+    const transformedVentures = ventures.map((venture) => ({
+      ...venture,
+      id: venture._id.toString(),
+      ctaDescription: venture.ctaDescription || "", // ✅ Ensured here
+    }))
+
+    return NextResponse.json(transformedVentures)
   } catch (error) {
     console.error("Error fetching ventures:", error)
     return NextResponse.json({ error: "Failed to fetch ventures" }, { status: 500 })
@@ -74,6 +81,7 @@ export async function POST(request) {
     // Create venture with timestamps
     const venture = {
       ...data,
+      ctaDescription: data.ctaDescription || "", // ✅ Ensure it's saved in DB
       status: data.status || "active",
       createdAt: new Date(),
       updatedAt: new Date(),

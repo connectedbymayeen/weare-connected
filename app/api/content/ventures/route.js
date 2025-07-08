@@ -43,7 +43,7 @@ export async function GET(request) {
       technologies: venture.technologies || [],
       features: venture.features || [],
       testimonials: venture.testimonials || [],
-      cta: String,
+      ctaDescription: venture.ctaDescription || "",
     }))
 
     return NextResponse.json(transformedVentures)

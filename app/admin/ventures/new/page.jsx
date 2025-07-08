@@ -36,7 +36,7 @@ export default function NewVenturePage() {
     testimonials: [],
     logo: null,
     featuredImage: null,
-    cta: "",
+    ctaDescription: "",
   })
   const [techInput, setTechInput] = useState("")
   const [formErrors, setFormErrors] = useState({})
@@ -165,7 +165,7 @@ export default function NewVenturePage() {
     if (!formData.description.trim()) errors.description = "Description is required"
     if (!formData.slug.trim()) errors.slug = "Slug is required"
     if (!formData.tagline.trim()) errors.tagline = "Tagline is required"
-    if (!formData.cta.trim()) errors.cta = "CTA is required"
+    if (!formData.ctaDescription.trim()) errors.ctaDescription = "CTA is required"
 
     setFormErrors(errors)
 

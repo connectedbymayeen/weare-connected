@@ -19,7 +19,7 @@ export default function VenturesClientPage({ ventures: dbVentures = [] }) {
         description: venture.description,
         category: venture.category || venture.industry || "Tech",
         status: venture.status || "Active",
-        founded: venture.foundedYear || venture.year || "2024",
+        founded: venture.foundedYear || venture.year || "",
         team: venture.teamSize ? `${venture.teamSize} people` : "Team",
         growth: venture.growth || "Growing",
         image:

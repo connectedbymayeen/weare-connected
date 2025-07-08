@@ -24,7 +24,7 @@ export default function VenturesSection({ ventures = [] }) {
               ? "bg-blue-500"
               : "bg-purple-500",
         category: venture.category || venture.industry || "Tech",
-        year: venture.foundedYear || venture.year || "2025",
+        year: venture.foundedYear || venture.year || "",
         teamMembers: venture.teamSize ? `${venture.teamSize} members` : "8 members",
         growth: venture.growth || "+150%",
         tags: venture.technologies || venture.tags || ["Technology", "Innovation"],

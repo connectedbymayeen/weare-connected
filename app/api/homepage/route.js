@@ -6,19 +6,21 @@ export async function GET() {
     const { db } = await connectToDatabase()
 
     // Fetch featured ventures (limit to 3 for homepage)
+
+    // remove filter and limit
     const ventures = await db
       .collection("ventures")
-      .find({ status: "active" })
+      .find()
       .sort({ createdAt: -1 })
-      .limit(3)
       .toArray()
 
     // Fetch services (limit to 4 for homepage)
+
+     // remove filter and limit
     const services = await db
       .collection("services")
-      .find({ status: "active" })
+      .find()  
       .sort({ createdAt: -1 })
-      .limit(4)
       .toArray()
 
     // Fetch case studies (limit to 3 for homepage)

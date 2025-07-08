@@ -10,6 +10,7 @@ import { ArrowLeft, Eye, Loader2, Save } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import HtmlTextEditor from "./components/HtmlTextEditor"
 
 // Calculate dynamic read time
 function calculateReadTime(content) {
@@ -21,12 +22,12 @@ function calculateReadTime(content) {
 }
 
 export default function NewBlogPost() {
+  const [content, setContent] = useState("");
   const router = useRouter()
   const [saving, setSaving] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
-    content: "",
     excerpt: "",
     author: {
       name: "",
@@ -94,7 +95,7 @@ export default function NewBlogPost() {
   const validateForm = () => {
     const errors = {}
     if (!formData.title.trim()) errors.title = "Title is required"
-    if (!formData.content.trim()) errors.content = "Content is required"
+    if (!content.trim()) errors.content = "Content is required"
     if (!formData.slug.trim()) errors.slug = "Slug is required"
     if (!formData.author.name.trim()) errors.authorName = "Author name is required"
 
@@ -116,6 +117,7 @@ export default function NewBlogPost() {
       // Format data for submission
       const formattedData = {
         ...formData,
+        content,
         tags: formData.tags ? formData.tags.split(",").map((tag) => tag.trim()) : [],
         readTime,
         publishedAt: formData.status === "published" ? new Date().toISOString() : null,
@@ -239,14 +241,16 @@ export default function NewBlogPost() {
               <Label htmlFor="content">
                 Content <span className="text-red-500">*</span>
               </Label>
-              <Textarea
+              {/* text area comment and add HTML Text Editor added */}
+              {/* <Textarea
                 id="content"
                 name="content"
                 value={formData.content}
                 onChange={handleInputChange}
                 placeholder="Write your blog post content here..."
                 rows={12}
-              />
+              /> */}
+              <HtmlTextEditor content={content}  setContent={setContent}/>
               {formErrors.content && <p className="text-sm text-red-500">{formErrors.content}</p>}
               <p className="text-sm text-gray-500">Read time: {calculateReadTime(formData.content)}</p>
             </div>

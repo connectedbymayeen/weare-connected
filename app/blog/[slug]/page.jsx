@@ -1,6 +1,7 @@
 import Footer from "@/app/components/footer"
 import Header from "@/app/components/header"
 import ShareButton from "@/app/components/ShareButton"
+import HtmlParser from "@/app/components/ui/htmlParser"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -140,11 +141,14 @@ export default async function BlogPage({ params }) {
             {/* Content */}
             <div className="prose prose-lg max-w-none mb-12">
               <div className="text-gray-700 leading-relaxed space-y-6">
-                {(post.content || "Content coming soon...").split("\n\n").map((paragraph, index) => (
+                {/* {(post.content || "Content coming soon...").split("\n\n").map((paragraph, index) => (
                   <p key={index} className="text-lg">
                     {paragraph}
                   </p>
-                ))}
+                ))} */}
+                <HtmlParser>
+                  {post.content}
+                </HtmlParser>
               </div>
             </div>
 

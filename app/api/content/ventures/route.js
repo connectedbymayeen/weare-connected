@@ -10,7 +10,7 @@ export async function GET(request) {
     const { db } = await connectToDatabase()
 
     // Build query for active ventures only
-    const query = { status: "active" }
+    const query = {}
 
     let venturesQuery = db.collection("ventures").find(query).sort({ createdAt: -1 })
 

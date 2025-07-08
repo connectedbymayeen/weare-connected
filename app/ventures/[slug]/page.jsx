@@ -357,11 +357,11 @@ export default async function VentureDetailPage({ params }) {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="container px-4 md:px-6 mx-auto max-w-7xl">
-            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">What Our Users Say</h2>
-            <div className="max-w-3xl mx-auto text-center">
-              {venture.testimonials && venture.testimonials.length > 0 && (
+        {venture.testimonials && venture.testimonials.length > 0 && (
+          <section className="py-16 bg-gray-50">
+            <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+              <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">What Our Users Say</h2>
+              <div className="max-w-3xl mx-auto text-center">
                 <div>
                   <p className="text-xl italic text-gray-700 mb-8">"{venture.testimonials[0].quote}"</p>
                   <div className="flex items-center justify-center gap-4">
@@ -381,10 +381,11 @@ export default async function VentureDetailPage({ params }) {
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
+
 
 
         {/* CTA Section */}
@@ -403,7 +404,7 @@ export default async function VentureDetailPage({ params }) {
                   variant="outline"
                   size="lg"
                   asChild
-                  className="border-white  text-[#6529b2] hover:bg-white hover:text-[#bc89ff] rounded-lg"
+                  className="border-white  text-[#6529b2] hover:bg-white hover:text-[#241637] rounded-lg"
                 >
                   <a href={venture.website} target="_blank" rel="noopener noreferrer">
                     Visit {venture.name}

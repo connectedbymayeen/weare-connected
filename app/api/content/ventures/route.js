@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server"
 import { connectToDatabase } from "@/app/lib/mongodb"
+import { NextResponse } from "next/server"
 
 // GET all ventures for public consumption
 export async function GET(request) {
@@ -43,6 +43,7 @@ export async function GET(request) {
       technologies: venture.technologies || [],
       features: venture.features || [],
       testimonials: venture.testimonials || [],
+      cta: String,
     }))
 
     return NextResponse.json(transformedVentures)

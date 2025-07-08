@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server"
 import { verifyAuth } from "@/app/lib/auth"
 import { connectToDatabase } from "@/app/lib/mongodb"
 import { ObjectId } from "mongodb"
+import { NextResponse } from "next/server"
 
 // GET a single venture by ID
 export async function GET(request, { params }) {

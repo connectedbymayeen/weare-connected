@@ -168,6 +168,8 @@ export default function NewVenturePage() {
     if (!formData.cta.trim()) errors.cta = "CTA is required"
 
     setFormErrors(errors)
+
+
     return Object.keys(errors).length === 0
   }
 

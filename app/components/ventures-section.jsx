@@ -11,7 +11,7 @@ export default function VenturesSection({ ventures = [] }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
 
-  // Enhanced fallback data with the new structure
+  // Map ventures to add fallback values and statusColor
   const venturesList =
     ventures.length > 0
       ? ventures.map((venture) => ({
@@ -24,14 +24,16 @@ export default function VenturesSection({ ventures = [] }) {
               ? "bg-blue-500"
               : "bg-purple-500",
         category: venture.category || venture.industry || "Tech",
-        year: venture.foundedYear || venture.year || "",
+        year: venture.foundedYear || venture.year || "2025",
         teamMembers: venture.teamSize ? `${venture.teamSize} members` : "8 members",
         growth: venture.growth || "+150%",
         tags: venture.technologies || venture.tags || ["Technology", "Innovation"],
+        // Assuming admin panel sends ctaDescription for each venture
+        ctaDescription: venture.ctaDescription || venture.cta?.description || "",
+        ctaText: venture.cta?.text || "Learn More",
+        ctaLink: venture.cta?.link || `/ventures/${venture.slug}`,
       }))
-      : [
-
-      ]
+      : []
 
   return (
     <section ref={ref} className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-purple-50 to-white">
@@ -110,6 +112,11 @@ export default function VenturesSection({ ventures = [] }) {
                       {venture.description || venture.tagline}
                     </p>
 
+                    {/* CTA Description */}
+                    {venture.ctaDescription && (
+                      <p className="text-sm text-gray-500 mb-4 line-clamp-2">{venture.ctaDescription}</p>
+                    )}
+
                     {/* Metrics Section */}
                     <div className="flex items-center justify-between mb-4 text-sm text-gray-500">
                       <div className="flex items-center gap-1">
@@ -140,8 +147,8 @@ export default function VenturesSection({ ventures = [] }) {
 
                     {/* Learn More Button */}
                     <Button asChild variant="outline" className="w-full" size="sm">
-                      <Link href={`/ventures/${venture.slug}`}>
-                        Learn More <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                      <Link href={venture.ctaLink}>
+                        {venture.ctaText} <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                       </Link>
                     </Button>
                   </div>

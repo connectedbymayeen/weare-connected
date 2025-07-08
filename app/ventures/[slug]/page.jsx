@@ -361,7 +361,7 @@ export default async function VentureDetailPage({ params }) {
           <div className="container px-4 md:px-6 mx-auto max-w-7xl">
             <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">What Our Users Say</h2>
             <div className="max-w-3xl mx-auto text-center">
-              {venture.testimonials && venture.testimonials.length > 0 ? (
+              {venture.testimonials && venture.testimonials.length > 0 && (
                 <div>
                   <p className="text-xl italic text-gray-700 mb-8">"{venture.testimonials[0].quote}"</p>
                   <div className="flex items-center justify-center gap-4">
@@ -381,13 +381,11 @@ export default async function VentureDetailPage({ params }) {
                     </div>
                   </div>
                 </div>
-              ) : (
-                // Default testimonial
-                
               )}
             </div>
           </div>
         </section>
+
 
         {/* CTA Section */}
         <section className="py-16 bg-[#6529b2] text-white">

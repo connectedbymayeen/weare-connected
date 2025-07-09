@@ -184,7 +184,7 @@ export default function NewBlogPost() {
               <Link href={`/blog/${formData.slug}`} target="_blank">
                 <Eye className="h-4 w-4 mr-2" />
                 Preview
-              </Link>
+            </Link>
             </Button>
           )}
           <Button onClick={handleSubmit} disabled={saving} className="bg-purple-emperor hover:bg-purple-emperor/90">
@@ -250,7 +250,7 @@ export default function NewBlogPost() {
                 placeholder="Write your blog post content here..."
                 rows={12}
               /> */}
-              <HtmlTextEditor content={content}  setContent={setContent}/>
+              <HtmlTextEditor content={content} setContent={setContent}/>
               {formErrors.content && <p className="text-sm text-red-500">{formErrors.content}</p>}
               <p className="text-sm text-gray-500">Read time: {calculateReadTime(formData.content)}</p>
             </div>

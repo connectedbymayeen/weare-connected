@@ -121,6 +121,7 @@ export default function ImageUpload({ onImageUpload, defaultImage = null, label 
             <div className="mt-2">
               <p className="text-sm text-gray-500">Click to upload or drag and drop</p>
               <p className="text-xs text-gray-500">PNG, JPG, GIF, WEBP, SVG up to 5MB</p>
+               <p className="text-xs text-gray-500">Recommended size: height: 600 px width: 1200 px</p>
             </div>
           </div>
 

@@ -173,10 +173,14 @@ export default function NewVenturePage() {
     return Object.keys(errors).length === 0
   }
 
-  const handleCreateVenture = async (e) => {
+  const handleCreateVenture = async (e) => {    
     e.preventDefault()
+    console.log("before validation check....")
+    console.log(formData);
 
     if (!validateForm()) return
+
+    console.log("form validated....")
 
     try {
       setIsSubmitting(true)
@@ -283,7 +287,7 @@ export default function NewVenturePage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="cta">CTA Description <span className="text-red-500">*</span></Label>
-                <Textarea id="cta" name="cta" value={formData.cta} onChange={handleInputChange} placeholder="Call-to-action (e.g. Try for free, Join waitlist)" rows={3} />
+                <Textarea id="cta" name="ctaDescription" value={formData.ctaDescription} onChange={handleInputChange} placeholder="Call-to-action (e.g. Try for free, Join waitlist)" rows={3} />
                 {formErrors.cta && <p className="text-sm text-red-500">{formErrors.cta}</p>}
               </div>
               <div className="grid grid-cols-2 gap-4">

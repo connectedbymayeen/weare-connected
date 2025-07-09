@@ -174,13 +174,9 @@ export default function NewVenturePage() {
   }
 
   const handleCreateVenture = async (e) => {    
-    e.preventDefault()
-    console.log("before validation check....")
-    console.log(formData);
-
+    e.preventDefault();
+    
     if (!validateForm()) return
-
-    console.log("form validated....")
 
     try {
       setIsSubmitting(true)

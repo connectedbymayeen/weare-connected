@@ -9,7 +9,7 @@ export async function GET() {
                 "/services",
                 "/contact",
                 "/careers",
-                "/test-blog",
+                "/blog",
                 "/ventures",
         ]
 

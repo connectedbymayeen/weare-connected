@@ -41,15 +41,15 @@ function serializeBlogPosts(posts) {
         : null,
     date: post.publishedAt
       ? new Date(post.publishedAt).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
       : new Date().toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
     readTime: post.readTime || `${Math.ceil((post.content?.length || 1000) / 200)} min read`,
     tags: post.tags || [],
     publishedAt: post.publishedAt ? new Date(post.publishedAt).toISOString() : new Date().toISOString(),

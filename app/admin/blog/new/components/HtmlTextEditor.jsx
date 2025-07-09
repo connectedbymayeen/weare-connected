@@ -26,9 +26,9 @@ const extensions = [
   BaseKit
 ];
 
-export default function HtmlTextEditor({content,setContent}) {
-  console.log("content",content);
-  
+export default function HtmlTextEditor({ content, setContent }) {
+  console.log("content", content);
+
 
   const onChangeContent = (value) => {
     setContent(value);
@@ -39,6 +39,7 @@ export default function HtmlTextEditor({content,setContent}) {
       content={content}
       onChangeContent={onChangeContent}
       extensions={extensions}
+      className="bg-white"
     />
   )
 }

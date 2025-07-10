@@ -1,7 +1,6 @@
 import { fontFamily } from "tailwindcss/defaultTheme"
 
 const config = {
-  // darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -61,14 +60,13 @@ const config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Brand colors
         "lynx-white": "#F7F7F7",
         "pot-black": "#161616",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         syne: ["var(--font-syne)", "serif"],
-        satoshi: ["var(--font-sans)", ...fontFamily.sans], // Use Inter as fallback
+        satoshi: ["var(--font-sans)", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -77,20 +75,12 @@ const config = {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -99,7 +89,10 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@tailwindcss/typography'),
+  ],
 }
+
 export default config

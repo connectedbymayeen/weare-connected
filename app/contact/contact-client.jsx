@@ -222,7 +222,7 @@ export default function ContactPageClient() {
                             onChange={(e) => handleChange("name", e.target.value)}
                             required
                             disabled={isSubmitting}
-                            className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                            className="border-gray-300 bg-white focus:border-purple-500 focus:ring-purple-500"
                           />
                         </div>
                         <div className="space-y-2">
@@ -234,7 +234,7 @@ export default function ContactPageClient() {
                             onChange={(e) => handleChange("email", e.target.value)}
                             required
                             disabled={isSubmitting}
-                            className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                            className="border-gray-300 bg-white focus:border-purple-500 focus:ring-purple-500"
                           />
                         </div>
                       </div>
@@ -246,7 +246,7 @@ export default function ContactPageClient() {
                           value={formData.company}
                           onChange={(e) => handleChange("company", e.target.value)}
                           disabled={isSubmitting}
-                          className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                          className="border-gray-300 bg-white focus:border-purple-500 focus:ring-purple-500"
                         />
                       </div>
 
@@ -263,7 +263,7 @@ export default function ContactPageClient() {
       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 
       disabled:cursor-not-allowed disabled:opacity-50"
                           >
-                            <SelectValue placeholder="Select a subject" />
+                            <SelectValue placeholder="Select a subject"  />
                           </SelectTrigger>
 
                           <SelectContent
@@ -291,7 +291,7 @@ export default function ContactPageClient() {
                           onChange={(e) => handleChange("message", e.target.value)}
                           required
                           disabled={isSubmitting}
-                          className="border-gray-300 focus:border-purple-500 focus:ring-purple-500 resize-none h-52"
+                          className="border-gray-300 bg-white focus:border-purple-500 focus:ring-purple-500 resize-none h-52"
                           placeholder="Tell us about your inquiry, how we can help you, or share your message with us..."
                         />
                       </div>
@@ -388,7 +388,7 @@ export default function ContactPageClient() {
                         <CardContent className="p-4 text-center">
                           <Phone className="h-8 w-8 text-primary mx-auto mb-2" />
                           <h4 className="font-semibold mb-1">Call Us</h4>
-                          <p className="text-sm text-muted-foreground">{contactData.phone || "+1 (415) 555-0123"}</p>
+                          <p className="text-sm text-muted-foreground">{contactData.phone || "+8801318250903"}</p>
                         </CardContent>
                       </Card>
                     </div>

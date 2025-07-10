@@ -10,7 +10,7 @@ import { ArrowLeft, Eye, Loader2, Save } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import HtmlTextEditor from "./components/HtmlTextEditor"
+import HtmlTextEditor from "../../new/components/HtmlTextEditor"
 
 // Calculate dynamic read time
 function calculateReadTime(content) {

@@ -140,15 +140,10 @@ export default async function BlogPage({ params }) {
             </div>
 
             {/* Content */}
-            <div className="prose prose-lg max-w-none mb-12">
-  <div className="text-gray-700 leading-relaxed space-y-6">
-    <div
-      dangerouslySetInnerHTML={{
-        __html: post.content
-      }}
-    />
-  </div>
+            <div className="prose prose-lg max-w-none mb-12 prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-primary prose-img:rounded-lg">
+  <div dangerouslySetInnerHTML={{ __html: post.content }} />
 </div>
+
 
             {/* Tags */}
             {post.tags && post.tags.length > 0 && (

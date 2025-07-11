@@ -398,7 +398,7 @@ export default async function VentureDetailPage({ params }) {
               </p>
             )}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg" className="rounded-lg dark:bg-white dark:hover:bg-[#eabaff]" asChild>
+              <Button variant="secondary" size="lg" className="border-white bg-white  dark:bg-white text-[#6529b2] hover:bg-white hover:text-[#ffffff] rounded-lg" asChild>
                 <Link href="/contact">Contact Us</Link>
               </Button>
               {venture.website && (

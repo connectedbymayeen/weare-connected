@@ -35,6 +35,27 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-D5KWFSH1KX');
           `}
         </Script>
+         <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://weareconnected.io" />
+  <meta property="og:title" content="Connected - The Launchpad for Limitless Revolutions" />
+  <meta
+    property="og:description"
+    content="Connected is a modern venture ecosystem that builds, launches, and scales bold ideas into global movements."
+  />
+  <meta property="og:image" content="https://weareconnected.io/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  {/* ✅ Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://weareconnected.io" />
+  <meta name="twitter:title" content="Connected - The Launchpad for Limitless Revolutions" />
+  <meta
+    name="twitter:description"
+    content="Connected is a modern venture ecosystem that builds, launches, and scales bold ideas into global movements."
+  />
+  <meta name="twitter:image" content="https://weareconnected.io/og-image.jpg" />
+
         <link
           rel="icon"
           href="/favicon-dark.ico"

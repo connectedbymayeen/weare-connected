@@ -411,7 +411,7 @@ export default async function VentureDetailPage({ params }) {
         <Button
   variant="outline"
   size="lg"
-  className="bg-white text-[#6529b2] hover:text-black hover:bg-white border-white rounded-lg"
+  className="bg-white dark:bg-white! text-[#6529b2] hover:text-black hover:bg-white border-white rounded-lg"
   asChild
 >
   <a href={venture.website} target="_blank" rel="noopener noreferrer">

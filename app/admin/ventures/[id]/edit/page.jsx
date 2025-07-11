@@ -174,7 +174,10 @@ export default function EditVenture({ params }) {
     if (!formData.description.trim()) errors.description = "Description is required"
     if (!formData.slug.trim()) errors.slug = "Slug is required"
     if (!formData.tagline.trim()) errors.tagline = "Tagline is required"
-    if (!formData.ctaDescription.trim()) errors.ctaDescription = "CTA is required"
+    if (!formData.ctaDescription.trim()) {
+  errors.ctaDescription = "CTA is required";
+}
+
 
     setFormErrors(errors)
     return Object.keys(errors).length === 0
@@ -381,14 +384,15 @@ export default function EditVenture({ params }) {
                         CTA Description <span className="text-red-500">*</span>
                       </Label>
                       <Textarea
-                        id="cta"
-                        name="cta"
-                        value={formData.cta}
-                        onChange={handleInputChange}
-                        placeholder="Write a call-to-action message (e.g. Get started free, Join the waitlist)"
-                        rows={3}
-                      />
-                      {formErrors.cta && <p className="text-sm text-red-500">{formErrors.cta}</p>}
+  id="ctaDescription"
+  name="ctaDescription"
+  value={formData.ctaDescription}
+  onChange={handleInputChange}
+  placeholder="CTA"
+  rows={3}
+/>
+{formErrors.ctaDescription && <p className="text-sm text-red-500">{formErrors.ctaDescription}</p>}
+
                     </div>
 
                     <div className="space-y-2">

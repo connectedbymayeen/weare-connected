@@ -389,33 +389,40 @@ export default async function VentureDetailPage({ params }) {
 
 
         {/* CTA Section */}
-        <section className="py-16 bg-[#6529b2] text-white">
-          <div className="container px-4 md:px-6 mx-auto text-center max-w-7xl">
-            <h2 className="text-3xl font-bold mb-4">Interested in {venture.name}?</h2>
-            {venture.ctaDescription && (
-              <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-                {venture.ctaDescription}
-              </p>
-            )}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg" className="border-white dark:hover:text-black bg-white  dark:bg-white text-[#6529b2] hover:bg-white hover:text-[#000000] rounded-lg" asChild>
-                <Link href="/contact">Contact Us</Link>
-              </Button>
-              {venture.website && (
-                <Button
-                  variant="outline"
-                  size="lg"
-                  asChild
-                  className="border-white bg-white dark:hover:text-black dark:bg-white text-[#6529b2] hover:bg-white hover:text-[#000000] rounded-lg"
-                >
-                  <a href={venture.website} target="_blank" rel="noopener noreferrer">
-                    Visit {venture.name}
-                  </a>
-                </Button>
-              )}
-            </div>
-          </div>
-        </section>
+   <section className="py-16 bg-[#6529b2] text-white">
+  <div className="container px-4 md:px-6 mx-auto text-center max-w-7xl">
+    <h2 className="text-3xl font-bold mb-4">Interested in {venture.name}?</h2>
+    {venture.ctaDescription && (
+      <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        {venture.ctaDescription}
+      </p>
+    )}
+    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <Button
+        variant="secondary"
+        size="lg"
+        className="bg-white text-[#6529b2] hover:text-black hover:bg-white border-white rounded-lg"
+        asChild
+      >
+        <Link href="/contact">Contact Us</Link>
+      </Button>
+
+      {venture.website && (
+        <Button
+          variant="outline"
+          size="lg"
+          className="bg-white text-[#6529b2] hover:text-black hover:bg-white border-white rounded-lg"
+          asChild
+        >
+          <a href={venture.website} target="_blank" rel="noopener noreferrer">
+            Visit {venture.name}
+          </a>
+        </Button>
+      )}
+    </div>
+  </div>
+</section>
+
 
       </main>
       <Footer />

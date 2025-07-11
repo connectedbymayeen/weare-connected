@@ -120,7 +120,7 @@ export default function VenturesClientPage({ ventures: dbVentures = [] }) {
                           </div>
                         </div>
 
-                        <Button asChild className="w-full h-10 dark:bg-white dark:hover:text-black dark:hover:bg-[#b073ff] bg-[#6529b2] text-white text-base font-semibold">
+                        <Button asChild className="w-full h-10 dark:hover:text-black dark:hover:bg-[#b073ff] bg-[#6529b2] text-white text-base font-semibold">
                           <Link href={`/ventures/${venture.slug}`}>
                             Learn More <ArrowRight className="ml-2 h-4 w-4" />
                           </Link>

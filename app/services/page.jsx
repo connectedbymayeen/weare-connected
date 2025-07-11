@@ -57,7 +57,7 @@ export default async function ServicesPage() {
                               </li>
                             ))}
                         </ul>
-                        <Button asChild variant="outline" className="w-full dark:bg-white dark:hover:text-black dark:hover:bg-[#b073ff]">
+                        <Button asChild variant="outline" className="w-full dark:hover:text-black dark:hover:bg-[#b073ff]">
                           <Link href={`/services/${service.slug}`}>
                             Learn More <ArrowRight className="ml-2 h-4 w-4" />
                           </Link>

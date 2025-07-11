@@ -1,11 +1,8 @@
-"use client";
-
-import { useEffect } from "react";
-import { useRouter } from "next/navigation"; 
 import { inter, satoshi, syne } from "@/lib/fonts";
 import Script from "next/script";
 import "./globals.css";
 import { AuthProvider } from "./lib/auth-context";
+import PrefetchRoutes from ".../../components/PrefetchRoutes"; 
 
 export const metadata = {
   title: "Connected - The Launchpad for Limitless Revolutions",
@@ -18,21 +15,9 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.prefetch("/about");
-    router.prefetch("/contact");
-    router.prefetch("/blog");
-    router.prefetch("/ventures");
-    router.prefetch("/career");
-    router.prefetch("/careers");
-  }, []);
-
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* Google Analytics Script */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-D5KWFSH1KX"
           strategy="afterInteractive"
@@ -64,6 +49,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.variable} ${satoshi.variable} ${syne.variable} flex flex-col min-h-screen bg-white text-gray-900 antialiased`}
       >
+        <PrefetchRoutes />
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

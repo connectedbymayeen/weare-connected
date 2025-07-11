@@ -398,7 +398,7 @@ export default async function VentureDetailPage({ params }) {
               </p>
             )}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg" className="border-white bg-white  dark:bg-white text-[#6529b2] hover:bg-white hover:text-[#ffffff] rounded-lg" asChild>
+              <Button variant="secondary" size="lg" className="border-white dark:hover:text-black bg-white  dark:bg-white text-[#6529b2] hover:bg-white hover:text-[#000000] rounded-lg" asChild>
                 <Link href="/contact">Contact Us</Link>
               </Button>
               {venture.website && (
@@ -406,7 +406,7 @@ export default async function VentureDetailPage({ params }) {
                   variant="outline"
                   size="lg"
                   asChild
-                  className="border-white bg-white  dark:bg-white text-[#6529b2] hover:bg-white hover:text-[#ffffff] rounded-lg"
+                  className="border-white bg-white dark:hover:text-black dark:bg-white text-[#6529b2] hover:bg-white hover:text-[#000000] rounded-lg"
                 >
                   <a href={venture.website} target="_blank" rel="noopener noreferrer">
                     Visit {venture.name}

@@ -52,14 +52,9 @@ const nextConfig = {
       },
     ]
   },
-  // Ensure proper trailing slash handling
-  // trailingSlash: false,
-  // Enable experimental features for better ISR
-  // Disable static optimization for API routes during build
-  experimental: {
-    // isrMemoryCacheSize: 0, // Disable ISR memory cache for Vercel
-    serverComponentsExternalPackages: ["mongodb"],
-  },
+  // New syntax for external server packages (Next 15+)
+  serverExternalPackages: ["mongodb"],
+
   // Add rewrites for placeholder images
   async rewrites() {
     return [

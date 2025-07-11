@@ -406,7 +406,7 @@ export default async function VentureDetailPage({ params }) {
                   variant="outline"
                   size="lg"
                   asChild
-                  className="border-white  text-[#6529b2] hover:bg-white hover:text-[#241637] rounded-lg"
+                  className="border-white bg-white   text-[#6529b2] hover:bg-white hover:text-[#241637] rounded-lg"
                 >
                   <a href={venture.website} target="_blank" rel="noopener noreferrer">
                     Visit {venture.name}

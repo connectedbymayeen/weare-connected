@@ -648,6 +648,7 @@ export async function getVentureBySlug(slug) {
       ...venture,
       id: venture._id.toString(),
       slug: venture.slug || venture._id.toString(),
+       ctaDescription: venture.ctaDescription || "", 
       image:
         venture.featuredImage?.url ||
         venture.image ||

@@ -13,6 +13,8 @@ export default function PrefetchRoutes() {
     router.prefetch("/ventures");
     router.prefetch("/career");
     router.prefetch("/careers");
+    router.prefetch("/press-kit");
+    router.prefetch("/case-studies");
   }, []);
 
   return null;

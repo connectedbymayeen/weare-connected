@@ -2,7 +2,8 @@ import { inter, satoshi, syne } from "@/lib/fonts";
 import Script from "next/script";
 import "./globals.css";
 import { AuthProvider } from "./lib/auth-context";
-import PrefetchRoutes from ".../../components/PrefetchRoutes"; 
+import PrefetchRoutes from "../app/components/PrefetchRoutes.jsx";
+
 
 export const metadata = {
   title: "Connected - The Launchpad for Limitless Revolutions",

@@ -69,10 +69,11 @@ export async function PUT(request, { params }) {
     }
 
     const updatedVenture = {
-      ...data,
-      ctaDescription: data.ctaDescription || "", // ✅ Fallback to empty string
-      updatedAt: new Date(),
-    }
+  ...data,
+  ...(data.ctaDescription !== undefined && { ctaDescription: data.ctaDescription }),
+  updatedAt: new Date(),
+}
+
 
     const result = await db.collection("ventures").updateOne(
       { _id: new ObjectId(id) },

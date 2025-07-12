@@ -20,7 +20,7 @@ export default function NewVenturePage() {
     description: "",
     tagline: "",
     category: "SaaS",
-    status: "active",
+    status: "",
     foundedYear: "",
     teamSize: "",
     growth: "",
@@ -169,13 +169,12 @@ export default function NewVenturePage() {
 
     setFormErrors(errors)
 
-
     return Object.keys(errors).length === 0
   }
 
-  const handleCreateVenture = async (e) => {    
-    e.preventDefault();
-    
+  const handleCreateVenture = async (e) => {
+    e.preventDefault()
+
     if (!validateForm()) return
 
     try {
@@ -282,8 +281,17 @@ export default function NewVenturePage() {
                 {formErrors.description && <p className="text-sm text-red-500">{formErrors.description}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cta">CTA Description <span className="text-red-500">*</span></Label>
-                <Textarea id="cta" name="ctaDescription" value={formData.ctaDescription} onChange={handleInputChange} placeholder="Call-to-action (e.g. Try for free, Join waitlist)" rows={3} />
+                <Label htmlFor="cta">
+                  CTA Description <span className="text-red-500">*</span>
+                </Label>
+                <Textarea
+                  id="cta"
+                  name="ctaDescription"
+                  value={formData.ctaDescription}
+                  onChange={handleInputChange}
+                  placeholder="Call-to-action (e.g. Try for free, Join waitlist)"
+                  rows={3}
+                />
                 {formErrors.cta && <p className="text-sm text-red-500">{formErrors.cta}</p>}
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -300,18 +308,13 @@ export default function NewVenturePage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
-                  <select
+                  <Input
                     id="status"
                     name="status"
                     value={formData.status}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  >
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                    <option value="scaling">Scaling</option>
-                    <option value="upcoming">Upcoming</option>
-                  </select>
+                    placeholder="e.g. Active, Scaling, Upcoming"
+                  />
                 </div>
 
                 <div className="space-y-2">

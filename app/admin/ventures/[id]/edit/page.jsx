@@ -25,7 +25,7 @@ export default function EditVenture({ params }) {
     description: "",
     tagline: "",
     category: "SaaS",
-    status: "active",
+    status: "",
     foundedYear: "",
     teamSize: "",
     growth: "",
@@ -79,7 +79,7 @@ export default function EditVenture({ params }) {
         description: venture.description || "",
         tagline: venture.tagline || "",
         category: venture.category || "SaaS",
-        status: venture.status || "active",
+        status: venture.status || "",
         foundedYear: venture.foundedYear || "",
         teamSize: venture.teamSize || "",
         growth: venture.growth || "",
@@ -175,9 +175,8 @@ export default function EditVenture({ params }) {
     if (!formData.slug.trim()) errors.slug = "Slug is required"
     if (!formData.tagline.trim()) errors.tagline = "Tagline is required"
     if (!formData.ctaDescription.trim()) {
-  errors.ctaDescription = "CTA is required";
-}
-
+      errors.ctaDescription = "CTA is required"
+    }
 
     setFormErrors(errors)
     return Object.keys(errors).length === 0
@@ -281,7 +280,7 @@ export default function EditVenture({ params }) {
           <CardContent className="p-6">
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
               <p>{error}</p>
-              <Button variant="outline" className="mt-2" onClick={() => router.push("/admin/ventures")}>
+              <Button variant="outline" className="mt-2 bg-transparent" onClick={() => router.push("/admin/ventures")}>
                 Return to Ventures Management
               </Button>
             </div>
@@ -384,15 +383,14 @@ export default function EditVenture({ params }) {
                         CTA Description <span className="text-red-500">*</span>
                       </Label>
                       <Textarea
-  id="ctaDescription"
-  name="ctaDescription"
-  value={formData.ctaDescription}
-  onChange={handleInputChange}
-  placeholder="CTA"
-  rows={3}
-/>
-{formErrors.ctaDescription && <p className="text-sm text-red-500">{formErrors.ctaDescription}</p>}
-
+                        id="ctaDescription"
+                        name="ctaDescription"
+                        value={formData.ctaDescription}
+                        onChange={handleInputChange}
+                        placeholder="CTA"
+                        rows={3}
+                      />
+                      {formErrors.ctaDescription && <p className="text-sm text-red-500">{formErrors.ctaDescription}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -428,18 +426,13 @@ export default function EditVenture({ params }) {
 
                     <div className="space-y-2">
                       <Label htmlFor="status">Status</Label>
-                      <select
+                      <Input
                         id="status"
                         name="status"
                         value={formData.status}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                      >
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="scaling">Scaling</option>
-                        <option value="upcoming">Upcoming</option>
-                      </select>
+                        placeholder="e.g. Active, Scaling, Upcoming"
+                      />
                     </div>
 
                     <div className="space-y-2">

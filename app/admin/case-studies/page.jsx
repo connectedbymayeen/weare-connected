@@ -6,20 +6,16 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog"
 import { Plus, Search, Edit, Trash2, Eye, Loader2, Building, Calendar } from "lucide-react"
 import Link from "next/link"
-import ImageUpload from "@/app/components/admin/image-upload"
 // import ImageUpload from "@/components/admin/image-upload"
 
 // Mock data for case studies
@@ -88,28 +84,10 @@ export default function CaseStudiesManagement() {
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [industryFilter, setIndustryFilter] = useState("all")
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [caseStudyToDelete, setCaseStudyToDelete] = useState(null)
-  const [formData, setFormData] = useState({
-    title: "",
-    slug: "",
-    client: "",
-    description: "",
-    shortDescription: "",
-    industry: "",
-    services: "",
-    challenge: "",
-    solution: "",
-    results: "",
-    testimonial: "",
-    completionDate: "",
-    status: "published",
-    featuredImage: null,
-    gallery: [],
-  })
-  const [formErrors, setFormErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false) // Declare setIsCreateModalOpen
 
   // Fetch case studies
   useEffect(() => {
@@ -138,108 +116,6 @@ export default function CaseStudiesManagement() {
       setError("Failed to load case studies. Please try again.")
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-
-    // Auto-generate slug from title
-    if (name === "title" && !formData.slug) {
-      const slug = value
-        .toLowerCase()
-        .replace(/[^\w\s]/gi, "")
-        .replace(/\s+/g, "-")
-      setFormData((prev) => ({ ...prev, slug }))
-    }
-
-    // Clear validation error when field is edited
-    if (formErrors[name]) {
-      setFormErrors((prev) => ({ ...prev, [name]: "" }))
-    }
-  }
-
-  const handleFeaturedImageUpload = (imageData) => {
-    setFormData((prev) => ({
-      ...prev,
-      featuredImage: imageData,
-    }))
-  }
-
-  const validateForm = () => {
-    const errors = {}
-    if (!formData.title.trim()) errors.title = "Title is required"
-    if (!formData.client.trim()) errors.client = "Client name is required"
-    if (!formData.description.trim()) errors.description = "Description is required"
-    if (!formData.slug.trim()) errors.slug = "Slug is required"
-
-    setFormErrors(errors)
-    return Object.keys(errors).length === 0
-  }
-
-  const handleCreateCaseStudy = async (e) => {
-    e.preventDefault()
-
-    if (!validateForm()) return
-
-    try {
-      setIsSubmitting(true)
-
-      // Format services as array if provided
-      const formattedData = {
-        ...formData,
-        services: formData.services
-          ? formData.services
-              .split(",")
-              .map((service) => service.trim())
-              .filter(Boolean)
-          : [],
-      }
-
-      const response = await fetch("/api/admin/case-studies", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formattedData),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || "Failed to create case study")
-      }
-
-      const data = await response.json()
-
-      // Add new case study to state and close modal
-      setCaseStudies((prev) => [data.caseStudy, ...prev])
-      setIsCreateModalOpen(false)
-
-      // Reset form
-      setFormData({
-        title: "",
-        slug: "",
-        client: "",
-        description: "",
-        shortDescription: "",
-        industry: "",
-        services: "",
-        challenge: "",
-        solution: "",
-        results: "",
-        testimonial: "",
-        completionDate: "",
-        status: "published",
-        featuredImage: null,
-        gallery: [],
-      })
-    } catch (err) {
-      console.error("Error creating case study:", err)
-      setFormErrors((prev) => ({ ...prev, submit: err.message }))
-    } finally {
-      setIsSubmitting(false)
     }
   }
 
@@ -298,222 +174,12 @@ export default function CaseStudiesManagement() {
           <h1 className="text-3xl font-bold text-gray-900">Case Studies Management</h1>
           <p className="text-gray-600 mt-1">Create, edit, and manage your case studies and client success stories</p>
         </div>
-        <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-purple-emperor hover:bg-purple-emperor/90">
-              <Plus className="h-4 w-4 mr-2" />
-              New Case Study
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Create New Case Study</DialogTitle>
-              <DialogDescription>Fill in the details to create a new case study</DialogDescription>
-            </DialogHeader>
-
-            <form onSubmit={handleCreateCaseStudy} className="space-y-4 mt-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="title">
-                    Title <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="title"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                    placeholder="Enter case study title"
-                  />
-                  {formErrors.title && <p className="text-sm text-red-500">{formErrors.title}</p>}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="slug">
-                    Slug <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="slug"
-                    name="slug"
-                    value={formData.slug}
-                    onChange={handleInputChange}
-                    placeholder="enter-case-study-slug"
-                  />
-                  {formErrors.slug && <p className="text-sm text-red-500">{formErrors.slug}</p>}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="client">
-                  Client Name <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="client"
-                  name="client"
-                  value={formData.client}
-                  onChange={handleInputChange}
-                  placeholder="Enter client name"
-                />
-                {formErrors.client && <p className="text-sm text-red-500">{formErrors.client}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="description">
-                  Description <span className="text-red-500">*</span>
-                </Label>
-                <Textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                  placeholder="Write your case study description here..."
-                  rows={6}
-                />
-                {formErrors.description && <p className="text-sm text-red-500">{formErrors.description}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="shortDescription">Short Description</Label>
-                <Textarea
-                  id="shortDescription"
-                  name="shortDescription"
-                  value={formData.shortDescription}
-                  onChange={handleInputChange}
-                  placeholder="Brief summary of the case study (optional)"
-                  rows={2}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="industry">Industry</Label>
-                  <Input
-                    id="industry"
-                    name="industry"
-                    value={formData.industry}
-                    onChange={handleInputChange}
-                    placeholder="e.g. Healthcare, Finance, Retail"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="services">Services (comma separated)</Label>
-                  <Input
-                    id="services"
-                    name="services"
-                    value={formData.services}
-                    onChange={handleInputChange}
-                    placeholder="e.g. Web Design, Development, SEO"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="challenge">Challenge</Label>
-                <Textarea
-                  id="challenge"
-                  name="challenge"
-                  value={formData.challenge}
-                  onChange={handleInputChange}
-                  placeholder="Describe the challenge the client faced"
-                  rows={3}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="solution">Solution</Label>
-                <Textarea
-                  id="solution"
-                  name="solution"
-                  value={formData.solution}
-                  onChange={handleInputChange}
-                  placeholder="Describe the solution you provided"
-                  rows={3}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="results">Results</Label>
-                <Textarea
-                  id="results"
-                  name="results"
-                  value={formData.results}
-                  onChange={handleInputChange}
-                  placeholder="Describe the results achieved"
-                  rows={3}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="testimonial">Client Testimonial</Label>
-                <Textarea
-                  id="testimonial"
-                  name="testimonial"
-                  value={formData.testimonial}
-                  onChange={handleInputChange}
-                  placeholder="Add a client testimonial (optional)"
-                  rows={3}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="completionDate">Completion Date</Label>
-                  <Input
-                    id="completionDate"
-                    name="completionDate"
-                    type="date"
-                    value={formData.completionDate}
-                    onChange={handleInputChange}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="status">Status</Label>
-                  <select
-                    id="status"
-                    name="status"
-                    value={formData.status}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  >
-                    <option value="published">Published</option>
-                    <option value="draft">Draft</option>
-                    <option value="archived">Archived</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Featured Image</Label>
-                <ImageUpload
-                  onImageUpload={handleFeaturedImageUpload}
-                  defaultImage={formData.featuredImage}
-                  label="Featured Image"
-                />
-              </div>
-
-              {formErrors.submit && (
-                <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">{formErrors.submit}</div>
-              )}
-
-              <DialogFooter>
-                <Button type="button" variant="outline" onClick={() => setIsCreateModalOpen(false)}>
-                  Cancel
-                </Button>
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Creating...
-                    </>
-                  ) : (
-                    "Create Case Study"
-                  )}
-                </Button>
-              </DialogFooter>
-            </form>
-          </DialogContent>
-        </Dialog>
+        <Button className="bg-purple-emperor hover:bg-purple-emperor/90" asChild>
+          <Link href="/admin/case-studies/new">
+            <Plus className="h-4 w-4 mr-2" />
+            New Case Study
+          </Link>
+        </Button>
       </div>
 
       {/* Filters */}
@@ -567,7 +233,7 @@ export default function CaseStudiesManagement() {
       {error && !loading && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
           <p>{error}</p>
-          <Button variant="outline" className="mt-2" onClick={fetchCaseStudies}>
+          <Button variant="outline" className="mt-2 bg-transparent" onClick={fetchCaseStudies}>
             Try Again
           </Button>
         </div>

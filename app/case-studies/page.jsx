@@ -25,11 +25,10 @@ export default async function CaseStudiesPage() {
           <section className="w-full py-12 md:py-24 lg:py-32 ">
             <div className="container mx-auto px-4 md:px-6 text-center">
               <div className="max-w-3xl mx-auto space-y-4">
-                <h1 className="text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                  Case Studies
-                </h1>
+                <h1 className="text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">Case Studies</h1>
                 <p className="text-muted-foreground md:text-xl">
-                  Explore our success stories and learn how we've helped businesses achieve their goals through innovation and strategic execution.
+                  Explore our success stories and learn how we've helped businesses achieve their goals through
+                  innovation and strategic execution.
                 </p>
               </div>
             </div>
@@ -73,7 +72,7 @@ export default async function CaseStudiesPage() {
                                 </Badge>
                               ))}
                           </div>
-                          <Button asChild variant="outline" className="w-full">
+                          <Button asChild variant="outline" className="w-full bg-transparent">
                             <Link href={`/case-studies/${study.slug}`}>
                               View Case Study <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
@@ -92,7 +91,7 @@ export default async function CaseStudiesPage() {
           </section>
         </main>
         <Footer />
-      </div >
+      </div>
     </>
   )
 }

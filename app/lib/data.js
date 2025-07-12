@@ -289,10 +289,7 @@ export async function getBlogPosts() {
 }
 
 function getSampleBlogPosts() {
-  return [
-
-
-  ]
+  return []
 }
 
 // Get a single blog post by slug - UPDATED TO FETCH REAL DATA
@@ -612,9 +609,7 @@ export async function getVentures() {
 }
 
 function getSampleVentures() {
-  return [
-
-  ]
+  return []
 }
 
 // Get a single venture by slug
@@ -648,7 +643,7 @@ export async function getVentureBySlug(slug) {
       ...venture,
       id: venture._id.toString(),
       slug: venture.slug || venture._id.toString(),
-       ctaDescription: venture.ctaDescription || "", 
+      ctaDescription: venture.ctaDescription || "",
       image:
         venture.featuredImage?.url ||
         venture.image ||
@@ -675,7 +670,11 @@ export async function getCaseStudies() {
     }
 
     const { db } = await connectToDatabase()
-    const caseStudies = await db.collection("case_studies").find({ status: "published" }).toArray()
+    const caseStudies = await db
+      .collection("case_studies")
+      .find({ status: "published" })
+      .sort({ createdAt: -1 })
+      .toArray()
 
     return caseStudies.map((study) => ({
       id: study._id.toString(),
@@ -683,12 +682,21 @@ export async function getCaseStudies() {
       title: study.title || "Untitled Case Study",
       client: study.client || "Client",
       industry: study.industry || "Industry",
+      description: study.description || "No description available",
+      shortDescription: study.shortDescription || study.description?.substring(0, 150) + "..." || "",
       image:
         study.featuredImage?.url ||
         study.image ||
         "/placeholder.svg?height=400&width=600&text=" + encodeURIComponent(study.title || "Case Study"),
-      description: study.description || "No description available",
-      tags: study.tags || [],
+      tags: study.services || [],
+      services: Array.isArray(study.services) ? study.services : [],
+      challenge: study.challenge || "",
+      solution: study.solution || "",
+      results: study.results || "",
+      testimonial: study.testimonial || "",
+      completionDate: study.completionDate || null,
+      duration: study.duration || "3-6 months", // Default duration
+      createdAt: study.createdAt ? new Date(study.createdAt).toISOString() : new Date().toISOString(),
     }))
   } catch (error) {
     return handleDbError(error, [], "case studies")
@@ -704,26 +712,41 @@ export async function getCaseStudyBySlug(slug) {
     }
 
     const { db } = await connectToDatabase()
-    const study = await db.collection("case_studies").findOne({ slug, status: "published" })
+    let study = await db.collection("case_studies").findOne({ slug, status: "published" })
+
+    // If not found by slug, try by ID (in case slug is actually an ID)
+    if (!study && ObjectId.isValid(slug)) {
+      try {
+        study = await db.collection("case_studies").findOne({ _id: new ObjectId(slug), status: "published" })
+      } catch (err) {
+        console.log("Error trying to find by ID:", err.message)
+      }
+    }
 
     if (!study) return null
 
     return {
       id: study._id.toString(),
-      slug: study.slug,
+      slug: study.slug || study._id.toString(),
       title: study.title || "Untitled Case Study",
       client: study.client || "Client",
       industry: study.industry || "Industry",
+      description: study.description || "No description available",
+      shortDescription: study.shortDescription || "",
       image:
         study.featuredImage?.url ||
         study.image ||
         "/placeholder.svg?height=400&width=600&text=" + encodeURIComponent(study.title || "Case Study"),
-      description: study.description || "No description available",
-      tags: study.tags || [],
-      challenge: study.challenge || "No challenge information available",
-      solution: study.solution || "No solution information available",
-      outcome: study.outcome || "No outcome information available",
-      testimonial: study.testimonial || null,
+      challenge: study.challenge || "",
+      solution: study.solution || "",
+      results: study.results || "",
+      testimonial: study.testimonial || "",
+      services: Array.isArray(study.services) ? study.services : [],
+      completionDate: study.completionDate || null,
+      featuredImage: study.featuredImage || null,
+      gallery: study.gallery || [],
+      createdAt: study.createdAt ? new Date(study.createdAt).toISOString() : new Date().toISOString(),
+      updatedAt: study.updatedAt ? new Date(study.updatedAt).toISOString() : new Date().toISOString(),
     }
   } catch (error) {
     return handleDbError(error, null, `case study with slug ${slug}`)

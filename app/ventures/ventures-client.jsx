@@ -51,87 +51,87 @@ export default function VenturesClientPage({ ventures: dbVentures = [] }) {
             </div>
           </div>
 
-          <section className="py-8 sm:py-10">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                {ventures.length === 0 ? (
-                  <div className="col-span-full text-center text-xl text-gray-500 font-medium py-16">
-                    No ventures available at this moment.
-                  </div>
-                ) : (
-                  ventures.map((venture) => (
-                    <Card
-                      key={venture.slug}
-                      className="overflow-hidden hover:shadow-2xl transition-shadow duration-300 bg-white w-full"
-                    >
-                      <div className="relative h-[280px] sm:h-[300px]">
-                        <Image
-                          src={venture.image}
-                          alt={venture.name}
-                          fill
-                          className="object-cover w-full h-full"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="flex items-center gap-3 mb-2">
-                            <Badge
-                              variant={venture.status === "Active" ? "default" : "secondary"}
-                              className="bg-[#6529b2] text-white font-semibold text-sm px-3 py-1"
-                            >
-                              {venture.status}
-                            </Badge>
-                            <Badge variant="outline" className="bg-white/20 text-white border-white/30 text-sm px-3 py-1">
-                              {venture.category}
-                            </Badge>
-                          </div>
-                        </div>
-                      </div>
-
-                      <CardHeader className="pb-0 px-5 pt-5">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <CardTitle className="text-2xl sm:text-3xl font-syne mb-2">{venture.name}</CardTitle>
-                            <p className="text-primary font-medium mb-2 text-lg">{venture.tagline}</p>
-                          </div>
-                          <Button variant="ghost" size="sm" asChild>
-                            <a href={venture.website} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="h-5 w-5" />
-                            </a>
-                          </Button>
-                        </div>
-                        <CardDescription className="text-base leading-relaxed text-muted-foreground">
-                          {venture.description}
-                        </CardDescription>
-                      </CardHeader>
-
-                      <CardContent className="pt-0 px-5 pb-5">
-                        <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground mb-6 mt-4 flex-wrap">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            <span>{venture.founded}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Users className="h-4 w-4" />
-                            <span>{venture.team}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <TrendingUp className="h-4 w-4" />
-                            <span>{venture.growth}</span>
-                          </div>
-                        </div>
-
-                        <Button asChild className="w-full h-10 dark:hover:text-black dark:hover:bg-[#b073ff] bg-[#6529b2] text-white text-base font-semibold">
-                          <Link href={`/ventures/${venture.slug}`}>
-                            Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                          </Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))
-                )}
+  <section className="py-8 sm:py-10">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {ventures.length === 0 ? (
+        <div className="col-span-full text-center text-lg text-gray-500 font-medium py-12">
+          No ventures available at this moment.
+        </div>
+      ) : (
+        ventures.map((venture) => (
+          <Card
+            key={venture.slug}
+            className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col"
+          >
+            {/* Image Section */}
+            <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
+              <Image
+                src={venture.image || "/placeholder.svg"}
+                alt={venture.name}
+                fill
+                className="object-cover transition-transform duration-500 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-t-lg" />
+              <div className="absolute bottom-3 left-3 flex gap-2">
+                <Badge className="bg-green-600 text-white text-xs px-2 py-0.5 rounded-full">
+                  {venture.status}
+                </Badge>
+                <Badge className="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full">
+                  {venture.category || "Tech"}
+                </Badge>
               </div>
             </div>
-          </section>
+
+            {/* Content Section */}
+            <CardHeader className="px-4 pt-4 pb-2 flex flex-col flex-grow">
+              <CardTitle className="text-xl font-semibold text-gray-900 mb-1">
+                {venture.name}
+              </CardTitle>
+              <p className="text-sm text-primary font-medium mb-2">
+                {venture.tagline}
+              </p>
+              <CardDescription className="text-sm text-muted-foreground leading-relaxed">
+                {venture.description}
+              </CardDescription>
+            </CardHeader>
+
+            {/* Stats and Button */}
+            <CardContent className="px-4 pt-0 pb-4 mt-auto">
+              <div className="flex items-center justify-between text-xs text-muted-foreground mb-3 flex-wrap gap-3">
+                <div className="flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  <span>{venture.founded || "2025"}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Users className="h-4 w-4" />
+                  <span>{venture.team || "8 members"}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <TrendingUp className="h-4 w-4" />
+                  <span>{venture.growth || "+150%"}</span>
+                </div>
+              </div>
+
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                className="w-full text-sm font-semibold"
+              >
+                <Link href={`/ventures/${venture.slug}`}>
+                  Learn More <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        ))
+      )}
+    </div>
+  </div>
+</section>
+
+
 
         </div>
       </div>

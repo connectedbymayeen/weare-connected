@@ -288,43 +288,22 @@ export default async function VentureDetailPage({ params }) {
               </div>
 
               {/* Technology Stack */}
-              <div>
-                <h2 className="text-3xl font-bold mb-8 text-gray-900">Technology Stack</h2>
-                <div className="flex flex-wrap gap-3">
-                  {venture.technologies && venture.technologies.length > 0 ? (
-                    venture.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
-                        {tech}
-                      </Badge>
-                    ))
-                  ) : (
-                    // Default technologies
-                    <>
-                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
-                        Figma
-                      </Badge>
-                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
-                        Adobe Creative Suite
-                      </Badge>
-                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
-                        Webflow
-                      </Badge>
-                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
-                        Framer
-                      </Badge>
-                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
-                        Sketch
-                      </Badge>
-                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
-                        Principle
-                      </Badge>
-                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
-                        After Effects
-                      </Badge>
-                    </>
-                  )}
-                </div>
-              </div>
+              {venture.technologies && venture.technologies.length > 0 && (
+  <div>
+    <h2 className="text-3xl font-bold mb-8 text-gray-900">Technology Stack</h2>
+    <div className="flex flex-wrap gap-3">
+      {venture.technologies.map((tech) => (
+        <Badge
+          key={tech}
+          variant="outline"
+          className="px-4 py-2 text-sm rounded-full border-gray-300"
+        >
+          {tech}
+        </Badge>
+      ))}
+    </div>
+  </div>
+)}
             </div>
           </div>
         </section>

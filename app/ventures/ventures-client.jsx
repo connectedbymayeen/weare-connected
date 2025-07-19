@@ -91,7 +91,7 @@ export default function VenturesClientPage({ ventures: dbVentures = [] }) {
               <p className="text-sm text-primary font-medium mb-2">
                 {venture.tagline}
               </p>
-              <CardDescription className="text-sm text-muted-foreground leading-relaxed">
+              <CardDescription className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4">
                 {venture.description}
               </CardDescription>
             </CardHeader>

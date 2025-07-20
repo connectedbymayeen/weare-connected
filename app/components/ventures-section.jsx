@@ -57,7 +57,7 @@ export default function VenturesSection({ ventures = [] }) {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {venturesList.map((venture, index) => (
+            {venturesList.slice(0, 3).map((venture, index) => (
             <motion.div
               key={venture.slug}
               initial={{ opacity: 0, y: 20 }}

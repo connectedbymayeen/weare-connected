@@ -177,68 +177,69 @@ export default async function VentureDetailPage({ params }) {
 
         {/* Key Metrics Section */}
         <section className="py-16 bg-white">
-          <div className="container px-4 md:px-6 mx-auto max-w-7xl">
-            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Key Metrics</h2>
-           <div
-  className={`grid gap-8 justify-center ${
-    venture.metrics?.length === 1
-      ? 'grid-cols-1'
-      : venture.metrics?.length === 2
-      ? 'grid-cols-2'
-      : venture.metrics?.length === 3
-      ? 'grid-cols-3'
-      : 'grid-cols-4'
-  }`}
->
-              {venture.metrics && venture.metrics.length > 0 ? (
-                venture.metrics.map((metric, index) => {
-                  const IconComponent = getMetricIcon(metric)
-                  return (
-                    <div key={index} className="text-center">
-                      <div className="mb-4">
-                        <IconComponent className="h-10 w-10 text-[#6529b2] mx-auto" />
-                      </div>
-                      <div className="text-2xl font-bold text-[#6529b2] mb-2">{metric.value}</div>
-                      <div className="text-gray-600 text-sm">{metric.label}</div>
-                    </div>
-                  )
-                })
-              ) : (
-                // Keep existing default metrics with appropriate icons
-                <>
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <Users className="h-10 w-10 text-[#6529b2] mx-auto" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#6529b2] mb-2">200+</div>
-                    <div className="text-gray-600 text-sm">Happy Clients</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <Target className="h-10 w-10 text-[#6529b2] mx-auto" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#6529b2] mb-2">500+</div>
-                    <div className="text-gray-600 text-sm">Projects Completed</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <Award className="h-10 w-10 text-[#6529b2] mx-auto" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#6529b2] mb-2">15</div>
-                    <div className="text-gray-600 text-sm">Awards Won</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <Zap className="h-10 w-10 text-[#6529b2] mx-auto" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#6529b2] mb-2">4.9/5</div>
-                    <div className="text-gray-600 text-sm">Client Satisfaction</div>
-                  </div>
-                </>
-              )}
+  <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+    <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Key Metrics</h2>
+
+    {/* Primary 4 Metrics Grid */}
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      {(venture.metrics && venture.metrics.length > 0
+        ? venture.metrics.slice(0, 4)
+        : [
+            {
+              icon: Users,
+              value: "200+",
+              label: "Happy Clients",
+            },
+            {
+              icon: Target,
+              value: "500+",
+              label: "Projects Completed",
+            },
+            {
+              icon: Award,
+              value: "15",
+              label: "Awards Won",
+            },
+            {
+              icon: Zap,
+              value: "4.9/5",
+              label: "Client Satisfaction",
+            },
+          ]
+      ).map((metric, index) => {
+        const IconComponent = metric.icon || getMetricIcon(metric)
+        return (
+          <div key={index} className="text-center">
+            <div className="mb-4">
+              <IconComponent className="h-10 w-10 text-[#6529b2] mx-auto" />
             </div>
+            <div className="text-2xl font-bold text-[#6529b2] mb-2">{metric.value}</div>
+            <div className="text-gray-600 text-sm">{metric.label}</div>
           </div>
-        </section>
+        )
+      })}
+    </div>
+
+    {/* If more than 4 metrics, show next 2 centered */}
+    {venture.metrics && venture.metrics.length > 4 && (
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 max-w-xl mx-auto gap-8">
+        {venture.metrics.slice(4, 6).map((metric, index) => {
+          const IconComponent = getMetricIcon(metric)
+          return (
+            <div key={index} className="text-center">
+              <div className="mb-4">
+                <IconComponent className="h-10 w-10 text-[#6529b2] mx-auto" />
+              </div>
+              <div className="text-2xl font-bold text-[#6529b2] mb-2">{metric.value}</div>
+              <div className="text-gray-600 text-sm">{metric.label}</div>
+            </div>
+          )
+        })}
+      </div>
+    )}
+  </div>
+</section>
+
 
         {/* Features and Technology Section */}
         <section className="py-16 bg-gray-50">
@@ -288,22 +289,43 @@ export default async function VentureDetailPage({ params }) {
               </div>
 
               {/* Technology Stack */}
-              {venture.technologies && venture.technologies.length > 0 && (
-  <div>
-    <h2 className="text-3xl font-bold mb-8 text-gray-900">Technology Stack</h2>
-    <div className="flex flex-wrap gap-3">
-      {venture.technologies.map((tech) => (
-        <Badge
-          key={tech}
-          variant="outline"
-          className="px-4 py-2 text-sm rounded-full border-gray-300"
-        >
-          {tech}
-        </Badge>
-      ))}
-    </div>
-  </div>
-)}
+              <div>
+                <h2 className="text-3xl font-bold mb-8 text-gray-900">Technology Stack</h2>
+                <div className="flex flex-wrap gap-3">
+                  {venture.technologies && venture.technologies.length > 0 ? (
+                    venture.technologies.map((tech) => (
+                      <Badge key={tech} variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
+                        {tech}
+                      </Badge>
+                    ))
+                  ) : (
+                    // Default technologies
+                    <>
+                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
+                        Figma
+                      </Badge>
+                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
+                        Adobe Creative Suite
+                      </Badge>
+                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
+                        Webflow
+                      </Badge>
+                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
+                        Framer
+                      </Badge>
+                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
+                        Sketch
+                      </Badge>
+                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
+                        Principle
+                      </Badge>
+                      <Badge variant="outline" className="px-4 py-2 text-sm rounded-full border-gray-300">
+                        After Effects
+                      </Badge>
+                    </>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </section>

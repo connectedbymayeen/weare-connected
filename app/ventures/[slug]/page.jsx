@@ -177,70 +177,57 @@ export default async function VentureDetailPage({ params }) {
           </div>
         </section>
 
-        {/* Key Metrics Section */}
-        <section className="py-16 bg-white">
-          <div className="container px-4 md:px-6 mx-auto max-w-7xl">
-            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Key Metrics</h2>
-           <div
-  className={`grid gap-8 justify-center ${
-    venture.metrics?.length === 1
-      ? 'grid-cols-1'
-      : venture.metrics?.length === 2
-      ? 'grid-cols-2'
-      : venture.metrics?.length === 3
-      ? 'grid-cols-3'
-      : 'grid-cols-4'
-  }`}
->
-              {venture.metrics && venture.metrics.length > 0 ? (
-                venture.metrics.map((metric, index) => {
-                  const IconComponent = getMetricIcon(metric)
-                  return (
-                    <div key={index} className="text-center">
-                      <div className="mb-4">
-                        <IconComponent className="h-10 w-10 text-[#6529b2] mx-auto" />
-                      </div>
-                      <div className="text-2xl font-bold text-[#6529b2] mb-2">{metric.value}</div>
-                      <div className="text-gray-600 text-sm">{metric.label}</div>
-                    </div>
-                  )
-                })
-              ) : (
-                // Keep existing default metrics with appropriate icons
-                <>
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <Users className="h-10 w-10 text-[#6529b2] mx-auto" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#6529b2] mb-2">200+</div>
-                    <div className="text-gray-600 text-sm">Happy Clients</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <Target className="h-10 w-10 text-[#6529b2] mx-auto" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#6529b2] mb-2">500+</div>
-                    <div className="text-gray-600 text-sm">Projects Completed</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <Award className="h-10 w-10 text-[#6529b2] mx-auto" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#6529b2] mb-2">15</div>
-                    <div className="text-gray-600 text-sm">Awards Won</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <Zap className="h-10 w-10 text-[#6529b2] mx-auto" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#6529b2] mb-2">4.9/5</div>
-                    <div className="text-gray-600 text-sm">Client Satisfaction</div>
-                  </div>
-                </>
-              )}
+                {/* Key Metrics Section */}
+<section className="py-16 bg-white">
+  <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+    <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Key Metrics</h2>
+
+    <div className="flex flex-wrap justify-center gap-8">
+      {(venture.metrics && venture.metrics.length > 0
+        ? venture.metrics
+        : [
+            {
+              value: '100K+ IPs planned across residential, mobile, and datacenter',
+              label: 'IP Pool Size',
+              icon: Target,
+            },
+            {
+              value: '100+ agencies and marketers on waitlist',
+              label: 'Pre-Launch Clients',
+              icon: Users,
+            },
+            {
+              value: '99.9% SLA target',
+              label: 'Expected Uptime',
+              icon: Calendar,
+            },
+            {
+              value: '500+ GB monthly capacity at launch',
+              label: 'Anticipated Bandwidth',
+              icon: Target,
+            },
+            {
+              value: 'Under 400ms expected on residential proxies',
+              label: 'Average Latency',
+              icon: Target,
+            },
+          ]
+      ).map((metric, index) => {
+        const IconComponent = metric.icon || getMetricIcon(metric)
+        return (
+          <div key={index} className="w-[260px] text-center">
+            <div className="mb-4">
+              <IconComponent className="h-10 w-10 text-[#6529b2] mx-auto" />
             </div>
+            <div className="text-lg font-bold text-[#6529b2] mb-2 leading-snug">{metric.value}</div>
+            <div className="text-gray-600 text-sm">{metric.label}</div>
           </div>
-        </section>
+        )
+      })}
+    </div>
+  </div>
+</section>
+
 
         {/* Features and Technology Section */}
         <section className="py-16 bg-gray-50">

@@ -1,12 +1,21 @@
-import Footer from "@/app/components/footer"
-import Header from "@/app/components/header"
-import { getVentureBySlug, getVentures } from "@/app/lib/data"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, Award, Calendar, ExternalLink, Target, TrendingUp, Users, Zap } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { notFound } from "next/navigation"
+import Footer from "@/app/components/footer";
+import Header from "@/app/components/header";
+import { getVentureBySlug, getVentures } from "@/app/lib/data";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  ArrowLeft,
+  Award,
+  Calendar,
+  ExternalLink,
+  Target,
+  TrendingUp,
+  Users,
+  Zap,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 // export const dynamic = 'force-dynamic';
 
@@ -18,59 +27,78 @@ import { notFound } from "next/navigation"
 // }
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params
-  const venture = await getVentureBySlug(slug)
+  const { slug } = await params;
+  const venture = await getVentureBySlug(slug);
 
   if (!venture) {
     return {
       title: "Venture Not Found",
-    }
+    };
   }
 
   return {
-    title: `${venture.name} - ${venture.tagline || venture.shortDescription} | Connected`,
+    title: `${venture.name} - ${
+      venture.tagline || venture.shortDescription
+    } | Connected`,
     description: venture.description,
-  }
+  };
 }
 
 export default async function VentureDetailPage({ params }) {
-  const { slug } = await params
-  const venture = await getVentureBySlug(slug)
+  const { slug } = await params;
+  const venture = await getVentureBySlug(slug);
 
   if (!venture) {
-    notFound()
+    notFound();
   }
 
   // Map icon components to metric icons with better logic
   const getMetricIcon = (metric) => {
-    const label = metric.label.toLowerCase()
+    const label = metric.label.toLowerCase();
 
-    if (label.includes("user") || label.includes("client") || label.includes("people") || label.includes("team")) {
-      return Users
-    } else if (label.includes("product") || label.includes("project") || label.includes("service")) {
-      return Target
+    if (
+      label.includes("user") ||
+      label.includes("client") ||
+      label.includes("people") ||
+      label.includes("team")
+    ) {
+      return Users;
+    } else if (
+      label.includes("product") ||
+      label.includes("project") ||
+      label.includes("service")
+    ) {
+      return Target;
     } else if (
       label.includes("co2") ||
       label.includes("energy") ||
       label.includes("speed") ||
       label.includes("performance")
     ) {
-      return Zap
+      return Zap;
     } else if (
       label.includes("award") ||
       label.includes("partner") ||
       label.includes("brand") ||
       label.includes("achievement")
     ) {
-      return Award
-    } else if (label.includes("growth") || label.includes("revenue") || label.includes("profit")) {
-      return TrendingUp
-    } else if (label.includes("year") || label.includes("time") || label.includes("date")) {
-      return Calendar
+      return Award;
+    } else if (
+      label.includes("growth") ||
+      label.includes("revenue") ||
+      label.includes("profit")
+    ) {
+      return TrendingUp;
+    } else if (
+      label.includes("year") ||
+      label.includes("time") ||
+      label.includes("date")
+    ) {
+      return Calendar;
     } else {
-      return Target // default icon
+      return Target; // default icon
     }
-  }
+  };
 
   return (
     <>
@@ -81,7 +109,11 @@ export default async function VentureDetailPage({ params }) {
           <div className="container px-4 md:px-16 mx-auto max-w-7xl">
             {/* Back Button */}
             <div className="mb-8">
-              <Button variant="ghost" asChild className="text-gray-600 hover:text-gray-900">
+              <Button
+                variant="ghost"
+                asChild
+                className="text-gray-600 hover:text-gray-900"
+              >
                 <Link href="/ventures">
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Back to Ventures
@@ -97,15 +129,22 @@ export default async function VentureDetailPage({ params }) {
                   <Badge className="bg-[#6529b2] hover:bg-purple-700 text-white px-3 py-1 rounded-full">
                     {venture.status || "Active"}
                   </Badge>
-                  <Badge variant="outline" className="px-3 py-1 rounded-full border-gray-300">
+                  <Badge
+                    variant="outline"
+                    className="px-3 py-1 rounded-full border-gray-300"
+                  >
                     {venture.industry || venture.category || "Agency"}
                   </Badge>
                 </div>
 
                 {/* Title and Tagline */}
                 <div>
-                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">{venture.name}</h1>
-                  <p className="text-xl text-gray-600 mb-4">{venture.tagline || venture.shortDescription}</p>
+                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+                    {venture.name}
+                  </h1>
+                  <p className="text-xl text-gray-600 mb-4">
+                    {venture.tagline || venture.shortDescription}
+                  </p>
                 </div>
 
                 {/* Description */}
@@ -138,8 +177,15 @@ export default async function VentureDetailPage({ params }) {
                 {/* Buttons */}
                 <div className="flex gap-4 pt-2">
                   {venture.website && (
-                    <Button className="bg-[#6529b2] hover:bg-purple-700 rounded-lg" asChild>
-                      <a href={venture.website} target="_blank" rel="noopener noreferrer">
+                    <Button
+                      className="bg-[#6529b2] hover:bg-purple-700 rounded-lg"
+                      asChild
+                    >
+                      <a
+                        href={venture.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Visit Website <ExternalLink className="h-4 w-4 ml-2" />
                       </a>
                     </Button>
@@ -162,7 +208,11 @@ export default async function VentureDetailPage({ params }) {
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gray-100">
                     <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                      <svg
+                        className="w-8 h-8 text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
                         <path
                           fillRule="evenodd"
                           d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
@@ -177,57 +227,61 @@ export default async function VentureDetailPage({ params }) {
           </div>
         </section>
 
-                {/* Key Metrics Section */}
-<section className="py-16 bg-white">
-  <div className="container px-4 md:px-6 mx-auto max-w-7xl">
-    <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Key Metrics</h2>
+        {/* Key Metrics Section */}
+        <section className="py-16 bg-white">
+          <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+              Key Metrics
+            </h2>
 
-    <div className="flex flex-wrap justify-center gap-8">
-      {(venture.metrics && venture.metrics.length > 0
-        ? venture.metrics
-        : [
-            {
-              value: '100K+ IPs planned across residential, mobile, and datacenter',
-              label: 'IP Pool Size',
-              icon: Target,
-            },
-            {
-              value: '100+ agencies and marketers on waitlist',
-              label: 'Pre-Launch Clients',
-              icon: Users,
-            },
-            {
-              value: '99.9% SLA target',
-              label: 'Expected Uptime',
-              icon: Calendar,
-            },
-            {
-              value: '500+ GB monthly capacity at launch',
-              label: 'Anticipated Bandwidth',
-              icon: Target,
-            },
-            {
-              value: 'Under 400ms expected on residential proxies',
-              label: 'Average Latency',
-              icon: Target,
-            },
-          ]
-      ).map((metric, index) => {
-        const IconComponent = metric.icon || getMetricIcon(metric)
-        return (
-          <div key={index} className="w-[260px] text-center">
-            <div className="mb-4">
-              <IconComponent className="h-10 w-10 text-[#6529b2] mx-auto" />
+            <div className="flex flex-wrap justify-center gap-8">
+              {(venture.metrics && venture.metrics.length > 0
+                ? venture.metrics
+                : [
+                    {
+                      value:
+                        "100K+ IPs planned across residential, mobile, and datacenter",
+                      label: "IP Pool Size",
+                      icon: Target,
+                    },
+                    {
+                      value: "100+ agencies and marketers on waitlist",
+                      label: "Pre-Launch Clients",
+                      icon: Users,
+                    },
+                    {
+                      value: "99.9% SLA target",
+                      label: "Expected Uptime",
+                      icon: Calendar,
+                    },
+                    {
+                      value: "500+ GB monthly capacity at launch",
+                      label: "Anticipated Bandwidth",
+                      icon: Target,
+                    },
+                    {
+                      value: "Under 400ms expected on residential proxies",
+                      label: "Average Latency",
+                      icon: Target,
+                    },
+                  ]
+              ).map((metric, index) => {
+                const IconComponent = metric.icon || getMetricIcon(metric);
+                return (
+                  <div key={index} className="w-[260px] text-center">
+                    <div className="mb-4">
+                      <IconComponent className="h-10 w-10 text-[#6529b2] mx-auto" />
+                    </div>
+                    <div className="text-lg font-bold text-[#6529b2] mb-2 leading-snug">
+                      {metric.value}
+                    </div>
+                    <div className="text-gray-600 text-sm">{metric.label}</div>
+                  </div>
+                );
+              })}
             </div>
-            <div className="text-lg font-bold text-[#6529b2] mb-2 leading-snug">{metric.value}</div>
-            <div className="text-gray-600 text-sm">{metric.label}</div>
           </div>
-        )
-      })}
-    </div>
-  </div>
-</section>
-
+        </section>
 
         {/* Features and Technology Section */}
         <section className="py-16 bg-gray-50">
@@ -235,7 +289,9 @@ export default async function VentureDetailPage({ params }) {
             <div className="grid lg:grid-cols-2 gap-16">
               {/* Key Features */}
               <div>
-                <h2 className="text-3xl font-bold mb-8 text-gray-900">Key Features</h2>
+                <h2 className="text-3xl font-bold mb-8 text-gray-900">
+                  Key Features
+                </h2>
                 <div className="space-y-4">
                   {venture.features && venture.features.length > 0 ? (
                     venture.features.map((feature, index) => (
@@ -249,15 +305,21 @@ export default async function VentureDetailPage({ params }) {
                     <>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-[#6529b2] rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">Brand identity design</span>
+                        <span className="text-gray-700">
+                          Brand identity design
+                        </span>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-[#6529b2] rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">Website and app design</span>
+                        <span className="text-gray-700">
+                          Website and app design
+                        </span>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-[#6529b2] rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">Marketing campaigns</span>
+                        <span className="text-gray-700">
+                          Marketing campaigns
+                        </span>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-[#6529b2] rounded-full mt-2 flex-shrink-0"></div>
@@ -269,7 +331,9 @@ export default async function VentureDetailPage({ params }) {
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-[#6529b2] rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">Design system creation</span>
+                        <span className="text-gray-700">
+                          Design system creation
+                        </span>
                       </div>
                     </>
                   )}
@@ -278,21 +342,23 @@ export default async function VentureDetailPage({ params }) {
 
               {/* Technology Stack */}
               {venture.technologies && venture.technologies.length > 0 && (
-  <div>
-    <h2 className="text-3xl font-bold mb-8 text-gray-900">Technology Stack</h2>
-    <div className="flex flex-wrap gap-3">
-      {venture.technologies.map((tech) => (
-        <Badge
-          key={tech}
-          variant="outline"
-          className="px-4 py-2 text-sm rounded-full border-gray-300"
-        >
-          {tech}
-        </Badge>
-      ))}
-    </div>
-  </div>
-)}
+                <div>
+                  <h2 className="text-3xl font-bold mb-8 text-gray-900">
+                    Technology Stack
+                  </h2>
+                  <div className="flex flex-wrap gap-3">
+                    {venture.technologies.map((tech) => (
+                      <Badge
+                        key={tech}
+                        variant="outline"
+                        className="px-4 py-2 text-sm rounded-full border-gray-300"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -300,7 +366,9 @@ export default async function VentureDetailPage({ params }) {
         {/* Achievements Section */}
         <section className="py-16 bg-white">
           <div className="container px-4 md:px-6 mx-auto max-w-7xl">
-            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Achievements</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+              Achievements
+            </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {venture.achievements && venture.achievements.length > 0 ? (
                 venture.achievements.map((achievement, index) => (
@@ -314,19 +382,27 @@ export default async function VentureDetailPage({ params }) {
                 <>
                   <div className="flex items-center gap-4">
                     <Award className="h-6 w-6 text-[#6529b2] flex-shrink-0" />
-                    <span className="text-gray-700">Awwwards Site of the Day (3 times)</span>
+                    <span className="text-gray-700">
+                      Awwwards Site of the Day (3 times)
+                    </span>
                   </div>
                   <div className="flex items-center gap-4">
                     <Award className="h-6 w-6 text-[#6529b2] flex-shrink-0" />
-                    <span className="text-gray-700">Dribbble Team of the Year 2023</span>
+                    <span className="text-gray-700">
+                      Dribbble Team of the Year 2023
+                    </span>
                   </div>
                   <div className="flex items-center gap-4">
                     <Award className="h-6 w-6 text-[#6529b2] flex-shrink-0" />
-                    <span className="text-gray-700">Featured in Design Week Magazine</span>
+                    <span className="text-gray-700">
+                      Featured in Design Week Magazine
+                    </span>
                   </div>
                   <div className="flex items-center gap-4">
                     <Award className="h-6 w-6 text-[#6529b2] flex-shrink-0" />
-                    <span className="text-gray-700">Helped 50+ startups establish their brand identity</span>
+                    <span className="text-gray-700">
+                      Helped 50+ startups establish their brand identity
+                    </span>
                   </div>
                 </>
               )}
@@ -338,23 +414,33 @@ export default async function VentureDetailPage({ params }) {
         {venture.testimonials && venture.testimonials.length > 0 && (
           <section className="py-16 bg-gray-50">
             <div className="container px-4 md:px-6 mx-auto max-w-7xl">
-              <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">What Our Users Say</h2>
+              <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+                What Our Users Say
+              </h2>
               <div className="max-w-3xl mx-auto text-center">
                 <div>
-                  <p className="text-xl italic text-gray-700 mb-8">"{venture.testimonials[0].quote}"</p>
+                  <p className="text-xl italic text-gray-700 mb-8">
+                    "{venture.testimonials[0].quote}"
+                  </p>
                   <div className="flex items-center justify-center gap-4">
                     <div className="relative w-12 h-12">
                       <Image
-                        src={venture.testimonials[0].image || "/placeholder.svg?height=48&width=48"}
+                        src={
+                          venture.testimonials[0].image ||
+                          "/placeholder.svg?height=48&width=48"
+                        }
                         alt={venture.testimonials[0].author}
                         fill
                         className="object-cover rounded-full"
                       />
                     </div>
                     <div className="text-left">
-                      <div className="font-semibold text-gray-900">{venture.testimonials[0].author}</div>
+                      <div className="font-semibold text-gray-900">
+                        {venture.testimonials[0].author}
+                      </div>
                       <div className="text-sm text-gray-600">
-                        {venture.testimonials[0].role} at {venture.testimonials[0].company}
+                        {venture.testimonials[0].role} at{" "}
+                        {venture.testimonials[0].company}
                       </div>
                     </div>
                   </div>
@@ -364,47 +450,48 @@ export default async function VentureDetailPage({ params }) {
           </section>
         )}
 
-
-
         {/* CTA Section */}
-   <section className="py-16 bg-[#6529b2] text-white">
-  <div className="container px-4 md:px-6 mx-auto text-center max-w-7xl">
-    <h2 className="text-3xl font-bold mb-4">Interested in {venture.name}?</h2>
-    {venture.ctaDescription && (
-      <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-        {venture.ctaDescription}
-      </p>
-    )}
-    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-      <Button
-        variant="secondary"
-        size="lg"
-        className="bg-white text-[#6529b2] hover:text-black hover:bg-white border-white rounded-lg"
-        asChild
-      >
-        <Link href="/contact">Contact Us</Link>
-      </Button>
+        <section className="py-16 bg-[#6529b2] text-white">
+          <div className="container px-4 md:px-6 mx-auto text-center max-w-7xl">
+            <h2 className="text-3xl font-bold mb-4">
+              Interested in {venture.name}?
+            </h2>
+            {venture.ctaDescription && (
+              <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+                {venture.ctaDescription}
+              </p>
+            )}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="bg-white text-[#6529b2] hover:text-black hover:bg-white border-white rounded-lg"
+                asChild
+              >
+                <Link href="/contact">Contact Us</Link>
+              </Button>
 
-      {venture.website && (
-        <Button
-  variant="secondary"
-  size="lg"
-  className="bg-white dark:bg-white! text-[#6529b2] hover:text-black hover:bg-white border-white rounded-lg"
-  asChild
->
-  <a href={venture.website} target="_blank" rel="noopener noreferrer">
-    Visit {venture.name}
-  </a>
-</Button>
-
-      )}
-    </div>
-  </div>
-</section>
-
-
+              {venture.website && (
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white dark:bg-white! text-[#6529b2] hover:text-black hover:bg-white border-white rounded-lg"
+                  asChild
+                >
+                  <a
+                    href={venture.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit {venture.name}
+                  </a>
+                </Button>
+              )}
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
-  )
+  );
 }

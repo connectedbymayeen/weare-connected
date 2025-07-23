@@ -9,7 +9,7 @@ export const metadata = {
 
 // Force dynamic rendering to ensure fresh data
 export const dynamic = "force-dynamic"
-export const revalidate = 0
+// export const revalidate = 0
 
 // Helper function to serialize MongoDB data for client components
 function serializeVentures(ventures) {
@@ -48,6 +48,7 @@ export default async function VenturesPage() {
 
     // Fetch real ventures data from database
     const rawVentures = await getVentures()
+    console.log("fetching ventures", rawVentures)
     console.log("Raw ventures fetched:", rawVentures?.length || 0)
 
     // Serialize the data to remove complex objects

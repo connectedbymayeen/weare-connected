@@ -131,14 +131,14 @@ export default function Footer() {
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-x-6 text-gray-400 text-xs sm:text-sm text-center">
             <span>&copy; {new Date().getFullYear()} Connected.</span>
-            <div className="flex gap-x-4 sm:gap-x-6 justify-center">
+{/*             <div className="flex gap-x-4 sm:gap-x-6 justify-center">
               <Link href="/privacy" className="hover:text-purple-400 transition-colors">
                 Privacy Policy
               </Link>
               <Link href="/terms" className="hover:text-purple-400 transition-colors">
                 Terms of Service
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

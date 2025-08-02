@@ -6,22 +6,12 @@ export async function GET() {
     const { db } = await connectToDatabase()
 
     // Fetch featured ventures (limit to 3 for homepage)
-
     // remove filter and limit
-    const ventures = await db
-      .collection("ventures")
-      .find()
-      .sort({ createdAt: -1 })
-      .toArray()
+    const ventures = await db.collection("ventures").find().sort({ createdAt: -1 }).toArray()
 
     // Fetch services (limit to 4 for homepage)
-
-     // remove filter and limit
-    const services = await db
-      .collection("services")
-      .find()  
-      .sort({ createdAt: -1 })
-      .toArray()
+    // remove filter and limit
+    const services = await db.collection("services").find().sort({ createdAt: -1 }).toArray()
 
     // Fetch case studies (limit to 3 for homepage)
     const caseStudies = await db.collection("case_studies").find({}).sort({ createdAt: -1 }).limit(3).toArray()
@@ -46,6 +36,10 @@ export async function GET() {
       website: venture.website,
       metrics: venture.metrics || [],
       technologies: venture.technologies || [],
+      // ADDED: Ensure these properties are included for the homepage
+      foundedYear: venture.foundedYear || venture.founded || venture.year, // Use existing foundedYear, founded, or year
+      team: venture.team || venture.teamMembers || venture.teamSize, // Use existing team, teamMembers, or teamSize
+      growth: venture.growth || venture.growthRate, // Use existing growth or growthRate
     }))
 
     // Transform services data
@@ -99,7 +93,7 @@ export async function GET() {
           { value: "3", label: "Global Offices" },
         ],
       },
-      featuredVentures: transformedVentures,
+      featuredVentures: transformedVentures, // Now includes foundedYear, team, growth
       services: transformedServices,
       caseStudies: transformedCaseStudies,
     }
@@ -130,9 +124,7 @@ export async function GET() {
           { value: "3", label: "Global Offices" },
         ],
       },
-      featuredVentures: [
-
-      ],
+      featuredVentures: [],
       services: [
         {
           id: "1",

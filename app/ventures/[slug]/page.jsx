@@ -197,7 +197,7 @@ export default async function VentureDetailPage({ params }) {
               </div>
 
               {/* Image */}
-              <div className="relative w-[600px] h-[400px] rounded-2xl overflow-hidden bg-white shadow-lg">
+            <div className="relative w-full sm:w-[600px] h-[340px] sm:h-[400px] rounded-2xl overflow-hidden bg-white shadow-lg mx-auto">
                 {venture.featuredImage?.url || venture.image ? (
                   <Image
                     src={venture.featuredImage?.url || venture.image}

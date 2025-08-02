@@ -369,7 +369,7 @@ export default function CareersClientPage() {
                 <div className="text-center py-12">
                   <p className="text-muted-foreground mb-4">
                     {jobsArray.length === 0
-                      ? "No job positions are currently available. Check the browser console for debugging info."
+                      ? "No job positions are currently available."
                       : "No positions match your search criteria."}
                   </p>
                   {jobsArray.length > 0 && (
@@ -385,7 +385,7 @@ export default function CareersClientPage() {
                     </Button>
                   )}
                   {/* Test API Button */}
-                  <div className="mt-4">
+                  {/* <div className="mt-4">
                     <Button
                       variant="outline"
                       onClick={async () => {
@@ -404,7 +404,7 @@ export default function CareersClientPage() {
                     >
                       Test API Directly
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               )}
             </div>

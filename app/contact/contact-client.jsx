@@ -68,7 +68,7 @@ export default function ContactPageClient() {
   const contactData = content?.contact || {
 
     office: {
-      address: "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
+      address: "",
     },
     emails: {
       general: "hi@weareconnected.io",

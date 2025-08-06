@@ -25,7 +25,7 @@ const defaultContactData = {
     "Ready to Start a Revolution? Whether you're a founder, investor, collaborator, or someone with a bold idea, we're always open to conversations that lead to action. Reach out.",
   office: {
     address:
-      "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh",
+      "",
   },
   emails: {
     general: "hi@weareconnected.io",

@@ -122,7 +122,7 @@ export default function AboutPageClient() {
       ],
       tagline:
         content?.about?.different?.tagline ||
-        "No middlemen. No wasted time. No vanity metrics. Just results, impact, and ownership.",
+        "",
     },
     stats: {
       title: content?.about?.stats?.title || "Our Impact",

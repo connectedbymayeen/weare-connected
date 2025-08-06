@@ -87,8 +87,7 @@ export default function Footer() {
             <ul className="space-y-2 sm:space-y-3">
               <li className="flex items-start">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
-                <span className="text-sm sm:text-base">Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212, Dhaka, Bangladesh
-
+                <span className="text-sm sm:text-base">
                 </span>
               </li>
               <li className="flex items-start">

@@ -351,7 +351,7 @@ export default function ContactPageClient() {
                           <p className="text-muted-foreground">
                             {(contactData.office?.address && contactData.office?.city)
                               ? `${contactData.office.address}, ${contactData.office.city}`
-                              : "Lotus Kamal Tower 2, 59-61, Gulshan South Avenue, Gulshan 1, 1212,Dhaka, Bangladesh"}
+                              : ""}
                           </p>
 
                         </div>

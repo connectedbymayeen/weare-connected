@@ -13,6 +13,7 @@ const nextConfig = {
       "images.unsplash.com",
       "via.placeholder.com",
       "placeholder.com",
+      "facebook.com"
     ],
     remotePatterns: [
       {
@@ -30,6 +31,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "placeholder.com",
+      },
+      {
+        protocol: "https",
+        hostname: "facebook.com",
       },
     ],
     unoptimized: true,

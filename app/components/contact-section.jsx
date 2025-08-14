@@ -15,17 +15,18 @@ import {
   Mail,
   MapPin,
   Phone,
-  YoutubeIcon
+  YoutubeIcon,
 } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const defaultContactData = {
   title: "Get in Touch",
   description:
     "Ready to Start a Revolution? Whether you're a founder, investor, collaborator, or someone with a bold idea, we're always open to conversations that lead to action. Reach out.",
   office: {
-    address:
-      "",
+    address: "",
+    city: "",
+    country: "",
   },
   emails: {
     general: "hi@weareconnected.io",
@@ -33,11 +34,43 @@ const defaultContactData = {
     careers: "careers@weareconnected.io",
   },
   phone: "+8801318250903",
-  hours: "Mon–Sun: 11AM – 9:00 PM (BD Time)",
+  hours: "Mon–Sun: 11AM – 9:00 PM (BD Time)",
 }
 
 export default function ContactSection() {
-  const [contactData] = useState(defaultContactData)
+  const [contactData, setContactData] = useState(defaultContactData)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch("/api/content/site")
+        if (response.ok) {
+          const data = await response.json()
+          if (data.contact) {
+            setContactData((prev) => ({
+              ...prev,
+              ...data.contact,
+              office: {
+                ...prev.office,
+                ...data.contact.office,
+              },
+              emails: {
+                ...prev.emails,
+                ...data.contact.emails,
+              },
+            }))
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching content:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchContent()
+  }, [])
 
   const [formData, setFormData] = useState({
     name: "",
@@ -119,6 +152,12 @@ export default function ContactSection() {
     }
   }
 
+  const getFormattedAddress = () => {
+    const { address, city, country } = contactData.office
+    const addressParts = [address, city, country].filter((part) => part && part.trim())
+    return addressParts.join(", ")
+  }
+
   return (
     <section className="w-full py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -150,7 +189,7 @@ export default function ContactSection() {
                     wordBreak: "break-word",
                   }}
                 >
-                  {contactData.office.address}
+                  {getFormattedAddress() || "Address will be updated soon"}
                 </p>
               </div>
             </div>
@@ -227,8 +266,7 @@ export default function ContactSection() {
               <Alert className="border-green-200 bg-green-50">
                 <CheckCircle className="h-4 w-4 text-green-600" />
                 <AlertDescription className="text-green-800">
-                  Thank you for your message! We've received your inquiry and will get back to you within 24
-                  hours.
+                  Thank you for your message! We've received your inquiry and will get back to you within 24 hours.
                 </AlertDescription>
               </Alert>
             )}

@@ -5,13 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { motion } from "framer-motion"
 import { AlertCircle, CheckCircle, Clock, Loader2, Mail, MapPin, Phone, Send } from "lucide-react"
@@ -66,9 +60,10 @@ export default function ContactPageClient() {
 
   // Use dynamic content with fallbacks
   const contactData = content?.contact || {
-
     office: {
       address: "",
+      city: "",
+      country: "",
     },
     emails: {
       general: "hi@weareconnected.io",
@@ -76,7 +71,13 @@ export default function ContactPageClient() {
       careers: "careers@weareconnected.io",
     },
     phone: "+8801318250903",
-    hours: "Mon–Sun: 11AM – 9:00 PM (BD Time)",
+    hours: "Mon–Sun: 11AM – 9:00 PM (BD Time)",
+  }
+
+  const getFormattedAddress = () => {
+    const { address, city, country } = contactData.office
+    const addressParts = [address, city, country].filter((part) => part && part.trim())
+    return addressParts.join(", ")
   }
 
   const handleSubmit = async (e) => {
@@ -181,8 +182,7 @@ export default function ContactPageClient() {
                 {contactData.hero?.title || "Contact Us"}
               </h1>
               <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                {contactData.hero?.subtitle ||
-                  "Let's start a conversation about your next big idea"}
+                {contactData.hero?.subtitle || "Let's start a conversation about your next big idea"}
               </p>
             </div>
             <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
@@ -191,7 +191,9 @@ export default function ContactPageClient() {
                 <Card className="mx-auto w-full bg-white relative z-10">
                   <CardHeader>
                     <CardTitle className="text-2xl font-syne">Send us a message</CardTitle>
-                    <CardDescription>Fill out the form below and we'll get back to you within 24 hours.</CardDescription>
+                    <CardDescription>
+                      Fill out the form below and we'll get back to you within 24 hours.
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     {/* Success Message */}
@@ -199,7 +201,8 @@ export default function ContactPageClient() {
                       <Alert className="border-green-200 bg-green-50 mb-6">
                         <CheckCircle className="h-4 w-4 text-green-600" />
                         <AlertDescription className="text-green-800">
-                          Thank you for your message! We've received your inquiry and will get back to you within 24 hours.
+                          Thank you for your message! We've received your inquiry and will get back to you within 24
+                          hours.
                         </AlertDescription>
                       </Alert>
                     )}
@@ -263,7 +266,7 @@ export default function ContactPageClient() {
       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 
       disabled:cursor-not-allowed disabled:opacity-50"
                           >
-                            <SelectValue placeholder="Select a subject"  />
+                            <SelectValue placeholder="Select a subject" />
                           </SelectTrigger>
 
                           <SelectContent
@@ -280,7 +283,6 @@ export default function ContactPageClient() {
                           </SelectContent>
                         </Select>
                       </div>
-
 
                       <div className="space-y-2">
                         <Label htmlFor="message">Message *</Label>
@@ -349,11 +351,8 @@ export default function ContactPageClient() {
                         <div>
                           <h3 className="font-semibold mb-1">Address</h3>
                           <p className="text-muted-foreground">
-                            {(contactData.office?.address && contactData.office?.city)
-                              ? `${contactData.office.address}, ${contactData.office.city}`
-                              : ""}
+                            {getFormattedAddress() || "Address will be updated soon"}
                           </p>
-
                         </div>
                       </div>
 
@@ -400,10 +399,7 @@ export default function ContactPageClient() {
         </div>
       </div>
 
-
       <OfficesGallerySection />
-
-
 
       <Footer />
     </>

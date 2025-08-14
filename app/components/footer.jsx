@@ -3,8 +3,56 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, YoutubeIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 export default function Footer() {
+  const [contactData, setContactData] = useState({
+    office: {
+      address: "",
+      city: "",
+      country: "",
+    },
+    emails: {
+      general: "hi@weareconnected.io",
+    },
+    phone: "+8801318250903",
+  })
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch("/api/content/site")
+        if (response.ok) {
+          const data = await response.json()
+          if (data.contact) {
+            setContactData((prev) => ({
+              ...prev,
+              ...data.contact,
+              office: {
+                ...prev.office,
+                ...data.contact.office,
+              },
+              emails: {
+                ...prev.emails,
+                ...data.contact.emails,
+              },
+            }))
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching content:", error)
+      }
+    }
+
+    fetchContent()
+  }, [])
+
+  const getFormattedAddress = () => {
+    const { address, city, country } = contactData.office
+    const addressParts = [address, city, country].filter((part) => part && part.trim())
+    return addressParts.join(", ")
+  }
+
   return (
     <footer className="w-full bg-gray-900 text-gray-300 relative overflow-hidden">
       {/* Top Section: Prominent Logo Banner with Unique Background */}
@@ -87,22 +135,24 @@ export default function Footer() {
             <ul className="space-y-2 sm:space-y-3">
               <li className="flex items-start">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
-                <span className="text-sm sm:text-base">
-                </span>
+                <span className="text-sm sm:text-base">{getFormattedAddress() || "Address will be updated soon"}</span>
               </li>
               <li className="flex items-start">
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
                 <a
-                  href="mailto:hi@weareconnected.io"
+                  href={`mailto:${contactData.emails.general}`}
                   className="hover:text-purple-400 transition-colors text-sm sm:text-base"
                 >
-                  hi@weareconnected.io
+                  {contactData.emails.general}
                 </a>
               </li>
               <li className="flex items-start">
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
-                <a href="tel:+14155550123" className="hover:text-purple-400 transition-colors text-sm sm:text-base">
-                  +8801318250903
+                <a
+                  href={`tel:${contactData.phone}`}
+                  className="hover:text-purple-400 transition-colors text-sm sm:text-base"
+                >
+                  {contactData.phone}
                 </a>
               </li>
             </ul>
@@ -130,14 +180,6 @@ export default function Footer() {
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-x-6 text-gray-400 text-xs sm:text-sm text-center">
             <span>&copy; {new Date().getFullYear()} Connected.</span>
-{/*             <div className="flex gap-x-4 sm:gap-x-6 justify-center">
-              <Link href="/privacy" className="hover:text-purple-400 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-purple-400 transition-colors">
-                Terms of Service
-              </Link>
-            </div> */}
           </div>
         </div>
       </div>
